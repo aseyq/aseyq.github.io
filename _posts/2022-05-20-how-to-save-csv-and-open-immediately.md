@@ -23,11 +23,11 @@ I didn't know that R has a function to create a temporary filename but apparentl
 Now here is the my function:
 
 ```{r}
-saveCSVopen <- function(df) {
+# open as CSV file on the fly
+flyCSV <- function(df) {
     filename <- tempfile(pattern = "file", tmpdir = tempdir(), fileext = ".csv")
     write.csv(df, filename)
     browseURL(filename)
-    print(pasteO("opening ",filename))
    }
 ```
 
@@ -38,17 +38,27 @@ And now you can
 df %>% 
  filter(...)  %>% 
  mutate(...)  %>% 
- saveCSVopen()
- 
+ flyCSV()
 ```
 
 The function returns the orignal data frame. So you can even open the file in the middle of a pipe chain.
 ```
 df %>% 
  filter(...)  %>% 
- saveCSVopen() %>% 
+ flyCSV() %>% 
  mutate(...)  %>% 
  ...
 ```
 
 Especially if you are not an RStudio user, this could be a good alternative to `View()`.
+
+After writing this post, I actuall thought it might be useful to have it as a package and I created the
+tiny R package called `flyCSV`. I added some customizations to it but essentially it does what is written
+above. 
+
+<h4> https://github.com/aseyq/flyCSV/ </h4>
+
+I'd appreciate if you let me know in case you give it a try.
+
+
+
