@@ -56,7 +56,7 @@ After writing this post, I actuall thought it might be useful to have it as a pa
 tiny R package called `flyCSV`. I added some customizations to it but essentially it does what is written
 above. 
 
-<h4> https://github.com/aseyq/flyCSV/ </h4>
+<h4> <a href="https://github.com/aseyq/flyCSV/">https://github.com/aseyq/flyCSV/</a> </h4>
 
 I'd appreciate if you let me know in case you give it a try.
 
