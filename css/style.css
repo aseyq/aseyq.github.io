@@ -1,0 +1,156 @@
+
+/* Badge, Status and Card styling */
+.big-badge {
+    padding: 5px 15px;
+    font-size: 1em;
+    margin-right: 5px;
+    margin-bottom: 5px; 
+    transition: transform .2s; 
+}
+
+
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; 
+}
+
+.card-body {
+    flex-grow: 1; 
+    padding: 20px;
+}
+
+.card-title-area {
+    background-color: #f2f2f2; 
+    color: black;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.card-title {
+    margin-top: 15px; /* This pushes the title down */
+}
+
+.status-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* margin added to provide space on the left side */
+}
+
+.type-indicator {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px; /* margin added to provide space on the left side */
+    margin-top: 0px; /* margin added to provide space on the top side */
+    font-size: 14px;
+}
+
+.status-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-text {
+    font-size: 10px;
+}
+
+.type-text {
+    margin-left: 10px;
+}
+
+/* Status colors */
+.published { background-color: green; }
+.revise-resubmit { background-color: orange; }
+.in-submission { background-color: #FFA500; }
+.draft { background-color: yellow; }
+.design-stage { background-color: #FFFFE0; }
+.data-collection { background-color: #FFFACD; }
+
+
+#places-section .row {
+    margin-bottom: 15px; /* Adjust this value to set the desired space */
+    padding: 10px; /* Some padding to make it look better */
+    border-radius: 5px; /* Optional: rounded corners for the backgrounds */
+}
+
+#places-section .row:nth-child(odd) {
+    background-color: #f5f5f5; /* A light blue, change to your preferred color */
+}
+
+#places-section .row:nth-child(even) {
+    background-color: #f7f7f7; /* A light gray, change to your preferred color */
+}
+
+.mobile-only {
+    display: none;  /* Hide by default */
+}
+
+@media (max-width: 991px) {  /* This value should match Bootstrap's breakpoint for lg screens */
+.mobile-only {
+    display: block;  /* Display on narrow screens */
+}
+}
+
+.close-menu {
+font-size: 0.9em; /* Making the text slightly smaller than the other items */
+
+}
+
+.close-menu:before {
+padding-right: 5px; /* Adds some spacing between the "X" and the text */
+}
+
+@media (max-width: 767px) { /* Bootstrap's breakpoint for medium screens */
+.profile_pic {
+max-width: 150px; /* or whatever size you prefer */
+max-height: 150px; /* adjust as per your need */
+display: block;
+margin: 0 auto; /* To center the image */
+}
+}
+
+.content-hidden {
+display: none;
+}
+
+.img-inst {
+    max-height: 100px;
+    display: block;
+}
+
+.img-bookcover {
+    max-height: 300px;
+    display: block;
+    
+}
+
+.section-to-scroll {
+    padding-top: 60px;  /* Height of your top bar */
+    margin-top: -60px;  /* Negative offset to counteract padding */
+  }
+
+  .container {
+    position: relative;
+  }
+  
+  .container.section-to-scroll::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px; /* Height of the line */
+    background-color: #333; /* Color of the line */
+  }
+  

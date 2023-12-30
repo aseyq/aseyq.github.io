@@ -1,0 +1,8 @@
+.container-fluid {
+    background: #F0FFFF;
+}
+
+
+.container{
+    background: #F0FFFF;
+}
