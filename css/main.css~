@@ -1,0 +1,99 @@
+body {
+  padding-top: 0px;
+  color: #000000;
+  background: #dddddd;
+  font-size: 1rem;
+}
+
+.navbar-toggler {
+    color: blue;
+}
+/* change the background color */
+.navbar-custom {
+    background-color: rgba(100,0,0,0.8);
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav
+.nav-link {
+    color: rgba(255,255,255,.5);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:focus .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 100;
+  color: #343a40;
+}
+
+h1 {
+  font-size: 6rem;
+  line-height: 5.5rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+a {
+    color:#BB0000;
+}
+a:hover {
+    color:rgba(100,50,50,1);
+}
+  
+
+.profile_pic {
+    width: 60%;
+    max-width: 100px;
+    max-width: 500px;
+    height: auto;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.sectiontitle{
+    padding-top:50px !important;
+    margin-top: 0px;
+    padding-left:20px;
+    padding-right:20px;
+    text-align: justify;
+}
+
+tr, td {
+  padding: 15px;
+  text-align: left;
+}
+
+.btn,
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: rgba(100,0,0,0.8);
+    border-color: #8064A2;
+}
+
+.btn:hover {
+   background-color: rgba(40,0,0,0.8);
+}

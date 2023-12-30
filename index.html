@@ -1,10 +1,753 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Hello World Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Seyhun Saral - Personal Page</title>
+    <!-- Bootstrap CSS CDN -->
+    <script defer data-domain="saral.it" src="https://plausible.io/js/script.js"></script>
+	<script async src="https://analytics.eu.umami.is/script.js" data-website-id="f36ec1a3-df58-4008-b015-7603cbd0e334"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/8ff9222f52.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
+
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a basic HTML page displaying the classic "Hello, World!" message.</p>
-</body>
-</html>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Ali Seyhun Saral</a>
+        <button class="navbar-toggler" id="navbarToggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#research">Research</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#experience">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item mobile-only">
+                <a class="nav-link close-menu" href="#">&times; Close Menu</a>
+            </li>            
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Sections -->
+<div class="container mt-1 pt-5 section-to-scroll" id="about">
+    
+    <div class="row mt-4">
+        <aside class="col-md-3">
+            <img class="profile_pic img-fluid border rounded-circle mx-auto d-block" src="img/pp.jpg" alt="Ali Seyhun Saral's Profile Picture">
+        </aside>
+        <main class="col-md-9">
+            <h3> Hi there! 👋  </h3>
+            
+            <section>
+                <p>
+                    I am a postdoctoral researcher at the <a href="https://www.iast.fr" target="_blank" rel="noopener">Institute for Advanced Study in Toulouse</a>.
+                </p>
+                <p>
+                    My interdisciplinary research primarily focuses on the topics of cooperation, group decision-making, and social learning. To conduct my research, I employ methods from microeconomics, game theory, behavioral and experimental economics, agent-based modeling, and social choice theory.
+                </p>
+                <p>
+                    Additionally, I am interested in software development related to experiments and data analysis and machine learning.
+                </p>
+            </section>
+            
+            <!-- Uncomment this if you wish to display the CV link in the future
+                <p>Here is my <a href="https://saral.it/files/saral_CV_web.pdf">CV</a>.</p>
+            -->
+            
+            <section>
+                <h4>Public Profiles:</h4>
+                <table class="table table-striped table-hover">
+                    <tbody>
+                        <tr>
+                            <td> <i class="fab fa-github"></i> Github </td>
+                            <td> <a href="https://github.com/aseyq" target="_blank" rel="noopener">@aseyq</a> </td>
+                        </tr>
+                        <tr>
+                            <td> <i class="fab fa-twitter"></i> Twitter </td>
+                            <td> <a href="https://twitter.com/aseyq" target="_blank" rel="noopener"> @aseyq </a></td>
+                        </tr>
+                        <tr> 
+                            <!-- google scholar -->
+                            <td> <i class="fas fa-graduation-cap"></i> Google Scholar </td>
+                            <td> <a href="https://scholar.google.com/citations?user=_wKlBXsAAAAJ&hl=en" target="_blank" rel="noopener">Ali Seyhun Saral</a> </td>
+                        </tr>
+                        <tr>
+                            <td> <i class="fab fa-orcid"></i> ORCID</td>
+                            <td> <a href="https://orcid.org/0000-0002-5523-5355" target="_blank" rel="noopener">0000-0002-5523-5355</a> </td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    
+    <div class="container mt-1 section-to-scroll" id="experience">
+        <h1>Past experience</h1>
+        
+        
+        <!-- iast -->
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-fluid img-inst" src="img/logo-iast.png">
+            </div>
+            <div class="col-md-10">
+                <h4>Institute for Advanced Study in Toulouse</h4>
+                <p>Postdoctoral Researcher</p>
+                <p>2022 - Present</p>
+            </div>
+            
+        </div>
+        <!-- bologna  -->
+        <div class="row">
+            <div class="col-md-2">
+                
+                <!-- smae image but height limited to 150 px -->
+                <img class="img-fluid img-inst" src="img/logo-unibo.png"> 
+            </div>
+            <div class="col-md-10">
+                <h4>Unversity of Bologna</h4>
+                <p>Postdoctoral Researcher</p>
+                <p>2021 - 2022</p>
+            </div>
+        </div>
+        
+        <!-- max planck institute for collective goods -->
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-fluid img-inst" src="img/logo-mpi.png">
+            </div>
+            <div class="col-md-10">
+                <h4>Max Planck Institute for Research on Collective Goods</h4>
+                <p>Lab Manager</p>
+                <p>2018 - 2021</p>
+            </div>
+        </div>
+        
+        <!-- trento university phd 2014-2019 -->
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-fluid img-inst" src="img/logo-unitn.png">
+            </div>
+            <div class="col-md-10">
+                <h4>University of Trento</h4>
+                <p>PhD in Economics and Management</p>
+                <p>2014 - 2019</p>
+            </div>
+        </div>
+        
+        <!-- Istanbul bilgi unversity master -->
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-fluid img-inst" src="img/logo-bilgi.png">
+            </div>
+            <div class="col-md-10">
+                <h4>Istanbul Bilgi University</h4>
+                <p>M.Sc. in Economics</p>
+                <p>2010 - 2014</p>
+            </div>
+        </div>
+        
+        <!-- Istanbul unversity bachelor -->
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-fluid img-inst" src="img/logo-iu.png">
+            </div>
+            <div class="col-md-10">
+                <h4>Istanbul University</h4>
+                <p>BA in Economics</p>
+                <p>2006 - 2010</p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="container mt-1 section-to-scroll" id="research">
+        <h1>Research</h1>
+
+        <h2 class="mt-4 mb-4"> Publications </h2>
+        <div class="d-flex flex-wrap">
+            
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">Competition and moral behavior: A meta-analysis of forty-five crowd-sourced experimental designs</h4>
+                        <p class="card-text blockquote"> with C. Huber, A. Dreber, J. Huber, M. Johannesson, M. Kirchler, U. Weitzel, ... , F. Holzmeister</p>
+                        <p class="card-text"><i>PNAS (2023)</i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle published"></span>
+                            <span class="status-text">Published</span>
+                        </div>
+                    </div>
+                    <div class="mt-auto ml-3 mb-3">
+                        <a href="https://www.pnas.org/doi/10.1073/pnas.2215572120#sec-3" class="badge badge-primary big-badge" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">Direct and indirect reciprocity among individuals and groups</h4>
+                        <p class="card-text blockquote"> with Angelo Romano and Junhui Wu</p>
+                        <p class="card-text"><i>Current Opinion in Psychology (2022)</i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle published"></span>
+                            <span class="status-text">Published</span>
+                        </div>
+                    </div>
+                    <!-- This works -->
+                    <div class="mt-auto ml-3 mb-3"> <!-- Use 'mt-auto' class to push content to the bottom -->
+                        <a href="https://www.sciencedirect.com/science/article/pii/S2352250X21001366" class="badge badge-primary big-badge" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">The stability of conditional cooperation: beliefs alone cannot explain the decline of cooperation in social dilemmas</h4>
+                        <p class="card-text blockquote"> with Luciano Andreozzi and  Matteo Ploner</p>
+                        <p class="card-text"><i>Scientific Reports (2020)</i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle published"></span>
+                            <span class="status-text">Published</span>
+                        </div>  
+                    </div>
+                    <div class="mt-auto ml-3 mb-3">
+                        <a href="https://www.nature.com/articles/s41598-020-70681-z" class="badge badge-primary big-badge"><i class="fas fa-file-alt"></i> Paper</a>
+                        <a href="https://github.com/seyhunsaral/stabilitycondcoop" class="badge badge-dark big-badge"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                
+
+                </div>
+            </div>
+            
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> zBrac—A multilanguage tool for z-Tree </h4>
+                        <p class="card-text blockquote"> with Anna Marie Schröter</p>
+                        <p class="card-text"><i>Journal of Behavioral and Experimental Finance (2019)</i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle published"></span>
+                            <span class="status-text">Published</span>
+                        </div>
+                    </div>  
+                        <div class="mt-auto ml-3 mb-3">
+                            <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214635018302661" class="badge badge-primary big-badge"><i class="fas fa-file-alt"></i> Paper</a>
+                            <a href="https://github.com/seyhunsaral/zbrac" class="badge badge-dark big-badge"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            
+        </div>  
+        <h2 class="mt-4 mb-4"> Work in progress </h2>
+        <div class="d-flex flex-wrap">
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> Are gender differences in risk attitudes weaker in representative samples? </h4>
+                        <p class="card-text blockquote"> with Marco Casari and Matteo Pinna </p>
+                        <p class="card-text"><i></i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle revise-resubmit"></span>
+                            <span class="status-text">Revise and Resubmit</span>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">  Open and closed societies: 
+six centuries of institutional change
+</h4>
+                        <p class="card-text blockquote"> with Marco Casari and Maurizio Lisciandro </p>
+                        <p class="card-text"><i></i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle in-submission"></span>
+                            <span class="status-text">In submission</span>
+                        </div>
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> Reciprocity in Dictator Games: An Experimental Study </h4>
+                        <p class="card-text blockquote"> with Luciano Andreozzi and Marco Faillo </p>
+                        <p class="card-text"><i>CEEL Working Papers (2021)</i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle in-submission"></span>
+                            <span class="status-text">In submission</span>
+                        </div>
+                    </div> 
+                        
+                    <div class="mt-auto ml-3 mb-3">
+                        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3959663" class="badge badge-primary big-badge"><i class="fas fa-file-alt"></i> Working Paper</a>
+                    </div>
+                
+                </div>
+            </div>
+            
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> Reciprocity as a social strategy evolves more readily under conflict rather than cooperation</h4>
+                        <p class="card-text blockquote"> with Angelo Romano and Carsten De Dreu </p>
+                        <p class="card-text"><i></i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle in-submission"></span>
+                            <span class="status-text">In submission</span>
+                        </div>
+                    </div>
+                    <div class="mt-auto ml-3 mb-3">
+                            <a href="https://github.com/aseyq/reciprocity_under_conflict" class="badge badge-dark big-badge"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                        
+                    
+                </div>
+            </div>
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> Wisdom of crowds under social influence: a comparison of voting rules</h4>
+                        <p class="card-text blockquote"> with Annika Hennes </p>
+                        <p class="card-text"><i></i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle draft"></span>
+                            <span class="status-text">Writing paper</span>
+                        </div>
+                    </div>
+                        <div class="mt-auto ml-3 mb-3">
+                            <!-- <a href="link_to_paper1" class="badge badge-primary big-badge"><i class="fas fa-file-alt"></i> Preprint</a> -->
+                            
+                        </div>
+                    
+                </div>
+            </div>
+            
+            <div class="col-md-12 mb-3">
+                <div class="card h-100 bg-light d-flex flex-column">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> Generating representative preferences: An algorithm to enumerate root profiles</h4>
+                        <p class="card-text blockquote"> with Fatma Aslan, Sebastian Kanunzinger and Jochen Staudacher </p>
+                        <p class="card-text"><i></i></p>
+                        <div class="status-indicator">
+                            <span class="status-circle draft"></span>
+                            <span class="status-text">Writing paper</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto ml-3 mb-3">
+
+                    </div>
+                </div>
+                </div>
+                
+                
+                <div class="col-md-12 mb-3">
+                    <div class="card h-100 bg-light d-flex flex-column">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bold"> The Evolution of cognitively appealing rituals</h4>
+                            <p class="card-text blockquote"> with Manvir Singh, Antoine Jacquet and Maxime Derex </p>
+                            <p class="card-text"><i></i></p>
+                            <div class="status-indicator">
+                                <span class="status-circle data-collection"></span>
+                                <span class="status-text">Data collection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="col-md-12 mb-3">
+                    <div class="card h-100 bg-light d-flex flex-column">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bold"> Is transparency surveillance?</h4>
+                            <p class="card-text blockquote"> with Annika Hennes and Rupak Majumdar </p>
+                            <p class="card-text"><i></i></p>
+                            <div class="status-indicator">
+                                <span class="status-circle design-stage"></span>
+                                <span class="status-text">Design stage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-md-12 mb-3">
+                    <div class="card h-100 bg-light d-flex flex-column">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bold"> Freeriding the past</h4>
+                            <p class="card-text blockquote"> with Adile Yasar and Maxime Derex </p>
+                            <p class="card-text"><i></i></p>
+                            <div class="status-indicator">
+                                <span class="status-circle design-stage"></span>
+                                <span class="status-text">Design stage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <div class="card h-100 bg-light d-flex flex-column">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bold"> Artificially Inspired: An experiment on AI's effects on creative skill enhancement </h4>
+                            <p class="card-text blockquote"> with Almudena Claasen, Piero Ronzani and Luca Verginer</p>
+                            <p class="card-text"><i></i></p>
+                            <div class="status-indicator">
+                                <span class="status-circle design-stage"></span>
+                                <span class="status-text">Design stage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+            </div>
+            
+            <div class="container mt-1 section-to-scroll" id="projects">
+                <h1>Projects & Software</h1>
+
+                <div class="col-md-12 mb-3">
+                    <div class="card h-100 bg-light d-flex flex-column">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h4 class="card-title mt-4 font-weight-bold"> Experiment Cookbook: A tutorial on oTree programming </h4>
+                                        <p class="card-text blockquote"></p>
+                                        <p class="card-text">
+                                            oTree is a Python-based framework for developing interactive experiments for behavioral and experimental economics.
+                                        </p>
+                                        <p class="card-text">
+                                            In this online book, I provide a tutorial on oTree programming as well as a collection of recipes for common tasks and problems in oTree.
+                                        </p>
+
+                                        <p class="card-text">
+                                            In addition, I provide some introduction to Python, HTML, CSS, and JavaScript for those who are not familiar with these languages.
+                                        </p>
+                                        <p class="card-text"> The book is currently in progress. You can find the latest version of the book on the book's website. </p>
+                                        
+                                        <div class="type-indicator">
+                                            <i class="fa-solid fa-book"></i>
+                                            <span class="type-text">Book</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="card-text">
+                                            <a href="https://experimentcookbook.com" target="_blank">
+                                            <img src="img/cookbook.png" class="img-fluid img-bookcover" alt="Experiment Cookbook">
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto ml-3 mb-3">
+                            <a href="https://experimentcookbook.com" class="badge badge-primary big-badge"><i class="fas fa-book"></i> Book</a>
+                            <!-- <a href="https://github.com/seyhunsaral/stabilitycondcoop" class="badge badge-dark big-badge"><i class="fab fa-github"></i> GitHub</a> -->
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-md-12 mb-3">
+                    <div class="card h-100 bg-light d-flex flex-column">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h4 class="card-title mt-4 font-weight-bold"> zBrac: A translation tool for z-Tree </h4>
+                                        <p class="card-text blockquote"> with Anna Schröter</p>
+                                        <p class="card-text"> zBrac is a tool designed to streamline text modification for z-Tree treatment files. With zBrac, you can easily export specified text into a language file and then import it back after modifying or translating the text. The primary advantage of using zBrac is that coding and text editing can be performed independently. </p>
+                                        
+                                        <div class="type-indicator">
+                                            <i class="fa-solid fa-laptop-code"></i>
+                                            <span class="type-text">Software</span>
+                                        </div>
+                
+                                        <div class="mt-0">
+                                            <a href="https://github.com/seyhunsaral/zbrac" class="badge badge-dark big-badge"><i class="fab fa-github"></i> GitHub</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="card-text"> 
+                                            <img src="img/zbrac.png" class="img-fluid img-bookcover" alt="Experiment Cookbook">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-12 mb-3">
+                    <div class="card h-100 bg-light d-flex flex-column">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h4 class="card-title mt-4 font-weight-bold"> choicepy: A Python framework for social choice theory </h4>
+                                        <p class="card-text blockquote"> with Annika Hennes</p>
+                                        <p class="card-text"> We are developing a Python package for computational projects on voting rules. We developed the core of the software for our paper  
+                                            <em> Wisdom of Crowds Under Social Influence.</em>
+                                        </p>
+                
+                                        <div class="type-indicator">
+                                            <i class="fa-solid fa-laptop-code"></i>
+                                            <span class="type-text">Software</span>
+                                        </div>
+                                        
+                                        <div class="mt-0">
+                                            <a href="https://github.com/seyhunsaral/choicepy" class="badge badge-dark big-badge"><i class="fab fa-github"></i> GitHub</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!-- This is where the image would go if there were one -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            You can find some other small software/packages for researchers on my <a href="https://github.com/aseyq/" target="_blank">GitHub page</a> that I won't list here.
+        </div>
+
+            </div>
+
+            <div class="container mt-1 section-to-scroll" id="teaching">
+                <h1>Teaching & Materials</h1>
+
+                <table class="table">
+                    <tr>
+                        <td> <a href="https://github.com/aseyq/imprs" target="_blank"> Introduction to Python & Experiments with oTree</a> </td>
+                        <td> International Max Planck Research Schools (IMPRS) Summer School </td>
+                        <td> 2023</td>
+                        <td> Immenstaad, Germany</td>
+                    </tr>
+
+                    <tr>
+                        <td> <a href="https://github.com/aseyq/leidensim" target="_blank"> Games and Agents: Agent-Based Modeling </a> </td>
+                        <td> Leiden University, Conflict and Cooperation Laboratory  </td>
+                        <td> 2022</td>
+                        <td> Leiden, Netherlands</td>
+                    </tr>
+
+                    <tr>
+                        <td> <a href="https://github.com/aseyq/cereb-otree" target="_blank"> Programming Experiments with oTree </a> </td>
+                        <td> University of Erfurt</td>
+                        <td> 2021</td>
+                        <td> Erfurt, Germany</td>
+                    </tr>
+
+                    <tr>
+                        <td> <a href="https://github.com/aseyq/trentomathr" target="_blank"> R Programming for Mathematics </a> </td>
+                        <td> University of Trento, Department of Economics and Management </td>
+                        <td> 2021</td>
+                        <td> Trento, Italy</td>
+                    </tr>
+
+                    <tr>
+                        <td> <a href="https://www.dropbox.com/scl/fi/58zu30cfkdefrysigu35z/saral_git_ile_versiyon_kontrolu-2020-06-02.pdf?rlkey=4ktcjxxdomi57ev60x5k54j2t&dl=1" target="_blank">Version control with Git (Turkish) </a></td>
+                        <td> Ulusal Araştırma Verileri Sempozyumu </td>
+                        <td> 2021</td>
+                        <td> Online, Turkey </td>
+                    </tr>
+
+                    <tr>
+                        <td> Programming Experiments with oTree</td>
+                        <td> Max Planck Institute for Research on Collective Goods </td>
+                        <td> 2020</td>
+                        <td> Bonn, Germany</td>
+                    </tr>
+
+                    <tr>
+                        <td> <a href="https://github.com/seyhunsaral/jdmx-ggplot2" target="_blank"> Introduction to ggplot2 </a> </td>
+                        <td> Judgement and Decision Making (JDMx) Workshop </td>
+                        <td> 2019</td>
+                        <td> Trento, Italy</td>
+                    </tr>
+
+                    <tr>
+                        <td> z-Tree Programming </td>
+                        <td> Max Planck Institute for Research on Collective Goods </td>
+                        <td> 2018</td>
+                        <td> Bonn, Germany</td>
+                    </tr>
+
+                    <tr>
+                        <td> Game Theory (T.A.) </td>
+                        <td> Trento University </td>
+                        <td> 2017</td>
+                        <td> Trento, Italy</td>
+                    </tr>
+
+                    <tr>
+                        <td> z-Tree Programming (with Matteo Ploner) </td>
+                        <td> Ca' Foscari University </td>
+                        <td> 2017</td>
+                        <td> Venice, Italy</td>
+                    </tr>
+
+                    <tr>
+                        <td> Game Theory (T.A.) </td>
+                        <td> Istanbul Bilgi University </td>
+                        <td> 2013</td>
+                        <td> Istanbul, Turkey</td>
+                    </tr>
+
+                    <tr>
+                        <td> Advanced Microeconomics (T.A.)</td>
+                        <td> Istanbul Bilgi University </td>
+                        <td> 2012-2013</td>
+                        <td> Istanbul, Turkey</td>
+                    </tr>
+
+                    <tr>
+                        <td> Intermediate Microeconomics (T.A.) </td>
+                        <td> Istanbul Bilgi University </td>
+                        <td> 2012-2013</td>
+                        <td> Istanbul, Turkey</td>
+                    </tr>
+
+                    <tr>
+                        <td> z-Tree Programming </td>
+                        <td> Istanbul Bilgi University </td>
+                        <td> 2012, 2014, 2016</td>
+                        <td> Istanbul, Turkey.</td>
+                    </tr>
+
+                    
+
+                </table>
+
+                
+
+            </div>
+            
+            <div class="container mt-1 section-to-scroll" id="contact">
+                <h1>Contact</h1>
+                <div> 
+                    <p>
+                        For your requests, comments, collaboration proposals or questions:  <a href="mailto:ali.saral@iast.fr"> ali.saral@iast.fr</a> 
+                        You can also contact me via <a href="https://www.twitter.com/aseyq" target="_blank"> Twitter</a>.
+                    </p>    
+                </div>
+                
+                
+            </div>
+            
+            <!-- Bootstrap JS and jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            
+            
+            <!-- Smooth Scroll -->
+            <script>
+                
+                $(document).ready(function(){
+                    // Close menu link logic
+                    let navExpanded = $('#navbarNav').hasClass('show'); // Check if navbar is expanded
+                    $('.close-menu').on('click', function(e){
+                        e.preventDefault();  // Prevent default action of <a>
+                            collapseNav();  // Collapse the navbar
+                        });
+                        
+                        // Navbar toggler custom behavior
+                        $('#navbarToggler').on('click', function() {
+                            console.log('Navbar toggler clicked');
+                            navExpanded = $('#navbarNav').hasClass('show'); // Check if navbar is expanded
+                            console.log('Navbar expanded: ' + navExpanded);
+                            if (navExpanded) {
+                                console.log('Navbar is expanded, collapsing');
+                                collapseNav();
+                            } else {
+                                console.log('Navbar is collapsed, expanding');
+                                expandNav();
+                            }
+                        });
+                        
+                        // show summary button logic
+                        $('.btn-show').click(function() {
+                            var content = $(this).prev('.content-hidden');
+                            if (content.is(':visible')) {
+                                content.slideUp();
+                                $(this).text('> Show Summary');
+                            } else {
+                                content.slideDown();
+                                $(this).text('> Hide Summary');
+                            }
+                        });
+                    });
+                    
+                    collapseNav = () => {
+                        $('.navbar-collapse').collapse('hide');
+                    }
+                    
+                    expandNav = () => {
+                        $('.navbar-collapse').collapse('show');
+                    }
+                    
+                    
+                </script>
+                
+
+                
+                
+            </body>
+            </html>
+            
