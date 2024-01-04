@@ -1,0 +1,457 @@
+---
+title: "Python + oTree Crash Course"
+subtitle: Session I - Python Basics
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "7 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format: 
+  revealjs:
+    #theme: white
+    incremental: false
+    #smaller: true
+    slide-number: true
+    show-slide-number: print
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+## Welcome to the course!
+- Ali Seyhun Saral (**Ali**)   
+  ali.saral@iast.fr
+
+<br/>
+
+- Day 1 - Python Introduction
+- Day 2 - oTree
+- Day 3 - oTree cont.(+ little bit of HTML, CSS, Javascript)
+
+
+## Where I've been 
+
+![](images/2023-08-03-15-17-47.png)
+
+## My research 
+![](images/2023-08-03-15-21-31.png)
+
+
+## Style of the course
+
+:::{.incremental}
+- Learning by doing vs. learning the concepts
+  - We will do both
+
+- I will talk about the concepts. Demonstrate them. Let you try, then we will do it together.
+
+- I will assume that you have no prior knowledge of Python.
+::: 
+
+# About you 
+# I don't have much programming experience, neither in Python nor other languages
+
+# I have never used Python before but I use other software like R, Stata regularly
+
+# I use Python at least occasinally
+
+
+## About you  {.smaller}
+
+  - **Beginners**
+    - Please give it a try and if you fail try again
+    - It might look intimidating but believe me it is not that hard (requires practice though)
+    - Interrupt me if you have any questions
+
+. . . 
+
+  - **Intermediate**
+    - Connections between concepts
+    - Beware of differences between languages
+    - Interrupt me if you have any questions
+
+. . . 
+
+  - **Advanced**
+    - Please be patient bear with me at the beginning
+    - Contributions are welcome
+    - Interrupt me if you have any questions
+
+## Rules
+- No stupid questions
+- Do the exercises/assigments. 
+- Try by yourself but you can ask for help.
+
+## Tools
+- Day 1: Jupyter Notebook (Online or local)
+- Day 2 and 3: VS Code
+
+## Course Materials
+- Repo here
+
+## What is Python?
+:::: {.columns}
+
+::: {.column width="50%"}
+
+:::::{.incremental}
+- `Python` is the one of the most popular general-purpose programming languages.
+
+- It is a **multi-paradigm** programming language.
+
+- Applications include -but not limited to- web development, software development, data analysis, automated tasks...
+
+- It has a magnificent ecosystem of libraries and frameworks.
+:::::
+
+:::
+
+::: {.column width="40%"}
+![](images/pythonlogo.svg){height="100px"}
+:::
+
+::::
+
+## What you can do with Python?
+
+- Data & Stats Analysis 
+- Machine Learning
+- Agent-Based Modeling
+- Experiments
+- Web Scraping
+- Websites/Web Apps
+- Software
+- ...
+
+
+## How to interact with Python
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- Python is essentially a **command-line interpreter** in its core.
+
+
+**1- Python Interpreter**
+
+:::
+
+::: {.column width="50%"}
+![](images/python_interpreter.png){width="600px"}
+:::
+
+::::
+
+## How to interact with python
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**2- Running a Python Script from the Terminal**
+
+- Python scripts have the extension `.py`
+:::
+
+::: {.column width="50%"}
+![](images/python_notepad.png){width="600px"}
+![](images/python_script.png){width="600px"}
+:::
+
+::::
+
+## How to interact with Python
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+**3- Using a development environment**
+
+* Some of them are `PyCharm`, `VSCode`, `RStudio` and so on.
+:::
+
+::: {.column width="50%"}
+![](images/vscode_python.png){width="400px"}
+![](images/pycharm_python.png){width="400px"}
+:::
+
+* Usually `Shift + Enter` or `Ctrl + Enter` to send the command to shell
+::::
+
+## How to interact with Python
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+**4- Jupyter Notebook**
+
+* Browser environment for writing and running interactive Python code.
+
+* You can combine text and code cells to create a notebook.
+
+:::
+
+::: {.column width="50%"}
+![](images/jupyter.png){width="400px"}
+:::
+
+::::
+
+## How to interact with Python
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+
+**4- Jupyter Notebook**
+
+
+:::
+
+::: {.column width="50%"}
+![](images/jupyter.png){width="400px"}
+:::
+
+::::
+
+## Installing Python
+
+**Windows**
+- Search for `Microsoft Store` in your machine and search for `Python 3.9` and install it. 
+
+**Mac or Windows**
+- Go to `https://www.python.org/downloads/` and download the latest version of Python.
+
+**Linux (apt)**
+- Open a terminal and type `sudo apt install python3.9`
+
+## You should be able to
+- Open a command line interface (CLI) or terminal
+- `python --version`
+- `pip --version`
+
+
+## Installing Jupiter Lab
+
+```{bash}
+pip install jupyterlab
+```
+
+## Getting course materials
+:::(.large)
+[https://github.com/aseyq/imprs](https://github.com/aseyq/imprs)
+:::
+
+## Hello World!
+
+* To print things in the console, one should use `print()` function. 
+
+. . .
+
+* Let's go ahead and print `Hello World`:
+
+. . . 
+
+```{python}
+print("Hello World!")
+
+```
+  
+## Using Python as calculator
+
+- Using `python` as calculator:
+
+. . . 
+
+```{python}
+42 + 38
+```
+
+. . . 
+
+```{python}
+36 * 5
+```
+
+
+
+## Arithmethic Operators in Python
+|   |   |
+|---|---|
+| `a + b` | Addition |
+| `a - b` | Subtraction |
+| `a * b` | Mutiplication |
+| `a / b` | Division |
+| `a ** b`|  Exponention (\\( a^b \\)) |
+| `a % b` | Modulo (\\( a \\: mod \\: b \\)) |
+
+## Variables in Python
+:::{.incremental}
+
+- Links a name to a value
+- Case-sensitive: `ali` and `Ali` are different variables
+- Can contain any alphanumeric characters and underscores (A-z, 0-9, _)
+- Cannot start with a number
+- You can print the value of a parameter with the `print()` function.
+- Oftentimes just a variable name is enough to print it.
+:::
+ 
+## Variables in Python (cont'd)
+
+```{python}
+#| output-location: column-fragment
+height = 100 * 2
+print(height)
+```
+
+<br>
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+height
+```
+
+<br>
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+height = 297
+width = 210
+
+area_mm2 = height * width
+print(area_mm2)
+```
+
+
+
+## Commenting in Python
+If you have the hash symbol (`#`) on a line, Python interpreter will not read the rest of the line
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+# Area of an A4 paper
+height = 297 # in mm
+width = 210  # in mm
+
+area_mm2 = height * width  # in mm2
+print(area_mm2)
+```
+
+
+## Types in Python
+- You can check the type of a variable using the `type()` function.
+
+```{python}
+#| output-location: column-fragment
+# Area of an A4 paper
+height = 297 # in mm
+type(height)
+```
+
+. . .
+
+<br>
+
+```{python}
+#| output-location: column-fragment
+# Area of an A4 paper
+height = 297.0 # in mm
+type(height)
+```
+
+. . .
+
+<br>
+
+```{python}
+#| output-location: column-fragment
+# Area of an A4 paper
+measure_name = "area"
+type(measure_name)
+```
+
+. . .
+
+
+## Types in Python
+We will deal with four main variable types:
+
+:::{.incremental}
+
+- Integers (`int`): 
+  - `1`, `2`, `-5` ,`2910`  
+- Float (`float`): 
+  - `1.0`, `2.5`, `-5.3`  (decimal numbers)
+- String (`str`):
+  -  `"hi"`, `'good morning!'`, `'Wow! 😲'`  (text)
+- Boolean (`    bool`)P
+  - `True`, `False` (logical)
+
+:::
+
+## Why do we care about types at all?
+- Each type has its own set of rules
+
+```{python}
+#| output-location: column-fragment
+3 + 5
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+'3' + '5'
+```
+
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+"Hello" + " World!"
+
+```
+
+## Why do we care about types at all (2)? 
+- Each type has its own set of rules
+
+- It is imporant how a variable is recorded in the memory, data, and how it is processed.
+
+
+## Practice
+###  `python_intro/Ex1.ipyb` 
+
+## Jupyter Notebook Shortcuts {.smaller}
+| Keyboard Shortcut | Description |
+| ---------------- | ----------- |
+| `Ctrl + Enter`   | Run selected cell |
+| `Shift + Enter`  | Run selected cell and advance to the next cell |
+| `Enter`          | Edit selected cell           |
+| `Esc`            | Stop Editing the cell   |
+| `m`              | Cell to Markdown (text) |
+| `y`              | Cell to code            |
+| `d` and `d` again| Delete cell |
+| `Ctrl + Shift + h` | Show keyboard shortcuts                    |
+
+## Practice (2)
+###  `python_intro/Ex2.ipyb`
+

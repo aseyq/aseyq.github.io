@@ -1,0 +1,326 @@
+---
+title: "oTree Crash Course"
+subtitle: Session IV - Group Decisions 2
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "8 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format:
+  revealjs:
+    #theme: white
+    incremental: false
+    slide-number: true
+    show-slide-number: print
+    highlight-style: tango
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+## Recap
+:::{.incremental}
+* We covered group experiments where the individuals had the same role.
+  
+* We created `Player` fields for the individual level data and `Group` fields.
+
+* We created a `group` function to `set payoffs` and triggered it at the waiting page by setting `after_all_players_arrive` method under our page class.
+  
+* Now we will see heterogenous groups where the individuals have different roles.
+:::
+
+## Group Experiments II - Heterogenous Groups {.smaller}
+
+
+| Aspect                     | Homogeneous Groups        | Heterogeneous Groups                                     |
+| -----------------          | ------------------     | --------                                             |
+| **Pages**                  | Everybody sees every page |  Some pages might be shown to specific participants only|
+| **Variables / Calculations** | Calculations are the same for everybody   | Role specific calculations might be necessary |
+
+## Identifying Participants in a Group
+
+
+* oTree already have a structure to deal with individuals roles in a group.
+* `player.id_in_group`: Each player gets an integer from 1 to n as their id in group.
+* ![](images/id_in_group.png){width="70%"}
+
+## Default behavior `id_in_group` in oTree {.smaller}
+
+:::{.center}
+![](images/mtc_grouping_with_ids.png){width="50%"}
+:::
+
+* `id_in_group` stays the same as for multiple rounds by default.
+* When participants use the same link (as opposed to the individual links), they will be grouped one by one.
+* First 2 participants will be in group 1, next 2 in group 2, etc.
+
+
+## Defining Roles
+- Roles can be defined based on `id_in_group` variable of the player.
+
+
+:::{.center}
+![](images/mtc_grouping_with_ids_roles.png){width="70%"}
+:::
+
+
+## Calling players when they all have the same role
+* In the Public Goods Game, our players were identical. So we could loop over players like
+
+```{.python code-line-numbers="false"}
+# Gets all the players and puts them in a list
+players = group.get_players()
+
+for p in players:
+  do_something(p)
+  p.some_attribute = some_number
+  #...
+  
+```
+
+## We can loop conditionally based on the id of the player
+
+```{.python code-line-numbers="false"}
+# Gets all the players and puts them in a list
+players = group.get_players()
+
+for p in players:
+
+  if player.id_in_group == 1: # Trustor
+    do_something(p)
+    p.some_attribute = some_number
+
+  if player.id_in_group == 2: # Trustee
+    do_something_else(p)
+    p.some_attribute = some_other_number
+  #...
+  
+```
+
+## Reaching player objects by id: `group.get_player_by_id()`
+
+
+  ```{.python code-line-numbers="false"}
+  trustor = group.get_player_by_id(1)
+  trustee = group.get_player_by_id(2)
+  
+  trustor.payoff = endowment - sent_amount + returned amount
+  trustee.payoff = C.MULTIPLIER * sent_amount - returned_amount
+  
+  
+  ```
+
+## Dislaying pages conditionally for different roles
+- We already know how to display pages conditionally in different rounds.
+
+- We can do the same for different roles (id_in_group) as well.
+
+```{.python code-line-numbers="false"}
+class PageForTrustor(Page):
+
+    def is_displayed(player):
+        return player.id_in_group == 1
+    
+```
+
+# Now let's see how we can use these in a Trust Game
+
+## Trust Game
+![](images/trust_game_str.png)
+
+- Trustor is given an endowment and can send any amount to the trustee.
+- The amount sent is tripled by the experimenter.
+- The trustee can send back any amount to the trustor.
+
+
+## Creating a new app
+1. `otree startapp trust`
+2. Add it to `settings.py`.
+
+```{.python filename="settings.py" code-line-numbers="false"}
+# ...
+SESSION_CONFIGS = [
+    dict(
+        name='trust',
+        app_sequence=['trust'],
+        num_demo_participants=2,
+    ),
+]
+# ...
+```
+## Planning Pages
+| Page         | Description                   | Shown |
+| -------------| ----------------------------- |-------|
+| Send         | Amount sent from P1 to P2     | P1    |
+| Return       | Amount returned from P2 to P1   | P2    |
+| Results      | Show Results                  | Both  |
+
+. . .
+
+- What about WaitPages?
+
+## Planning Pages
+| Page         | Description                   | Shown |
+| -------------| ----------------------------- |-------|
+| Send         | Amount sent from P1 to P2     | P1    |
+| WaitForP1    |                               |       |
+| Return       | Amount returned from P2 to P1   | P2    |
+| WaitForP2    |                               |       |
+| Results      | Show Results                  | Both  |
+
+## Group fields
+
+- We already know how to create group fields.
+- We can also create forms for group fields.
+
+```{.python code-line-numbers="false"}
+class Send(Page):
+    form_fields = ['sent']
+    form_model = 'group'
+```
+
+## Game Parameters{.smaller}
+| Parameter             | Description                           | Scope     | Field/Type       |
+| -------------         | ----------------------------------    | --------  | ----------       |
+| PLAYERS_PER_GROUP     | (built-in) Number of players in group | Constants |                  |
+| ENDOWMENT             | Initial endowment of P1               | Constants |`c()`   |
+| MULTIPLIER            | The multiplier of P1's transfer to P2 | Constants |                  |
+| sent           | The amount sent by P1 to P2           | Group     | **CurrencyField** |
+| returned       | The amount sent back by P2 to P1      | Group     | **CurrencyField** |
+| payoff                | Payoff of each player (built-in)     | Player     | **CurrencyField** |
+
+. . .  
+
+- Lets create those fields
+
+
+## Setting Payoffs
+
+* Now we can define our `set_payoff` function.
+
+```{.python filename="settings.py" code-line-numbers="false"}
+
+def set_payoffs(group):
+    p1 = group.get_player_by_id(1)
+    p2 = group.get_player_by_id(2)
+
+    p1.payoff = C.ENDOWMENT - group.sent + group.returned
+    p2.payoff = group.sent * C.MULTIPLIER - group.returned
+```
+
+## Using Experimental Currencies
+* `settings.py` controls the parameters for currency types
+```{.python filename="settings.py" code-line-numbers="false"}
+# e.g. EUR, GBP, CNY, JPY
+REAL_WORLD_CURRENCY_CODE = 'USD'
+USE_POINTS = True
+
+## this you should add manually
+POINTS_CUSTOM_NAME = 'ECU'
+```
+
+## Triggering `set_payoffs`
+| Page         | Description                   | Shown |
+| -------------| ----------------------------- |-------|
+| Send         | Send amount from P1 to P2     | P1    |
+| WaitForP1    |                               |       |
+| Return       | Return amount from P2 to P1   | P2    |
+| WaitForP2    |                               |       |
+| Results      | Show Results                  | Both  |
+
+. . . 
+
+- We need to trigger `set_payoffs` in the `WaitForP2` page.
+
+# Preparing Results Page
+* We can have a single page with if conditions
+
+```{.html filename="templates/trust/Results.html" code-line-numbers="false"}
+    {{ if player.id_in_group == 1 }}
+      <ul>
+            <li> You had {{ C.ENDOWMENT }} </li>
+            <li> You sent Player B {{ group.sent_amount }}.</li>
+            <li> Player B returned {{ group.returned_amount }}. </li>
+        </ul>
+        </p>
+    {{ else }}
+            <p>
+            <ul>
+                <li>Player A sent you {{ group.sent_amount }}. </li>
+                <li>You returned {{ group.returned_amount }}. </li>
+
+            </ul>
+            </p>
+    {{ endif }}
+
+```
+
+## Payoff Relevant Variables in a Template {.smaller}
+:::{.incremental}
+* In oTree, there is a separate `player` object for each participant in each app or in each round.
+* oTree represents a participant with `participant` object within all rounds and apps. 
+* It tracks payoff relevant information for each round/each app and update `participant` variables
+* Some important variables:
+  * `participant.payoff`: Total payoff in each app in the currency/points
+  * `participant.payoff_in_real_world_currency`: Total payoff after the payoff is converted
+  * `participant.payoff_plus_participation_fee`: Payoff + participation fee
+* You can access the participation fee by `session.config.participation_fee`
+:::
+
+## Payoff relevant information in Results
+```{.html filename="templates/trust/Results.html" code-line-numbers="false"}
+    <p>
+        Your payoff from this stage is {{ participant.payoff }}. 
+        It is converted to {{ participant.payoff_in_real_world_currency }}.
+        You earned {{ session.config.participation_fee }} a fixed 
+        show-up fee for participating in this experiment.
+    </p>
+
+    <h5>In total, your final earning 
+    is {{ participant.payoff_plus_participation_fee }}. </h5>
+```
+
+
+## Easier definition of roles
+
+```{.python code-line-numbers="false"}
+class C(BaseConstants):
+    NAME_IN_URL = 'trust'
+    PLAYERS_PER_GROUP = 3
+    NUM_ROUNDS = 1
+
+    TRUSTOR = 1
+    TRUSTEE = 2
+```
+
+## Built-in Roles
+- If you add `_ROLE` in constants, oTree will automatically create a `role` field in `player` object and fill it with the string you defined.
+
+```{.python code-line-numbers="false"}
+class C(BaseConstants):
+    # ...
+    TRUSTOR_ROLE = 'Trustor'
+    TRUSTEE_ROLE = 'Trustee
+```
+
+## Built-in Roles
+
+Then one can write
+
+```{.python code-line-numbers="false"}
+class Return(Page):
+
+    @staticmethod
+    def is_displayed(player):
+        return player.role == "Trustor"
+```
+
+## Also you can get player by role
+
+```{.python code-line-numbers="false"}
+player1 = group.get_player_by_role("Trustor")
+```

@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Data Visualization in R with ggplot2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ali Seyhun Saral" />
+    <meta name="date" content="2019-06-29" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/shinobi.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/tamu-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data Visualization in R with ggplot2
+### Ali Seyhun Saral
+### Jdmx 2019
+### 2019-06-29
+
+---
+
+
+&lt;link href="https://fonts.googleapis.com/css?family=Anton|Average|Fjalla+One|Gravitas+One|Montserrat&amp;display=swap" rel="stylesheet"&gt; 
+
+
+### `ggplot2`: What does gg stand for?
+* Initiated by Hadley Wickham
+* Based on Wilkinson(2005): The Grammar of Graphics   
+
+--
+
+ _A statistical graphic is a __mapping__ from data to __aesthetic__ attributes (color, shape, size) of __geometric objects__ (points, lines, bars)_. 
+ Wickham - ggplot2 (2016)
+--
+
+- Set of independent components:
+    - Data
+    - Layers
+        - Geometric objects (geoms)
+        - Statistical Transformations (stats)
+    - Scales (scale)
+    - Coordinate system (coord)
+    - Facets (facet)
+    - Theme (theme)
+
+---
+### Mappings
+
+&lt;img src="./img/flow.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+* aes() is responsible for defining mappings
+.pull-left[
+
+```r
+head(my_data)
+```
+
+```
+##   class hours_studied score
+## 1     A            28    63
+## 2     A            21    59
+## 3     A            14    40
+## 4     A            29    78
+## 5     A            16    37
+## 6     A            28    60
+```
+]
+.pull-right[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+## Let's get started
+* Go to:
+### [saral.it/jdmx](https://saral.it/jdmx)
+
+
+* If you are running on your own computer, please install necessary packages ( `pack.R` )
+
+* Open `ex1.R`
+
+---
+### Data
+
+* World Happiness Report by UN Sustainable Development Solutions Network
+
+
+```r
+ head(happiness_data)
+```
+
+```
+##       country happiness gdp_per_capita social_support life_expectancy
+## 1     Finland     7.632          1.305          1.592           0.874
+## 2      Norway     7.594          1.456          1.582           0.861
+## 3     Denmark     7.555          1.351          1.590           0.868
+## 4     Iceland     7.495          1.343          1.644           0.914
+## 5 Switzerland     7.487          1.420          1.549           0.927
+## 6 Netherlands     7.441          1.361          1.488           0.878
+##   freedom generosity corruption continent
+## 1   0.681      0.192        106    Europe
+## 2   0.686      0.286        102    Europe
+## 3   0.683      0.284        107    Europe
+## 4   0.677      0.353         77    Europe
+## 5   0.660      0.256        103    Europe
+## 6   0.638      0.333         98    Europe
+```
+---
+### Our first `ggplot2` graph
+The relationship between `happiness` and `gdp_per_capita`.
+&lt;img src="index_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+### Initializing the canvas (Step 1)
+* Load `ggplot2` library 
+* We use `ggplot()` function (not ggplot2)
+* Define the data frame
+* Define the aesthetic mappings with `aes()`
+
+
+```r
+ggplot(happiness_data, aes( x = gdp_per_capita, y = happiness))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-8-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+---
+### Adding `geom_point` (Step 2)
+* Elements are added with `+` (must be at the end of the line)
+* Create scatterplots and bubble charts
+* Can take `x`, `y`, `color`, `size`, `alpha` ...
+* Documentation for `geom_point`:   
+  https://ggplot2.tidyverse.org/reference/geom_point.html
+
+```r
+ggplot(happiness_data, aes( x = gdp_per_capita, y = happiness)) +
+  geom_point()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-9-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+* geoms inherit aesthetic mappings from the top level of the plot, which is the `ggplot()` function
+---
+### Adding `geom_text` 
+* Elements are added with `+` (must be at the end of the line)
+* Create scatterplots and bubble charts
+* Can take `x`, `y`, `color`, `size`, `alpha` ...
+* Documentation for `geom_point`:   
+  https://ggplot2.tidyverse.org/reference/geom_text.html
+
+```r
+ggplot(happiness_data, aes( x = gdp_per_capita, y = happiness)) +
+  geom_text(aes(label = country))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Coloring vs. Mapping to a Color
+* If we want to color a geom, we should add the parameter directly
+
+```r
+ggplot(happiness_data, aes( x = gdp_per_capita, y = happiness)) +
+  geom_point(color = "red")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-11-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+###  Coloring vs. Mapping to a Color
+* If we want to map a variable to the color, we use `aes()`
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness,
+                           color = continent)) +
+  geom_point()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-12-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Coloring vs. Mapping to a Color (Step 3)
+* Note that we could put the color aesthetic in `geom_point()` as well.
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+    geom_point(aes(color = continent))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Mapping to a Shape Instead
+
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+    geom_point(aes(shape = continent))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Or both
+
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes(shape = continent, color = continent))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-15-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### We can even add a size mapping
+
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent, size = generosity))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-16-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Let's stick to the previous one
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+    geom_point(aes( color = continent))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-17-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Setting the axis limits (Step 4 -&gt;)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent)) +
+  scale_y_continuous( limits = c(0,8)) 
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Setting the axis breaks (-&gt; Step 4 -&gt;)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+    geom_point(aes( color = continent)) +
+    scale_y_continuous( limits = c(0,8), breaks = 0:8) 
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+`seq()` function can be handy to set axis breaks.
+---
+### Setting axis names (-&gt; Step 4)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent)) +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+`seq()` function can be handy to set axis breaks.
+---
+
+### Scales
+
+* Control how data map to visual properties
+* `ggplot2` has well selected defaults, but often customization is needed
+* There are several "ready to use" scales for different type of aesthethics
+
+[`scale_x_discrete()`](https://ggplot2.tidyverse.org/reference/scale_discrete.html)  
+[`scale_x_continuous()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html)  
+[`scale_shape()`](https://ggplot2.tidyverse.org/reference/scale_shape.html)  
+[`scale_color_brewer()`](https://ggplot2.tidyverse.org/reference/scale_brewer.html)  More information [Brewer Scale Palettes](http://colorbrewer2.org/#type=qualitative&amp;scheme=Set1&amp;n=3)  
+
+* And can be built manually:
+
+[DIY scales](https://ggplot2.tidyverse.org/reference/scale_manual.html)
+```
+scale_colour_manual() 
+scale_fill_manual() 
+scale_size_manual() 
+scale_shape_manual() 
+scale_linetype_manual() 
+scale_alpha_manual()
+scale_discrete_manual() 
+```
+
+---
+### Setting color scale : Brewer palette (Step 5)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent)) +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita") +
+  scale_color_brewer(name = "Continent", palette = "Set1")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Setting color scale : Custom
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent)) +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita") +
+  scale_color_manual(name = "Continent",
+                     values = c("blue", "orange", "red", "purple", "cyan"))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Setting color scale : Custom
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent)) +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita") +
+  scale_color_manual(name = "Continent",
+                     values = c("blue", "orange", "red", "purple", "cyan"),
+                     labels = c("AFR","AMR","ASI","EUR","OCE"))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+---
+### Adding `geom_smooth()`(Step 6)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent)) +
+  geom_smooth() +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita") +
+  scale_color_brewer(palette = "Set1")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+### Adding linear `geom_smooth()` (Step 7)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes( color = continent)) +
+  geom_smooth(method = "lm") +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita") +
+  scale_color_brewer(palette = "Set1")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+### Final Touches (Step 7)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes(color = continent), alpha = 0.5) +
+  geom_smooth(method = "lm", se= FALSE, color = "black") +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita") +
+  scale_color_brewer(name = "", palette = "Set1") +
+  theme_bw()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+### Facetting (Bonus Step)
+
+```r
+ggplot(happiness_data, aes(x = gdp_per_capita,
+                           y = happiness)) +
+  geom_point(aes(color = continent), alpha = 0.5) +
+  geom_smooth(method = "lm", se= FALSE, color = "black") +
+  scale_y_continuous(name = "Happiness index", limits = c(0,8), breaks = 0:8) +
+  scale_x_continuous(name = "Log GDP per Capita") +
+  scale_color_brewer(palette = "Set1") +
+  facet_grid( ~ continent) +
+  theme_bw()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+---
+### Before we go on:
+&lt;img src="./img/googling.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+
+&lt;img src="./img/googling3.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+&lt;img src="./img/googling4.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+--
+
+&lt;img src="./img/googling2.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+### Don't get lost
+#### Commands and Packages
+`help(command_name)`  
+`help(package = 'dplyr')`  
+`browseVignettes(package=package-name)`   
+
+#### Browsing data
+`view(data_name)` : Real slow. Only in RStudio  
+    `head(data_name` and `tail(data_name)`: First n lines / Last n lines  
+`str(data_name)`: Check the structure  
+`glimpse(data_name)`: Better structure (IMHO)  
+`summary(data_name)`: Summary of the data  
+
+#### My problem solving workflow  
+
+* Help functions
+* Googling it [Don't let anyone google that for you](https://lmgtfy.com/?iie=1&amp;q=rotate+axis+labels+in+ggplot2)
+* [Tidyverse.org](https://www.tidyverse.org/)
+* [Stackoverflow.com](https://www.stackoverflow.com)
+
+---
+### Bar charts in ggplot
+* `geom_col()`: 
+    * Direct mapping from the data 
+    * x: categorical variable
+    * y: bar height
+    
+* `geom_bar()`: 
+    * Special case of `geom_col()`
+    * x: categorical variable
+    * y: no y variable (with exceptions)
+---
+### Bar charts in ggplot : geom_col()
+
+```r
+library(dplyr)
+happiness_data_subset  &lt;- happiness_data  %&gt;% filter( country %in% c("Italy", "Germany", "Turkey") )
+head(happiness_data_subset)
+```
+
+```
+##   country happiness gdp_per_capita social_support life_expectancy freedom
+## 1 Germany     6.965          1.340          1.474           0.861   0.586
+## 2   Italy     6.000          1.264          1.501           0.946   0.281
+## 3  Turkey     5.483          1.148          1.380           0.686   0.324
+##   generosity corruption continent
+## 1      0.273         95    Europe
+## 2      0.137         12    Europe
+## 3      0.106         64      Asia
+```
+---
+### Bar charts in ggplot : geom_col()
+
+```r
+ggplot(happiness_data_subset, aes(x = country, y = happiness)) +
+  geom_col()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Bar charts in ggplot : geom_col()
+
+```r
+library(dplyr)
+ggplot(happiness_data_subset, aes(x = country, y = happiness)) +
+  geom_point(size = 4) +
+  scale_y_continuous(limits = c(0,8)) +
+  coord_flip()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Nobel Prize Data (Step 1)
+* Open ex2.R
+* Individual/Organizational level
+
+
+
+```r
+glimpse(nobel_winners)
+```
+
+```
+## Observations: 969
+## Variables: 20
+## $ prize_year           &lt;dbl&gt; 1901, 1901, 1901, 1901, 1901, 1901, 1902, 1…
+## $ category             &lt;chr&gt; "Chemistry", "Literature", "Medicine", "Pea…
+## $ prize                &lt;chr&gt; "The Nobel Prize in Chemistry 1901", "The N…
+## $ motivation           &lt;chr&gt; "\"in recognition of the extraordinary serv…
+## $ prize_share          &lt;chr&gt; "1/1", "1/1", "1/1", "1/2", "1/2", "1/1", "…
+## $ laureate_id          &lt;dbl&gt; 160, 569, 293, 462, 463, 1, 161, 571, 294, …
+## $ laureate_type        &lt;chr&gt; "Individual", "Individual", "Individual", "…
+## $ full_name            &lt;chr&gt; "Jacobus Henricus van 't Hoff", "Sully Prud…
+## $ birth_date           &lt;date&gt; 1852-08-30, 1839-03-16, 1854-03-15, 1828-0…
+## $ birth_city           &lt;chr&gt; "Rotterdam", "Paris", "Hansdorf (Lawice)", …
+## $ birth_country        &lt;chr&gt; "Netherlands", "France", "Prussia (Poland)"…
+## $ gender               &lt;chr&gt; "Male", "Male", "Male", "Male", "Male", "Ma…
+## $ organization_name    &lt;chr&gt; "Berlin University", NA, "Marburg Universit…
+## $ organization_city    &lt;chr&gt; "Berlin", NA, "Marburg", NA, NA, "Munich", …
+## $ organization_country &lt;chr&gt; "Germany", NA, "Germany", NA, NA, "Germany"…
+## $ death_date           &lt;date&gt; 1911-03-01, 1907-09-07, 1917-03-31, 1910-1…
+## $ death_city           &lt;chr&gt; "Berlin", "Châtenay", "Marburg", "Heiden", …
+## $ death_country        &lt;chr&gt; "Germany", "France", "Germany", "Switzerlan…
+## $ birth_year           &lt;dbl&gt; 1852, 1839, 1854, 1828, 1822, 1845, 1852, 1…
+## $ age_awarded          &lt;dbl&gt; 49, 62, 47, 73, 79, 56, 50, 85, 45, 69, 59,…
+```
+---
+### Bar Charts: `geom_bar()` (Step 2)
+* Note that geom_bar automatically counts the number of instances (default behavior)
+* Special case of geom_col()
+
+
+```r
+ggplot(nobel_winners, aes(x = category))+
+  geom_bar()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Bar Charts: `fill` aesthethics (Step 3)
+* Note that we use `fill` instead of `color`
+* Color often refers to outline
+
+
+```r
+ggplot(nobel_winners, aes(x = category, fill = gender))+
+  geom_bar()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+
+### Investigating the data
+What are the NA's?
+
+
+```r
+nobel_winners  %&gt;% filter(is.na(gender))  %&gt;% select(full_name)
+```
+
+```
+## # A tibble: 26 x 1
+##    full_name                                                               
+##    &lt;chr&gt;                                                                   
+##  1 Institut de droit international (Institute of International Law)        
+##  2 Bureau international permanent de la Paix (Permanent International Peac…
+##  3 Comité international de la Croix Rouge (International Committee of the …
+##  4 Office international Nansen pour les Réfugiés (Nansen International Off…
+##  5 Comité international de la Croix Rouge (International Committee of the …
+##  6 Friends Service Council (The Quakers)                                   
+##  7 American Friends Service Committee (The Quakers)                        
+##  8 Office of the United Nations High Commissioner for Refugees (UNHCR)     
+##  9 Comité international de la Croix Rouge (International Committee of the …
+## 10 Ligue des Sociétés de la Croix-Rouge (League of Red Cross Societies)    
+## # … with 16 more rows
+```
+
+```r
+library(dplyr)
+unique(nobel_winners$laureate_type)
+```
+
+```
+## [1] "Individual"   "Organization"
+```
+
+---
+
+### Let's take individual laureates only  (Step 4 and Step 5)
+
+```r
+nobel_winners_ind  &lt;- nobel_winners  %&gt;%
+  filter(laureate_type == "Individual")
+
+ggplot(nobel_winners_ind, aes(x = category, fill = gender))+
+  geom_bar()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-41-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+### Different positionings
+
+```r
+ggplot(nobel_winners_ind, aes(x = category, fill = gender))+
+  geom_bar(position = "dodge")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-42-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+### Different positionings
+
+```r
+ggplot(nobel_winners_ind, aes(x = category, fill = gender))+
+  geom_bar(position = "fill")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Flipping the x and the y axis (Step 7)
+* `coord_flip()` does the trick easily
+
+```r
+ggplot(nobel_winners_ind, aes(x = category, fill = gender))+
+  geom_bar(position = "dodge")+
+  coord_flip()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-44-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Bar ordering (Step 8)
+* Bars are ordered by the order of the categorical variable (factor)
+* `forcats` package have some useful tools that we can plug directly into the plot
+
+
+```r
+library(forcats)
+ggplot(data = nobel_winners_ind, aes(x = fct_relevel(category, c("Economics", "Peace", "Literature", "Chemistry", "Physics", "Medicine")))) +
+  geom_bar(aes(fill = gender)) +
+  coord_flip()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-45-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+# You can try out different bar positionings on the file(Step 9)
+---
+### A continous and a categorical variable: `geom_boxplot()`
+* Summarized by  five parameters
+
+```r
+ggplot(nobel_winners, aes(y = age_awarded, x = category)) +
+  geom_boxplot()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-46-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+### A continuous and a categorical variable: `geom_point()`?
+
+```r
+ggplot(nobel_winners, aes(y = age_awarded, x = category)) +
+  geom_point()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-47-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### A continuous and a categorical variable: `geom_jitter()`
+
+```r
+ggplot(nobel_winners, aes(y = age_awarded, x = category)) +
+  geom_jitter()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-48-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### A continous and a categorical variable: `geom_jitter()`
+* We have to be careful about misrepresentation
+
+```r
+ggplot(nobel_winners, aes(y = age_awarded, x = category)) +
+  geom_jitter(height = 0, width = 0.3)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-49-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+### Layering up: geom_jitter() and geom_boxplot()
+
+```r
+ggplot(nobel_winners, aes(y = age_awarded, x = category)) +
+  geom_jitter(color = "blue") +
+  geom_boxplot(fill = NA, color = "black", outlier.shape = NA)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-50-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+
+```r
+ggplot(nobel_winners, aes(x = age_awarded)) +
+  geom_histogram() +
+  facet_grid(category ~ .)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-51-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+
+```r
+ggplot(nobel_winners, aes(x = age_awarded)) +
+  geom_density(fill = "blue") +
+  facet_grid(category ~ .)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-52-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+
+
+```r
+nobel_winners  %&gt;%
+  filter(!is.na(age_awarded))  %&gt;%
+  group_by(prize_year)  %&gt;%
+  summarise( mean_age = mean(age_awarded))  %&gt;% 
+  ggplot(aes(x = prize_year, y = mean_age )) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1800,2019,10)) +
+  scale_y_continuous(limits = c(15,99))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-53-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+```r
+nobel_winners  %&gt;%
+  filter(!is.na(age_awarded))  %&gt;%
+  group_by(prize_year)  %&gt;%
+  summarise( mean_age = mean(age_awarded))  %&gt;% 
+ggplot(aes(x = prize_year, y = mean_age )) +
+geom_point() +
+geom_line() +
+geom_smooth() +
+scale_x_continuous(breaks = seq(1800,2019,10)) +
+scale_y_continuous(limits = c(15,99))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-54-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+
+```r
+nobel_winners  %&gt;%
+  filter(!is.na(age_awarded))  %&gt;%
+  group_by(prize_year, category)  %&gt;%
+  summarise( mean_age = mean(age_awarded))  %&gt;% 
+ggplot(aes(x = prize_year, y = mean_age )) +
+geom_point() +
+geom_line() +
+geom_smooth(method = "lm", se = FALSE) +
+scale_x_continuous(breaks = seq(1800,2019,10)) +
+scale_y_continuous(limits = c(15,99)) +
+facet_grid(category ~ .)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-55-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+# Ex3 - Create the plot
+&lt;img src="index_files/figure-html/unnamed-chunk-56-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+---
+&lt;img src="index_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+---
+### Step 1 - Creating jittered points
+&lt;img src="index_files/figure-html/unnamed-chunk-58-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+### Step 2 - Creating the summary statistics 
+* Average of all disciplines
+* Average for each discipline
+* Minimum, Maximum, 
+---
+
+### Step 2 - Creating the summary statistics 
+* Average of all disciplines
+
+```r
+average_age  &lt;- mean(nobel_winners$age_awarded, na.rm = TRUE)
+print(average_age)
+```
+
+```
+## [1] 59.48401
+```
+* Average for each discipline
+
+```r
+nobel_winners_summary  &lt;- nobel_winners %&gt;%
+  group_by(category)  %&gt;%
+  summarise( mean_age_awarded = mean(age_awarded, na.rm = TRUE))  %&gt;%
+  arrange(mean_age_awarded) 
+
+print(nobel_winners_summary)
+```
+
+```
+## # A tibble: 6 x 2
+##   category   mean_age_awarded
+##   &lt;fct&gt;                 &lt;dbl&gt;
+## 1 Physics                55.8
+## 2 Medicine               57.9
+## 3 Chemistry              58.1
+## 4 Peace                  61.4
+## 5 Literature             64.7
+## 6 Economics              67.2
+```
+---
+### Step 3 - Adding mean per discipline line
+
+```r
+ggplot(nobel_winners, aes(y = category, x = age_awarded, color = category))+
+    geom_jitter(alpha = 0.3, width = 0.0, height = 0.1, size = 2) +
+    geom_point(data = nobel_winners_summary,
+               aes(x =mean_age_awarded), size = 10)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-61-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+### Step 4 - Adding the point layer for averages
+
+```r
+ggplot(nobel_winners, aes(y = category, x = age_awarded, color = category))+
+    geom_vline( xintercept = mean(nobel_winners$age_awarded, na.rm = TRUE), color = "gray20", linetype = "dashed") +
+    geom_jitter(alpha = 0.3, width = 0.0, height = 0.1, size = 2) +
+    geom_point(data = nobel_winners_summary,
+               aes(x =mean_age_awarded), size = 10)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-62-1.png" style="display: block; margin: auto;" /&gt;
+---
+### Step 5 - Adding a text layer
+
+
+```r
+ggplot(nobel_winners, aes(y = category, x = age_awarded, color = category))+
+    geom_vline( xintercept = mean(nobel_winners$age_awarded, na.rm = TRUE), color = "gray20", linetype = "dashed") +
+    geom_jitter(alpha = 0.3, width = 0.0, height = 0.1, size = 2) +
+    geom_point(data = nobel_winners_summary,
+               aes(x =mean_age_awarded), size = 10) +
+    geom_text_repel(aes(label = full_name), data = filter(nobel_winners, age_awarded == min(nobel_winners$age_awarded, na.rm = TRUE) | age_awarded == max(nobel_winners$age_awarded, na.rm = TRUE)), color = "black")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-63-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+---
+
+### Step 6 - Adding a theme
+
+
+```r
+ggplot(nobel_winners, aes(y = category, x = age_awarded, color = category))+
+    geom_vline( xintercept = mean(nobel_winners$age_awarded, na.rm = TRUE), color = "gray20", linetype = "dashed") +
+    geom_jitter(alpha = 0.3, width = 0.0, height = 0.1, size = 2) +
+    geom_point(data = nobel_winners_summary,
+               aes(x =mean_age_awarded), size = 10) +
+    geom_text_repel(aes(label = full_name), data = filter(nobel_winners, age_awarded == min(nobel_winners$age_awarded, na.rm = TRUE) | age_awarded == max(nobel_winners$age_awarded, na.rm = TRUE)), color = "black") +
+ theme_economist() +
+  guides(fill=FALSE, color = FALSE)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-64-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+---
+&lt;img src="index_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+---
+# World Map
+
+```r
+library(rworldmap)
+library(ggplot2)
+map_world &lt;- map_data(map="world")
+
+#Add the data you want to map countries by to map.world
+#In this example, I add lengths of country names plus some offset
+
+map_world_happiness  &lt;- map_world  %&gt;% rename(country = region)  %&gt;% left_join(happiness_data, by = "country") 
+
+map_world_new  &lt;- map_world  %&gt;% rename(country = region) 
+
+ggplot() +
+  geom_map(data=map_world_happiness, map=map_world, aes(map_id=country, x=long, y=lat, fill=happiness)) +
+  coord_equal()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-66-1.png" style="display: block; margin: auto;" /&gt;
+---
+
+```r
+library(rworldmap)
+library(ggplot2)
+map_world &lt;- map_data(map="world")
+
+#Add the data you want to map countries by to map.world
+#In this example, I add lengths of country names plus some offset
+
+map_world_happiness  &lt;- map_world  %&gt;% rename(country = region)  %&gt;% left_join(happiness_data, by = "country") 
+
+map_world_new  &lt;- map_world  %&gt;% rename(country = region) 
+
+ggplot() +
+  geom_map(data=map_world_happiness, map=map_world, aes(map_id=country, x=long, y=lat, fill=happiness), color = "black", size =0.2) +
+  scale_fill_distiller(direction = 1) +
+  coord_equal()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-67-1.png" style="display: block; margin: auto;" /&gt;
+---
+### Final Remarks
+- `ggplot2` is a powerful, flexible and consistent package that produce aesthetically pleasing graphics
+--
+
+- `ggplot2` is straightforward as long as you have the right data structure.
+
+--
+
+.center[
+![Saw](./img/meme1.jpg)
+
+]
+---
+### Final Remarks
+- `ggplot2` is a powerful, flexible and consistent package that produce aesthetically pleasing graphics
+
+- `ggplot2` is straightforward as long as you have the right data structure.
+
+
+- My workflow is:
+    - Sketch the plot
+    - Determine the mappings
+    - Create necessary side data
+    - Layer up!
+    
+- We didn't cover `facets`, `themes` and `guides`.    Participant is encouraged to refer to the documentation
+---
+# Thank you
+
+###Ali Seyhun Saral  
+#### saral@coll.mpg.de 
+
+#### @seyhunsaral
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

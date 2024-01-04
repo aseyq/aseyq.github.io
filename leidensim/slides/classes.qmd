@@ -1,0 +1,343 @@
+---
+title: "Classes in Python"
+subtitle: Session III - Introduction to ABM
+author: "Ali Seyhun Saral (Uni. Bologna)"
+institute: "Institute of Psychology at Leiden University."
+date: "14 June 2022"
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: white
+    incremental: false
+    smaller: true
+    preview-links: auto
+    css: styles.css
+bibliography: bibliography.bib
+
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+
+---
+
+## Table-Based Workflow
+
+| Name  | Awards | Partner |
+|-------|--------|---------|
+| Art   | 10     | Paul    |
+| Cher  | 20     | Sonny   |
+| Paul  | 20     | Art     |
+| Sonny | 5      | Cher    |
+
+
+
+## Table-Based Workflow
+
+:::{.columns}
+
+
+::::{.column}
+| Name  | Awards | Partner |
+|-------|--------|---------|
+| Art   | 10     | Paul    |
+| Cher  | 20     | Sonny   |
+| Paul  | 20     | Art     |
+| Sonny | 5      | Cher    |
+
+::::
+
+::::{.column}
+:::::{.fragment}
+```{.python}
+def addAwards(name):
+  table[name, ‘Awards’] += 1
+```
+
+:::::
+
+```{.python}
+addAwards("Cher")
+```
+
+<br>
+
+:::::{.fragment}
+
+```{.python}
+def make_partner(name1, name2):
+  table[name1, ‘Partner’] += name2
+  table[name2, ‘Partner’] += name1
+}
+```
+:::::
+
+```{.python}
+make_partner("Art", "Paul")
+```
+::::
+
+::: 
+## Object-Oriented Programming
+
+```{.python}
+cher.add_award()
+
+art.make_partner(paul)
+```
+
+. . .
+
+```{.python}
+cher.awards
+
+## output: 10
+```
+. . .
+
+```{.python}
+art.partner   # paul
+paul.partner # art
+
+art.partner.partner # art
+art.partner.add_award() # paul gets an award
+```
+
+## Object-Oriented Programming
+- Objects have some variables `attribute` (`art.award`, `art.partner`)
+
+- Objects have some methods functions attached to them `method` (`art.add_award()`)
+
+- Object are independent units.
+
+
+## Object-Oriented Programming
+![](images/objects1.png)
+
+## Classes 
+
+:::::{.columns}
+
+::::::{.column width="50%"}
+
+:::{.incremental}
+- Classes are blueprints in which an object is generated. 
+
+- An object created wrom a class is called an `instance`
+
+- Usually a class ansers four questions:
+  - What are the variables related to it? (`attributes`)
+  - What are the functions related to it? (`methods`)
+  - What to do when I first create an object? (`__init__`)
+  - Is there another class I should inherit from? (`parent class`)
+:::
+
+::::::
+
+::::::{.column width="50%"}
+![](images/blueprint.jpg)
+::::::
+
+:::::
+
+
+## Classes
+![](images/classes1.png)
+
+## Class 
+![](images/classes2.png)
+
+## Class 
+![](images/classes3.png)
+
+
+## Class 
+![](images/classes4.png)
+
+
+## Object-Orented Programming Properties
+
+1. Encapsulation: Self-contained pieces
+
+2. Abstractation: What is going on underneath is abstracted away
+
+3. Inheritance: Classes can be organized hierarchially
+
+4. Polymorphism: Classes can change into different forms from the parents
+
+
+
+## How to create Classes in Python
+
+```{python}
+class Singer:
+  def __init__(self):
+    self.awards = 0
+
+  def sing(self):
+    print("la la la laaa!")
+
+  def win_award(self):
+    self.award = self.award + 1
+```
+
+. . .
+
+- Two unfamiliar things:
+  - `__init__`: basically a function run automatically when an instance is created
+  - `self`: can be read **myself**. If refers to the instance that is created from it. 
+
+
+. . . 
+
+- Creating an insance
+```{python}
+#| output-location: column-fragment
+ali = Singer()
+
+ali.sing()
+
+```
+
+## Practice
+<h3>Ex7_classes.ipynb </h3>
+![](images/classes5.png)
+
+## Class Inheritance
+
+When you create a class with inheritance, put the name of the parent class inside the parantheses.
+
+```{python}
+class Singer:
+  def __init__(self):
+    self.awards = 0
+
+  def sing(self):
+    print("la la la laaa!")
+
+  def win_award(self):
+    self.award = self.award + 1
+```
+
+<br>
+
+. . . 
+
+```{python}
+class OperaSinger(Singer):
+    def sing_aria(self):
+      print("Ridi, Pagliaccio... sul tuo amore infranto!")
+```
+
+## Class Inheritance
+
+```{python}
+#| output-location: column-fragment
+angelo = OperaSinger()
+
+angelo.sing()
+```
+<br>
+
+. . . 
+
+
+```{python}
+#| output-location: column-fragment
+angelo = OperaSinger()
+
+angelo.sing_aria()
+```
+
+## Class Inheritance
+
+:::{.incremental}
+- If you need to reach the parent class from a child class, you can call `super()` function.
+
+- If you define a method with the same name in the child class, the method of the parent will be overwritten.
+
+- If this is not the behavior you want, you can call the super function and extend the method over it.
+:::
+
+## Class Inheritance: `super()`
+
+
+```{python}
+class Singer:
+  def __init__(self):
+    self.awards = 0
+
+  def sing(self):
+    print("la la la laaa!")
+
+  def win_award(self):
+    self.award = self.award + 1
+```
+
+<br>
+
+. . . 
+
+```{python}
+class OperaSinger(Singer):
+    def __init__(self):
+      self.vocal_range = "tenor"
+
+    def sing_aria(self):
+      print("Ridi, Pagliaccio... sul tuo amore infranto!")
+```
+<br>
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+#| error: true
+angelo = OperaSinger()
+
+angelo.awards
+```
+
+## Class Intheritance: `super()`
+
+```{python}
+class Singer:
+  def __init__(self):
+    self.awards = 0
+
+  def sing(self):
+    print("la la la laaa!")
+
+  def win_award(self):
+    self.award = self.award + 1
+```
+
+<br>
+
+. . . 
+
+```{python}
+#| code-line-numbers: "|3"
+class OperaSinger(Singer):
+    def __init__(self):
+      super().__init__()
+      self.vocal_range = "tenor"
+
+    def sing_aria(self):
+      print("Ridi, Pagliaccio... sul tuo amore infranto!")
+```
+<br>
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+
+angelo = OperaSinger()
+
+angelo.awards
+```
+
+## Practice
+<h3>Ex8_classes2.ipynb </h3>
+

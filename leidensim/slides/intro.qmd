@@ -1,0 +1,300 @@
+---
+title: "Games and Agents"
+subtitle: Session I - Introduction to Agent Based Modeling
+author: "Ali Seyhun Saral (Uni. Bologna)"
+institute: "Institute of Psychology at Leiden University."
+date: "13 June 2022"
+footer: ""
+
+format: 
+  revealjs:
+    theme: white
+    incremental: false
+    smaller: true
+    slide-number: true
+    show-slide-number: print
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+## A flock of birds
+
+<iframe width="1120" height="630" src="https://www.youtube.com/embed/V4f_1_r80RY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## A flock of birds
+Simple rules lead to seemingly sophisticated behavior [@reynolds1987flocks]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+:::::{.incremental}
+- **Align** yourself with the neighbors in terms of velocity and direction.
+- **Separating** yourself enough from the others to avoid collusion.
+- Try to **center** yourself to your neighbors.
+:::::
+:::
+::: {.column width="50%"}
+
+
+
+![](images/boid.gif)
+
+:::
+::::
+
+
+## Simple rules -> Complex Behavior
+
+::: {.r-stack}
+![](images/fishmarket2.jpg){.fragment width="800" height="600"}
+
+![](images/stock.jpg){.fragment width="976" height="549"}
+
+![](images/traffic.jpg){.fragment width="560" height="374"}
+
+![](images/neuron.png){.fragment width="800" height="500"}
+:::
+
+
+
+## What is a scientific model?
+
+:::: {.columns}
+
+::: {.column width="40%"}
+::::: {.incremental}
+- A simplified representation of some part of the reality that is useful for a scientific purpose.
+  - Help us to **understand** the reality it represents. 
+  - **Manipulate** it to improve causal understanding.
+  - Make **predictions** out of it.
+:::::
+:::
+
+::: {.column width="60%"}
+![](images/s1_legohouse.jpg){.absolute top="170" right="50" width="400" height="400"}
+<!-- Note that default size of presentation slides is 1050 x 700  -->
+:::
+
+::::
+
+
+::: footer
+"LEGO House" by georgivar is licensed under CC BY-SA 2.0.
+:::
+
+
+
+## Modelling complex systems
+::: {.incremental}
+- The complexity of scientific models was limited by its mathematical tractability.
+
+- Computer simlations relaxed relaxed this limitation.
+
+- ABM's are less simplified in a specific way:
+  - They describe individual components of a system
+  - Individuals and components are autonomous entities
+:::
+
+## Agent-based models
+::: {.incremental}
+- Computational model for simulation the interactions of autonomous objects (agents).
+- Agents: people, animals, institutions, particles, etc.
+- Bottom-up approach
+- Define the behavior of agents and their interactions.
+:::
+
+## What problems are addressed by ABM?
+
+
+- Housing market collapse [@gilbert2009agent; @geanakoplos2012getting]
+- Stock Market fluctuations (@lebaron2001empirical)
+- Managing tropical forests (@huth2004multicriteria)
+- COVID- Contact Tracing [@hinch2021openabm]
+
+. . .
+
+[See @railsback2019agent. For more, p.11]
+
+
+## Why ABM?
+::: {.incremental}
+- Solve problems that traditional models and methods are too simple for.
+- Support/refute theory based on additional features.
+- Explore potential distribution of outcomes.
+- Adresses problems related to *emergence*.
+:::
+
+## Emergence
+
+
+:::: {.columns}
+::: {.column width="50%"}
+- Describes a relationship between a low-level system (micro) and a high-level (macro) system.
+- Macro-level phenomena can only be derived by studying micro-level phenomena.
+
+- Simple interactions between a system's elements lead to unexpected global behavior [@epstein1999agent]
+
+:::
+
+::: {.column width="50%"}
+![](images/antcolony.png)
+:::
+::::
+
+
+
+## Examples:
+- The human body
+- The human brain
+- Pandemics
+- Ecosystems
+- Global Production chain
+- Mexican waves
+
+
+## Features of ABM
+[@romanowska2021agent]
+
+- There are no strict rules on how ABM should be built.
+
+Some features:
+
+  - Emergent
+  - Heterogeneity
+  - Temporal
+  - Spatial
+  - Learning/adaptation
+
+## Complex Adaptive Systems and ABM
+- When we use agent-based models, we useally study a compleyx adaptive system.
+- Dynamic of systems composed if interacting elements in different levels.
+
+
+## Two historical inspiration
+
+- Evolution
+
+- Emergence
+
+
+## Evolution: Universal Constructor 
+:::: {.columns}
+::: {.column width="70%"}
+- One robot buiding another
+  - Without a computer
+  - Design a machine which's complexity increase under natural selection.
+  - The concept of **celular automata**
+
+:::
+
+::: {.column width="30%"}
+![](images/s1_vonneumann.jpg){.absolute height="400" top="170" right="50"}
+<!-- Note that default size of presentation slides is 1050 x 700  -->
+John von Neumann (1903-1957)
+:::
+::::
+
+
+## Game of Life (1970)
+:::: {.columns}
+::: {.column width="70%"}
+
+- A cellular automaton
+- Square cells with two states: alive and dead.
+- 8 neigbors:
+  - if <2 alive neighbors: dies
+  - if 2-3 alive neighbors: lives
+  - if > 3 alive neighbors: dies
+  - if 3 alive neighbors: lives
+
+:::
+
+::: {.column width="30%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Game_of_life_beehive.svg/147px-Game_of_life_beehive.svg.png)
+:::
+::::
+
+## Game of Life (1970)
+![](images/gameoflife.gif)
+[Full Video: Youtube](https://www.youtube.com/watch?v=C2vgICfQawE)
+
+## Axelrod Tournaments (1980)
+- Iterated Prisoners Dilemma Game: "**Cooperate**" "**Defect**"
+- Colleagues were invited to submit their strategies
+- Strategies played against each other repeatedly 
+- 15 strategies initially.
+- The winner was the TIT FOR TAT strategy.
+
+## Building Agent-Based Models
+- Modeling (Design, description etc.)
+- Programming 
+
+## What software to use
+https://en.wikipedia.org/wiki/Comparison_of_agent-based_modeling_software
+
+- [Netlogo](http://netlogoweb.org/launch#http://netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo)
+
+- Python
+
+
+- Mesa (Python)
+
+- AgentPy (Python)
+
+- R
+
+## Why Python?
+
+- The skills are transferable
+- The language is easy to learn
+- You get to understand underlying concepts of ABM
+- Potential to use in other fields with packages
+- Easier to connect wit data
+- Potential to combine other technologies 
+  - Reinfocement learning
+  - Regression analysis
+
+
+## This workshop
+- Hands-on introduction to agent based models
+- We will use Python
+- We will build models from scratch
+- We will use other packages like Axelrod, AgentPy
+- Focus more on Game Theory
+
+## Workshop Program {.smaller}
+
+#### 13 June 2022, Monday
+- Python Basics
+
+#### 14 June 2022, Tuesday
+- Python: Introduction to Object-Oriented Programming in Python
+- Creating an Agent
+- Interacting agents 
+- Implementing the Game
+- Axelrod Tournaments
+
+## Workshop Program- cont {.smaller}
+#### 15 June 2022, Wednesday
+- Creating a Population
+- Evolution of strategies
+- Python: Numpy, Pandas, Matplotlib
+- Sensitivity Analysis
+   
+#### 16 June 2022, Thursday
+- Grid Games
+- Seggregation Model
+- Networks
+- Advanced Topics Discussion
+
+#### Preperation
+- Jupyter Notebook
+
+
+
+
+## References 

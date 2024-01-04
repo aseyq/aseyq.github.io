@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Group Experiments: Homogenous Players</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ali Seyhun Saral" />
+    <meta name="date" content="2021-11-25" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Group Experiments: Homogenous Players
+### Ali Seyhun Saral
+### 25 Nov 2021
+
+---
+
+&lt;style type="text/css"&gt;
+.remark-code, .remark-inline-code {
+  font-size: 80%;
+  color: blue;
+	background-color: rgba(222,222,222,0.3);
+}
+.titletext {
+	font-size: 400%;
+  display:inline-block; 
+}
+
+.smaller {
+	font-size: 70%;
+  display:inline-block; 
+}
+&lt;/style&gt;
+
+
+## Individual Experiments
+
+* We have covered individual experiments so far.
+
+--
+
+* Create `Player` fields for the variables written in the data
+
+--
+
+* Create `Pages` for each page we will see and add fields with `form_fields`
+
+--
+
+* Create/modify the templates for each page. (`PageName.html`, `AnotherPage.html`)
+
+--
+
+&lt;img src="images/model_page_template.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Group Experiments I - Homogenous Groups
+* **Homogenous Groups** 
+
+  * All members have the same role.
+  
+  * They see the same pages.
+
+--
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+* Some technical aspects differ from the individual experiments:
+
+| Aspect                     | Individual Task        | Group Task                                     |
+| -----------------          | ------------------     | --------                                       |
+| **Pages**                  | My own pace | Sometimes have to wait for others|
+| **Variables / Calculations** | My own variables   | Need to reach other players' variables        |
+---
+## Waiting for other players
+* oTree has a specific type of page called "WaitPage"
+
+--
+
+* Waits for all players in the group. When everybody is thereo, it moves on to the next page. 
+
+--
+
+* You need to add it to `PageSequence` list at the bottom but you don't need to create a template.
+
+--
+
+* It can also trigger some functions when all players in the group reach to the point.
+
+--
+
+* Syntax:
+
+```python
+class ResultsWaitPage(WaitPage):
+    pass
+```
+---
+
+## oTree models
+**`__init__.py`**:
+
+```python
+# MODELS
+class Constants(BaseConstants):
+    name_in_url = 'my_survey'
+    players_per_group = None
+    num_rounds = 1
+
+
+class Subsession(BaseSubsession):
+    pass
+
+
+class Group(BaseGroup):
+    pass
+
+
+class Player(BasePlayer):
+    some_individual_variable = models.IntegerField()
+```
+
+---
+# Models
+* They are managing objects which represent players/groups/the constants and handle database entries.
+--
+
+* Four built-in models:
+  * `Player`: Parameters that are unique for each individual.
+  
+  * `Group` : Parameters that are unique for the group, same for each individual in the group.
+  
+  * `Constants`: Parameters that are the same for the experiment.
+     * Beware:Constants are not written on the data!
+  
+  * `Subsession`: Parameters that are same for the "subsession". More often used to initiate some specific settings. We will see it next week.
+---
+
+## Setting group size
+
+* Groups structure is created and handled automatically by oTree
+
+
+```python
+class Constants(BaseConstants):
+    # ...
+    players_per_group = 3
+    # ...
+```
+---
+## `Player` and `Group` classes
+* Classes are like blueprints, declaring the design
+* They are capitalized. (`Player`, `Group`)
+&lt;img src="images/classes.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## `Player` and `Group` instances  
+* Instances are objects created from classes
+
+--
+
+* They are lowercase. (`player`, `group`)
+
+--
+
+* We usually deal with them in computations
+--
+
+* They have attributes(variables) 
+    * Built-in defined in the relevant model
+    * Each player object holds its own value
+--
+
+* They have functions defined in the class(methods) 
+    * Built-in or defined somewhere in `__init__.py`
+
+---
+## `Player` and `Group` instances
+&lt;img src="images/instances.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+### Reaching to players in a group
+* Groups contain players
+* `some_list = group.get_players()`
+* That list contains players
+
+* `some_list[0]`, `some_list[1]`, `some_list[2]`
+* We can loop over that:
+
+
+```python
+players = group.get_players()
+
+for p in players:
+  p.do_something()
+  p.my_player_variable
+```
+
+---
+### Reaching to its group from a player
+
+```python
+player.group  # linked to group object
+
+player.group.my_group_variable
+player.group.do_something()
+```
+---
+class: inverse
+
+.center[.titletext[Let's build a game and see it in practice]]
+---
+# See the demo
+&lt;h1&gt;&lt;a href="https://xpsurvey.com/room/erfurt"&gt; xpsurvey.com/room/erfurt &lt;/a&gt;&lt;/h1&gt;
+
+---
+## The Guessing Game
+.pull-left[
+* Groups of 5 (we can take 3 for convenience)
+
+* Participants pick a number between 0 to 10.
+
+* Those who picked the closest number to **2/3 of the average** wins 10 EUR.
+  
+* Show-up fee: 5 EUR.
+]
+
+.pull-right[
+&lt;img src="images/guessing_result.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+---
+## Building the Guessing Game
+* Let's activate our virtual environment and go to our oTree folder
+* Alternatively we can create a new project
+
+--
+
+* Start a new app
+```
+otree startapp guessing
+```
+---
+## Let's plan first our pages
+| Page                |  Description      |
+|---------------------|-------------------|
+| `Guessing`          | Guessing screen   |
+| `Results`           | Results screen    |
+
+---
+
+## We need a WaitPage before the calculations
+
+| Page                |  Description      |
+|---------------------|-------------------|
+| `Guessing`          | Guessing screen   |
+| **`ResultsWaitPage`**   | Waiting page      |
+| `Results`           | Results screen    |
+
+---
+
+# Fields
+
+| Variable          |    Model    |     Type      |       |
+|-------------------|-------------|------------------|----|
+| `guess`           | `Player`    | `IntegerField()` | Player's guess |
+--
+| `average_guess`   | `Group`     | `FloatField()`   | Average guess in the group|
+--
+| `multiplier`      | `Constants` | Constant         | Ratio of the average for the target number |
+--
+| `target_number`   | `Group`     | `FloatField()`   | Target number |
+--
+| `distance`        | `Player`    | `FloatField()`   | Difference to target value |
+--
+| `is_winner`       | `Player`    | `BooleanField()` |  Whether participant won or not |
+--
+| `reward`          | `Constants` | Constant         | Reward amount |
+--
+| `payoff`          | `Player`    | BUILT IN `Integer` |  |
+---
+
+
+## `Currency` and `payoff` built-in features in oTree
+
+* oTree has built-in currency field : `Currency`
+* Handles monetary calculations and currency symbols.
+
+--
+* Each player has already a `payoff` field
+* Payoff will be converted to real money at the end.
+
+
+--
+
+* `settings.py` controls conversion and currency.
+
+---
+
+## Calculations in `oTree`
+
+* You can write functions in `__init__.py`
+
+--
+* Functions get `player` or `group` as input
+
+
+```python
+def set_payoffs(group):
+    # do something
+```
+--
+
+* These functions don't run automatically. It should be triggered.
+
+---
+
+## Triggering a function in a `WaitPage` 
+* `WaitPage` have a built in variable `after_all_players_arrive`.
+
+--
+
+* It takes the name of the function to be executed.
+
+--
+
+* Executes it when all players arrive in the WaitPage, before moving to the next page
+
+--
+
+```python
+class ResultsWaitPage(WaitPage):
+    after_all_players_arrive = 'set_payoffs'
+```
+
+---
+## Template features
+
+* Templates have access to `player`, `group` and `Constants` variables.
+
+   ```
+       Your guess was {{ player.guess }}.
+       Your group decided on {{ group.decision }}
+       The reward was {{ Constants.reward }}
+       You will get {{session.config.participation_fee}} for participating.
+   ```
+   
+--
+   
+* You can show less digits of decimals with `| to0`, `|to1`, `|to2`.
+
+
+
+---
+
+## Template features
+
+* If you want to show a variable that doesn't exist in your models, you can use a page function called `vars_for_template`
+
+--
+
+
+```python
+class Results(Page):
+    
+    def vars_for_template(player):
+
+        return dict(
+            variable_to_show=432,
+        )
+```
+  
+* Then you can reach it in the template by:
+
+```
+{{ variable_to_show }}
+
+```
+---
+# Final Code
+
+* Models (`__init__.py`)
+
+
+```python
+# MODELS
+class Constants(BaseConstants):
+    name_in_url = 'guessing'
+    players_per_group = 3
+    num_rounds = 1
+    multiplier = 2/3   # 2/3 of the averages
+    reward = Currency(10)
+
+
+class Subsession(BaseSubsession):
+    pass
+
+
+class Group(BaseGroup):
+    average_guess = models.FloatField()
+    target_number = models.FloatField()
+
+class Player(BasePlayer):
+    guess = models.IntegerFiel(label= "Pick a number", min=0, max=100)
+    distance = models.FloatField()
+    is_winner = models.BooleanField(initial=False)
+```
+---
+# Final Code
+
+* Functions (`__init__.py`)
+
+```python
+# FUNCTIONS
+def set_payoffs(group):
+    players = group.get_players()
+    guesses = [p.guess for p in players]
+    
+    group.average_guess = sum(guesses) / Constants.players_per_group
+    group.target_number = group.average_guess * Constants.multiplier
+    
+    for p in players:
+        p.distance = abs(p.guess - group.target_number) # This is for my data
+
+    distances = [p.distance for p in players]
+    minimum_distance = min(distances)
+
+    for p in players:
+        # if the player is the winner
+        if p.distance == minimum_distance:
+            p.is_winner = True
+            p.payoff = Constants.reward
+```
+
+---
+# Final Code
+
+* Pages (`__init__.py`)
+
+
+```python
+# PAGES
+class Welcome(Page):
+    pass
+
+class Guessing(Page):
+    form_model = "player"
+    form_fields = ['guess']
+
+class ResultsWaitPage(WaitPage):
+    after_all_players_arrive = 'set_payoffs'
+
+class Results(Page):
+    @staticmethod
+    def vars_for_template(player):
+        guesses = [p.guess for p in player.group.get_players()]
+
+        return dict(
+            guesses=guesses,
+        )
+
+
+page_sequence = [Welcome, Guessing, ResultsWaitPage, Results]
+```
+
+# Final Code
+* `Guessing.html`
+
+```
+{{ block title }}
+Guess the 2/3 of the Average
+{{ endblock }}
+{{ block content }}
+
+{{ formfields }}
+
+{{ next_button }}
+
+{{ endblock }}
+
+
+```
+---
+
+# Final Code
+* `Results.html`
+
+```
+{{ block title }}
+Results
+{{ endblock }}
+
+{{ block content }}
+&lt;p&gt;
+    Your guess was &lt;strong&gt;{{ player.guess }}&lt;/strong&gt;.
+&lt;/p&gt;
+&lt;p&gt;
+    The all guesses in the group are the following: &lt;strong&gt;{{ guesses }}&lt;/strong&gt;.
+&lt;/p&gt;
+&lt;p&gt;
+    The average guess was &lt;strong&gt;{{ group.average_guess | to2 }}&lt;/strong&gt;. The 2/3 of the average guess was &lt;strong&gt;{{ group.target_number | to2 }}&lt;/strong&gt;.
+&lt;/p&gt;
+
+        {{ if player.is_winner }}
+        &lt;h4 style="color:green;"&gt;  You won! &lt;/h4&gt;
+        {{ else }}
+        &lt;h4 style="color:red;"&gt;  You didn't win! :( &lt;/h4&gt;
+        {{ endif }}
+
+        &lt;p&gt;
+            Your won {{ player.payoff }} from this round.
+        &lt;/p&gt;
+        &lt;h5&gt;Your final earning is {{ participant.payoff_plus_participation_fee }}. &lt;/h5&gt;
+
+&lt;br&gt;&lt;br&gt;
+&lt;p&gt;&lt;strong&gt; Thank you very much for participating in our experiment. Now you can close this browser.&lt;/strong&gt;&lt;/p&gt;
+{{ endblock }}
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

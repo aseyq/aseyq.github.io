@@ -1,0 +1,235 @@
+---
+title: "Lecture 3 - Data Types, Vectors"
+output: 
+  xaringan::moon_reader:
+    css: styles.css
+
+date: "`r format(Sys.time(), '%d %B %Y')`"
+author: "Ali Seyhun Saral <ali.saral@unibo.it>"
+params:
+    twitter: "@seyhunsaral"
+---
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(collapse=TRUE, error=TRUE, warning=TRUE)
+knitr::opts_chunk$set(dpi=300, warning = FALSE, fig.align = 'center', message = FALSE)
+options(timeout= 4000000) 
+```
+## Recap of Last Week
+* We've seen how to create vectors `c(item1,item2,item3)`
+
+--
+
+* We saw the data types we will use commonly: `logical` (`TRUE`,`FALSE`), `numeric` (`-21`,`42`,`32.5`), and `character` (`"its raining today"`)
+
+--
+
+* We've learned how to change one type to another: (`as.numeric("32")`, `as.character(32)`)
+
+--
+
+* We've seen two ways to create longer vectors: `seq(4,12, by=2)` and `rep(0,20)`.
+
+
+---
+## Basic Plots in R
+
+Let's draw the points (1,1), (2,4), (3,8), (4,16), (5,12)
+
+--
+
+
+```{r}
+x  <- c(1,2,3,4,5)
+y  <- c(1,4,8,16,32)
+```
+--
+
+```{r, eval=FALSE}
+plot(x,y)
+```
+
+--
+```{r echo=FALSE,fig.align = 'center', out.width = "40%"}
+plot(x,y)
+```
+
+---
+
+## Basic Plots in R
+
+If we want to put a line between our observations
+
+--
+
+```{r}
+x  <- c(1,2,3,4,5)
+y  <- c(1,4,8,16,32)
+```
+--
+
+```{r, eval=FALSE}
+plot(x,y, type="l")
+
+```
+
+--
+```{r echo=FALSE,fig.align = 'center', out.width = "40%"}
+plot(x,y, type="l")
+```
+---
+
+## We can draw both lines and points
+```{r fig.align = 'center', out.width = "50%"}
+plot(x,y, type="b")
+
+```
+---
+
+## We can change shapes of the points
+```{r fig.align = 'center', out.width = "50%"}
+plot(x,y, type="b", pch = 24)
+
+```
+* pch: plotting character
+
+---
+## We can change sizes of the points
+```{r fig.align = 'center', out.width = "50%"}
+plot(x,y, type="b", pch = 24, cex=2)
+
+```
+* cex: character expansion
+
+---
+
+## We can change the color
+```{r fig.align = 'center', out.width = "50%"}
+plot(x,y, type="b", pch = 24, col="red", cex=2)
+
+```
+
+---
+
+## Lets build the graph of $x^2$
+
+1\. Create a vector with enough points, to be the x values (say from 1 to 100)
+
+--
+
+2\. Calculate the values for `x^2` and save it as another vector
+
+--
+
+3\. Plot those values as "line" 
+
+---
+
+## Lets build the graph of $x^2$
+
+```{r, fig.align='center', out.width="50%"}
+x  <- seq(0,100,0.1)
+y  <- x ^ 2
+plot(x,y, type="l")
+```
+
+---
+
+## Histograms
+
+```{r, eval=FALSE}
+
+heights  <- c(1.75, 1.80, 1.82,1.55,1.84,1.85 ) # and more
+
+```
+
+```{r, echo=FALSE}
+heights <- rnorm(50, 1.75, 0.10)
+```
+
+--
+
+```{r, fig.align='center', out.width="50%"}
+hist(heights)
+```
+
+---
+
+## Histograms 
+
+Let's calculate the average height
+
+--
+
+```{r}
+mean_heights <- mean(heights)
+```
+
+--
+
+```{r}
+print(mean_heights)
+```
+
+---
+
+## Vertical line on the plot
+
+```{r, fig.align='center', out.width="50%"}
+hist(heights)
+abline(v = mean_heights, col="red")
+
+```
+
+---
+
+## Vertical line on the plot
+```
+abline(v= vertical_value, h=horizontal_value)
+```
+
+
+* `abline()` places on top of the histogram
+* It is common in R to use `plot(x,y)` and then place other layers on top
+
+
+```{r, fig.align='center', out.width="40%"}
+hist(heights)
+abline(v = mean_heights, col="red")
+
+```
+    
+---
+
+## Classroom Experiment
+
+- How many candies do you think there are in the jar?
+<center>
+<h1> www.saral.it/jar </h1>
+</center>
+
+---
+
+## Excercises
+
+1 - Put the data of the guesses in a vector. (if you can read from csv file... good. but a simple copy past will suffice)
+
+
+2 - Calculate the mean and save it to `mean_guesses`
+
+
+3 - Draw a histogram from the guesses data
+
+
+4 - Put the real number as a vertical line on the plot.
+
+---
+
+5 - Think about the results. Do you think it was accurate? Were you expecting it? How well did you do?
+
+6 - Create the vector of deviations (differences) from the real number. Save it as `accuracies`
+
+7 - Now create a vector from the seating row data. save it as `seatings`
+
+8 - Plot a graph with `seatings` on the x axis and `accuracies` on the y axis.
+
+9 - Interpret the graph. Do you think the people on the front rows did better?

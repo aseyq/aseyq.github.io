@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lecture 2 - Data Types, Vectors</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ali Seyhun Saral ali.saral@unibo.it" />
+    <meta name="date" content="2021-11-15" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Lecture 2 - Data Types, Vectors
+### Ali Seyhun Saral <a href="mailto:ali.saral@unibo.it" class="email">ali.saral@unibo.it</a>
+### 15 November 2021
+
+---
+
+
+## Recap of Last Week
+* We've seen R and RStudio interface  
+
+--
+
+* We've learned about arithmethic operators (`+`, `-`, `*`,`/`, `^`, `%%`)  
+
+--
+
+* We've learned about logical operators (`&amp;`, `|`, `!`)  
+
+--
+
+* We've seen about relational operators (`==`, `&lt;`,`&lt;=`,`&gt;`,`&gt;=`,`!=`)  
+
+--
+
+* We've seen the assignment operator (`&lt;-`)  
+
+--
+
+* We've seen some built-in functions (like `abs(x)`, `sqrt(x)`)  
+
+--
+
+* We've leaned how to create our own functions:  
+--
+
+```r
+a_times_b_square &lt;- function(a,b) {
+
+    return(a * b ^2)
+
+    }
+```
+--
+
+```r
+a_times_b_square(2,3)
+```
+
+```
+## [1] 18
+```
+---
+## Data Types in R
+* As you probably saw in numerous occasions, computers have a unique way of storing data.
+
+--
+
+* In order to be comfortable with a programming language, you need to understand its data types.
+
+--
+
+* R has a number of data types, which are called "classes".
+
+---
+
+## Basic Variable Types (Atomic classes)
+* `logical`: `TRUE` or `FALSE`. That's it! Only two possible values for this type.
+
+--
+
+* `numeric` or `double`: `32`, `21.82`, `-99`, `-0.4`  ...
+
+--
+
+* `character` or `string`: "hello", "ali", "cogito ergo sum", "42" 
+
+--
+
+* You should wrap a character variable with `" "` or `' '`. Otherwise R will think that its a variable name
+  
+---
+ 
+## Some other types that we don't care much about
+* `integer`: `1L`, `-1L`, `42L`, `-42L` Represents 1, -1, 42, -42
+
+* `complex`: `1i`, `-1i`, `42i`, `-42i` 
+
+* `factor`: Is a categorical variable. Less important for us in this course, more important for data analysis.
+---
+
+## More complex types
+* `vector` : Represents vectors. **very fundemental type**
+
+--
+
+* `matrix`: Represents matrices. **important for this course**
+
+--
+
+* `lists`: Similar to `vectors` but more flexible (we will see)
+
+--
+
+* `data.frame`: Very important for data analysis, statistics, econometrics, machine learning, data science and so on.
+
+---
+## Summary of Data Types
+
+&lt;span class="border"&gt;
+&lt;img src="img/slides2_datatypes.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;/span&gt;
+
+---
+
+## Data Types in R
+* Each data/variable type has its own set of operations that you can use.
+
+--
+
+* For instance you can multiply a `numeric` type by 2:
+
+```r
+21 * 2
+```
+
+```
+## [1] 42
+```
+-- 
+* But if its a `character` type, you can't multiply it by 2.
+
+```r
+"21" * 2
+```
+
+```
+## Error in "21" * 2: non-numeric argument to binary operator
+```
+---
+* Similarly, `character` type has its own operations:
+
+--
+
+
+```r
+my_string &lt;- "precipitevolissimevolmente"
+
+# Lets count number of characters in the string
+nchar(my_string)
+```
+
+```
+## [1] 26
+```
+
+```r
+# Let's get the first 9 characters
+substring(my_string, 1, 9)   # substring(my_string, start, end)
+```
+
+```
+## [1] "precipite"
+```
+
+```r
+# if try this with a number, it will work but it will return a characher
+substring(3.141592653589793, 1, 9)
+```
+
+```
+## [1] "3.1415926"
+```
+---
+## How to know the type of a variable
+
+```r
+a &lt;- 42
+b &lt;- "42"
+c &lt;- TRUE
+```
+
+--
+
+
+```r
+class(a)
+```
+
+```
+## [1] "numeric"
+```
+
+
+```r
+class(b)
+```
+
+```
+## [1] "character"
+```
+
+
+```r
+class(c)
+```
+
+```
+## [1] "logical"
+```
+---
+## How to know the type of a variable
+
+```r
+a &lt;- 42
+b &lt;- "42"
+c &lt;- TRUE
+```
+
+--
+
+
+```r
+typeof(a)
+```
+
+```
+## [1] "double"
+```
+
+
+```r
+typeof(b)
+```
+
+```
+## [1] "character"
+```
+
+
+```r
+typeof(c)
+```
+
+```
+## [1] "logical"
+```
+
+---
+## How to change the type of a variable
+
+```r
+a &lt;- 42
+b &lt;- as.character(a)
+
+class(a)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+print(a)
+```
+
+```
+## [1] 42
+```
+
+
+```r
+a &lt;- "42"
+b &lt;- as.numeric(a)
+
+class(a)
+```
+
+```
+## [1] "character"
+```
+
+```r
+print(a)
+```
+
+```
+## [1] "42"
+```
+
+---
+
+## Some type conversion would not work
+
+```r
+a &lt;- "42abc32"
+b &lt;- as.numeric(a)
+
+class(a)
+```
+
+```
+## [1] "character"
+```
+
+```r
+print(a)
+```
+
+```
+## [1] "42abc32"
+```
+
+
+```r
+c &lt;- "hello"
+d &lt;- as.numeric(a)
+
+class(a)
+```
+
+```
+## [1] "character"
+```
+
+```r
+iprint(a)
+```
+
+```
+## Error in iprint(a): could not find function "iprint"
+```
+---
+
+# Vectors
+- A collection of n elements.
+- At quantity with a direction and a magnitude.
+
+
+
+`$$\vec{y} = \left[\begin{array}{@{}c@{}}
+    22 \\
+    24 \\
+    18 \\
+    \vdots \\
+    34 \\
+    \end{array} \right]$$`
+
+---
+
+## Vectors in R
+Vectors are one of the most fundemental object types in R. Like mathematical vectora, they are a 1-dimensional collection of numbers, strings, or logical `TRUE` or `FALSE`.
+
+Let's create the vector of ages in the clasroom in R.
+
+
+```r
+ages &lt;- c(22,24,18,34)
+```
+
+We create vectors with the function `c()`. Add as many items as you like seperated by a comma.
+
+`c()` stands for combine.
+
+---
+Now we have our vector, we can make some calculations over this vector. For instance if we want to get the average age in the class, we can do use the function `mean()`
+
+
+```r
+ages &lt;- c(22,24,18,34)
+mean(ages)
+```
+
+```
+## [1] 24.5
+```
+
+
+```r
+ages &lt;- c(22,24,18,34)
+sd(ages)
+```
+
+```
+## [1] 6.806859
+```
+
+
+---
+## Vectors in R - 2
+* In R, vectors could contain different types of items.
+
+* However each item in a vector should be the same type.
+
+--
+
+
+```r
+my_numeric_vector &lt;- c(2, 4, 5)
+print(my_numeric_vector)
+```
+
+```
+## [1] 2 4 5
+```
+
+--
+
+
+```r
+my_other_numeric_vector &lt;- c(2, 4, 5.3) # Notice how they are printed out
+print(my_other_numeric_vector)
+```
+
+```
+## [1] 2.0 4.0 5.3
+```
+
+--
+
+
+```r
+my_character_vector &lt;- c("ali","bob", "chiara")
+print(my_character_vector)
+```
+
+```
+## [1] "ali"    "bob"    "chiara"
+```
+
+---
+
+# Adding Vectors
+
+```r
+a &lt;- c(1,2)
+b &lt;- c(3,4)
+a + b
+```
+
+```
+## [1] 4 6
+```
+
+--
+
+** Beware of vectors with different sizes**
+
+```r
+a &lt;- c(1,2)
+b &lt;- c(3,4,5,6)
+
+a + b
+```
+
+```
+## [1] 4 6 6 8
+```
+
+```r
+# As if c(1,2,1,2) + c(3,4,5,6)
+```
+
+---
+
+There are other ways to create vectors, especially when you need vectors that are long.
+
+---
+### Creating a vector of repeated items `rep(x,times)`
+
+ If you want a repeated vector from a number, item or even another vector, you can use this function. `x` is the object to be repeated, and `times` is the how many times you want it to be repeated. For instance, if you want the number `42` to be repeated 10 times:
+ 
+
+```r
+ rep(42,10)
+```
+
+```
+##  [1] 42 42 42 42 42 42 42 42 42 42
+```
+
+---
+ 
+You can also repeat a another vector.
+
+
+```r
+onezero  &lt;- c(1,0)
+rep(onezero, 4)
+```
+
+```
+## [1] 1 0 1 0 1 0 1 0
+```
+
+```r
+# This is the same with rep(onezero, times=4)
+rep(onezero, times=4)
+```
+
+```
+## [1] 1 0 1 0 1 0 1 0
+```
+
+---
+
+And you can specify the length of the output vector
+
+```r
+rep(onezero, length.out=4)
+```
+
+```
+## [1] 1 0 1 0
+```
+
+---
+
+## Creating a vector of a sequence `seq(from, to)`
+The simplest way to create a vector of sequence is the function `seq`. 
+
+
+```r
+seq(12)
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12
+```
+
+```r
+seq(4,12, by =2)
+```
+
+```
+## [1]  4  6  8 10 12
+```
+
+---
+
+## Excercises
+
+1- Create a variable called `my_numeric` with the number 320. 
+Check the type of the variable. Then convert it to character and save the result as `my_character`.
+
+
+2- Calculate the sum and subtraction of the vectors (4,1) and (3,5). Then multipy these vectors. What did you get? Is that a proper vector multiplication?
+
+---
+3- Here are the temperature of Trento in the previous years
+2021:  50.2 Fahrenheit  
+2020:  42.4 Fahrenheit  
+2019:  34.4 Fahrenheit  
+2018:  46.3 Fahrenheit  
+2017:  41.24 Fahrenheit  
+
+a- Create a function which convert Fahrenheit to Celsius. Call it `f_to_c`
+b- Convert each of these values to Celsius
+c- Create a vector from the years and save it as `vector_year`
+d- Create a vector from the celsius values and save it as `vector_celsius`
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

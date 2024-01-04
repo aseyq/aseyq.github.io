@@ -1,0 +1,15 @@
+{{ block title }}
+    Please answer the following question
+{{ endblock }}
+
+{{ block content }}
+
+You can either get {{ C.SAFE_PAYOFF }} points for sure, or take the risky option.
+
+If you take the risky option, you will get 
+{{ C.RISKY_PAYOFF }} points, or 0 points with equal chances.
+
+    {{ formfields }}
+    {{ next_button }}
+
+{{ endblock }}

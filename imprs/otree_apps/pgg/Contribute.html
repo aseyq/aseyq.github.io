@@ -1,0 +1,57 @@
+{{ block title }}
+    Contribute to the public project
+{{ endblock }}
+{{ block content }}
+
+<!-- bootstrab box instructions for the experiment -->
+
+<div class="alert alert-info" role="alert">
+    <h3>Instructions:</h3>
+    <!-- bullet points-->
+
+    <ul>
+        <li>
+            You are about to contribute to the public project. You are playing in a group of {{ C.PLAYERS_PER_GROUP }} players (including you).
+        </li>
+
+        <li>
+            Each player has {{ C.ENDOWMENT }}. You can contribute any amount between 0 and {{ C.ENDOWMENT }} to the public project.
+        </li>
+
+        <li>
+            The amount you contribute will be multiplied by {{ C.MULTIPLIER }} and added to the public project.
+        </li>
+
+        <li>
+            The total amount in the public project will be divided equally among all the players in the group.
+        </li>
+
+        <li> 
+            In other words final payoff will be:
+        </li>
+
+        <!-- center payoff formula-->
+
+        <div class="center">
+            <h4> {{C.ENDOWMENT}} - Your contribution + Total contribution in your group * {{ C.MULTIPLIER }} / {{ C.PLAYERS_PER_GROUP }}  </h4>
+        </div>
+    
+    </ul>
+</div>
+
+
+
+
+<p>
+    You have {{ C.ENDOWMENT}}. You can choose to contribute an amount between 0 and {{ C.ENDOWMENT}} to the public project.
+</p>
+
+<!-- center -->
+<div class="center">
+    {{ formfields }}    
+</div>
+
+
+{{ next_button }}
+
+{{ endblock }}

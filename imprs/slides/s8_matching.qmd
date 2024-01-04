@@ -1,0 +1,297 @@
+---
+title: "oTree Crash Course"
+subtitle: Session X - Matching
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "9 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format:
+  revealjs:
+    #theme: white
+    incremental: false
+    slide-number: true
+    show-slide-number: print
+    highlight-style: tango
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+
+## Multiple Rounds
+* Built-in variable for multiple rounds.
+
+```{.python code-line-numbers=false}
+class C(BaseConstants):
+    NAME_IN_URL = 'pgg'
+    PLAYERS_PER_GROUP = 3
+    NUM_ROUNDS = 1
+
+    ENDOWMENT = cu(1000)
+    MULTIPLIER = 2
+```
+
+. . . 
+
+* Each `player`, `group` and `subsession` will have the attribute `round_number`.
+    * Example: `player.round_number`
+
+
+
+## Variables when there are multiple rounds {.smaller}
+:::{.center}
+![](images/rounds.png){width=50%}
+:::
+
+* For each round, there will be a separate `player` object for each participant and a `group` object for each group.
+
+* For each participant, `participant` object connects players.
+
+* `player.variable_name` written in the previous rounds will not be accessible
+
+
+## Accessing variables when there are multiple rounds
+
+* `player.in_round(n)` brings the player object of a participant at a given round
+
+```{.python code-line-numbers=false}
+# Get the player obj in the prev. round
+previous_player = player.in_round(player.round_number - 1) 
+
+previous_decision = previous_player.decision
+
+```
+
+## For our trust game
+```{.python code-line-numbers=false}
+    def vars_for_template(player):
+           if player.round_number > 1:
+            previous_player = player.in_round(player.round_number - 1)
+            previous_sent_amount = previous_player.group.sent_amount
+            previous_returned_amount = previous_player.group.returned_amount
+            return dict(prev_sent = previous_sent_amount,
+                        prev_return = previous_returned_amount)
+```
+
+## Other methods to gather objects from the previous round
+:::{.incremental}
+* `player.in_previous_rounds()`: Returns a list of all player objects of the same participant from the previous rounds
+
+* `player.in_all_rounds()`: Returns a list of all player objects of the same participant from the previous round + the current round
+
+* `player.in_rounds(m, n)` Returns a list of players of the same participants from rounds m to n.
+
+* [link to documentation](https://otree.readthedocs.io/en/latest/rounds.html?highlight=round#passing-data-between-rounds-or-apps)
+:::
+
+## Matching and Subsession Class
+
+:::{.incremental}
+* In oTree, groups are created when the session is created
+* This is handled by `subsession` class.
+* A built-in `subsession` function, `creating_session` can be created to monitor/modify this process.
+* `subsession.get_group_matrix()` shows the matching as a list of list.
+    * Each group is a list
+    * Order represents id_in_group
+:::
+
+## Matching and Subsession Class
+```{.python code-line-numbers=false}
+
+# Add this code to anywhere in your __init__.py file. 
+# (ideally under #FUNCTIONS section you've created)
+
+def creating_session(subsession):
+    print(subsession.get_group_matrix())
+
+# OUTPUT
+# [[1, 2], [3, 4], [5, 6]]
+# [[1, 2], [3, 4], [5, 6]]
+# [[1, 2], [3, 4], [5, 6]]
+
+```
+
+## Matching in multiple round games
+
+:::: {.columns}
+
+::: {.column width="40%"}
+* The default behavior: Roles (`id_in_group`) are fixed, groups are fixed.
+:::
+
+::: {.column width="60%"}
+:::::{.center}
+![](images/mtc_same_group_same_role.png){width=40%}
+:::::
+:::
+::::
+
+## Random Group, Random Role
+
+:::: {.columns}
+
+::: {.column width="60%"}
+* To shuffle groups and `id_in_group` in each round, you can use: 
+
+```{.python code-line-numbers=false}
+def creating_session(subsession):
+    subsession.group_randomly()
+    
+```
+:::
+
+::: {.column width="40%"}
+:::::{.center}
+![](images/mtc_random_group_random_role.png){width=60%}
+:::::
+:::
+::::
+
+
+## Random Group, Random Role
+
+* You can also condition the shuffling for specific rounds
+```{.python code-line-numbers=false}
+# Shuffle only in round 1 and 3, keep the grouping otherwise
+def creating_session(subsession):
+    if subsession.round_number in [1,3]:
+        subsession.group_randomly()
+    else:
+        subsession.group_like_round(subsession.round_number -1)
+
+## GROUPS    
+# [[5, 2], [3, 6], [4, 1]]
+# [[5, 2], [3, 6], [4, 1]]
+# [[2, 4], [6, 5], [1, 3]]
+# [[2, 4], [6, 5], [1, 3]]
+
+```
+
+## Random Group, Same Role
+
+:::: {.columns}
+
+::: {.column width="60%"}
+* If `group_randomly` takes the argument, `fixed_id_in_group=True`, then it would shuffle in a way that `id_in_group` will be same for each player.
+
+```{.python code-line-numbers=false}
+def creating_session(subsession):
+    subsession.group_randomly(fixed_id_in_group=True)
+    
+```
+:::
+
+::: {.column width="40%"}
+:::::{.center}
+![](images/mtc_random_group_same_role.png){width=60%}
+:::::
+:::
+::::
+
+## Using a custom matching structure
+```{.python code-line-numbers=false}
+def creating_session(subsession):
+
+    matching = [[1,3], [2,4]]
+    subsession.set_group_matrix(matching)
+```
+
+## Grouping by arrival time
+
+:::{.incremental} 
+* In online experiments, you often need to group participants as they arrive.
+* `group_by_arrival_time` is a built-in function that does this.
+* It is a `WaitPage` class attribute.
+*  It works only if the page is a `WaitPage` and it is the first page of the app.
+::: 
+
+. . .
+
+```{.python code-line-numbers=false}
+  class GroupingWait(WaitPage):
+    group_by_arrival_time = True
+    
+  page_sequence = [GroupingWait, ...]
+  ```
+
+## Multiple Apps
+
+* One can add multiple apps. They will be shown in order.
+
+```{.python code-line-numbers=false}
+SESSION_CONFIGS = [
+    dict(
+        name='trust',
+        app_sequence=['consent', 'trust', 'timeout'],
+        num_demo_participants=2,
+        real_world_currency_per_point= 0.25,
+        participation_fee = 3,
+    ),
+]
+```
+
+* In oTree You can stop at whatever page/app you'd like.
+
+## oTree Structure with Multiple Apps
+
+![](images/participant.png){width=70%}
+
+## Carrying Data Between Apps
+- Accessing data from a participant's previous app requires storing the data on the participant object.
+- The participant object persists across apps and retains data.
+
+
+```{.python code-line-numbers=false filename="settings.py" }
+PARTICIPANT_FIELDS = ["my_variable"]
+```
+
+```{.python code-line-numbers=false}
+participant.my_variable = 1
+```
+
+## Timeouts 
+
+* You can set timeouts for pages. 
+* By default, it would try to submit if there is a form, and proceed the participant in the next page.
+
+```{.python code-line-numbers=false}
+class MyPage(Page):
+    timeout_seconds = 60
+```
+
+## Detecting Timeouts
+:::{.incremental}
+* `before_next_page` is another special function defined in pages.
+* It triggers for each player some desired functions.
+* It will be supplied with two arguments, `player` object and `timeout_happend`
+:::
+
+## Detecting Timeouts
+```{.python code-line-numbers=false}
+class Consent(Page):
+    timeout_seconds = 30
+
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.timed_out = True
+```
+
+## Then you can send the participant to another app
+
+```{.python code-line-numbers=false}
+class Consent(Page):
+    timeout_seconds = 30
+
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.timed_out = True
+
+    def app_after_this_page(player, upcoming_apps):
+        if player.timed_out:
+            return "timeout"
+```

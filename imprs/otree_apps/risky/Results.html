@@ -1,0 +1,31 @@
+{{ block title }}
+    Results
+{{ endblock }}
+
+{{ block content }}
+
+
+    {{ if player.wants_risky }}
+        <p>You took the risky option.</p>
+
+        {{ if player.is_lucky }}
+        <p> You won!</p>
+        {{ endif }}
+
+        {{ if not player.is_lucky }}
+        <p>    You lose! </p>
+        {{ endif}}
+
+    {{ else }}
+        <p> You took the safe option.</p>
+        
+    {{ endif }}
+
+        <p> Your payoff is {{ player.payoff }}</p>
+       <p> Thank you for your participation.</p>
+    
+    {{ next_button }}
+
+{{ endblock }}
+
+

@@ -1,0 +1,273 @@
+---
+title: "Individual Decisions in oTree"
+author: "Ali Seyhun Saral"
+date: "18 Nov 2021"
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+  
+---
+```{css, echo=FALSE}
+.remark-code, .remark-inline-code {
+  font-size: 80%;
+  color: blue;
+	background-color: rgba(222,222,222,0.3);
+}
+.titletext {
+	font-size: 400%;
+  display:inline-block; 
+}
+
+.smaller {
+	font-size: 70%;
+  display:inline-block; 
+}
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::knit_engines$set(htmlrun = function(options) {
+  print(options$code)
+  # the source code is in options$code; just do
+  # whatever you want with it
+})
+```
+# Individual Decisions in oTree
+* Although oTree is designed for multiplayer games, it is also suitable for individual decision making experiments
+
+--
+
+* Usually we need only `Player` and `Constants` class
+---
+# Usual steps to create an oTree experiment
+1\. Create a project (top level oTree installation)
+
+--
+
+  ```{bash, eval=FALSE}
+  otree startproject oTree 
+  # or any other name instead of 'oTree'
+  ```
+  
+--
+
+2\. Create an app (or multiple apps for the project)
+
+--
+
+  ```{bash, eval=FALSE}
+  otree startapp APPNAME
+  # whatever app name you prefer
+  ```
+  
+3\. Register the app in `settings.py`
+
+--
+
+  ```{python, eval=FALSE}
+  SESSION_CONFIGS = [
+      dict(
+        name='my_survey',
+        app_sequence=['my_survey'],
+        num_demo_participants=50,
+     ),
+  ]
+  ```
+
+---
+# Usual steps to create an oTree experiment
+
+4\. Implement your data structure (** your models**)
+--
+
+  * Go to `__init__.py` and
+  * Add your fields in `Player` and `Group` classes
+  
+  ```{python, eval=FALSE}
+  class Player(BasePlayer):
+    name = models.StringField(blank=True, label="Your name (optional)")
+    ...
+  ```  
+
+--
+
+5\. Implement your **pages** in Python
+
+--
+
+  * Go to `__init__.py` and create a class for each page 
+  
+  ```{python, eval=FALSE}
+  class Survey(Page):
+      form_model = "player"
+      form_fields = ['name', 'age', 'mood', 'wants_feedback']
+  ```  
+
+--
+
+6\.  Create HTML **templates** for your pages
+--
+
+  * Each html must have the same name with the Page class you created.
+    * For instance `Survey.html`
+  * oTree automatically handles most of it.
+
+---
+# Let's create a survey for our employees
+.pull-left[
+```{r, echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('images/survey_preview.png')
+```  
+]
+
+--
+
+.pull-right[
+* We would like to have the following columns:
+  * `name`: Participant Name (optional)
+  
+  * `age` : Age
+  
+  * `mood`: How do they feel today? Categorical: `bad`, `okay`, `wonderful`
+  
+  * `wants_feedback`: Yes or No
+  
+  * `comments`: Text
+]  
+---
+# Creating Fields in our models
+
+| Variable          |  Field Type      |
+|-------------------|------------------|
+| `name`            | `StringField`    |
+| `age`             | `IntegerField`   | 
+| `mood`            | `StringField`    |
+| `wants_feedback`  | `BooleanField`   |
+| `comments`        | `LongStringField`|
+
+* Each field will be defined under `Player` class
+
+---
+# Fields 
+* Fields create the data structure to record the data. They can be thought as “columns” in a spreadsheet. 
+* They are placed in Player or Group classes in `__init__.py`
+* You can create a field for form input, or to save the data without an explicit input
+
+| Field Name      | What for?                  | Example                                  |
+|-----------------|----------------------------|------------------------------------------|
+| StringField     | Short text, Categories     | `department = Models.StingField()`       |
+| IntegerField    | Integer (whole numbers)    | `age = Models.IntegerField()`            |
+| FloatField      | Decimals                   | `percentage = Models.FloatField()`       |
+| BooleanField    | True or False              | `is_dictator = Models.BooleanField()`    |
+| CurrencyField   | Numbers in currency format | `earned_stage1 = Models.CurrencyField()` |
+| LongStringField | Long test                  | `diary_entry = Models.LongStringField()` |
+---
+# Some field options
+.smaller[
+* Adding labels
+  ```{python,eval=FALSE} 
+   models.StringField(label = “What is your name”)
+   ```
+
+* Minimum, maximum
+  ```{python,eval=FALSE}
+  models.IntegerField(min = 18, max = 117)
+  ```
+* Empty allowed
+  ```{python,eval=FALSE}
+models.Integerfield(blank = True)
+  ```
+* Default Value
+  ```{python,eval=FALSE}
+  models.IntegerField(initial = 20)
+  ```
+
+* Multiple choices
+  ```{python,eval=FALSE}
+  department = models.StringField(choices = [“Economics”, “Law”])
+  ```
+* Radio buttons 
+  ```{python,eval=FALSE}
+  department = models.StringField(choices = [“Economics”, “Law”], widget=widget.RadioSelect)
+  ```
+]
+
+
+---
+
+# Creating Pages
+
+| Page                |  Description      |
+|---------------------|-------------------|
+| `Survey`            |  Survey questions |
+| `Results`           |  Feedback         |
+
+* Each page will have a 
+
+--
+
+  * Class in `__init__.py` 
+  
+--
+
+  * They should be added to `page_sequence` list
+  
+--
+
+  * Will have a `html` template in the same folder
+
+---
+# Creating Templates
+* We will take advantage of the default template
+
+```
+{{ block title }}
+    TITLE HERE
+{{ endblock }}
+
+{{ block content }}
+CONTENT HERE
+    {{ formfields }}   <--- This generates input fields automatically
+
+{{ next_button }}      <--- This creates a next button
+{{ endblock }}
+```
+
+---
+# Template Syntax
+
+* Templates use HTML codes, and oTree template items (indicated by `{{ }}`).
+
+* Indentation is not important in templates.
+
+* oTree has two default blocks:` {{ block title }}`, and `{{ block content }}`
+
+* You can reach variables of the player with `{{ player.variablename }}`
+
+* You can have conditional content by `{{ if CONDITION }}`
+
+.pull-left[
+  ```
+    {{ if CONDITION}}
+    ...
+    {{ endif }}
+  ```
+]
+-- 
+
+.pull-right[
+  ```
+    {{ if CONDITION}}
+    ...
+    {{ else }}
+    ...
+    {{ endif }}
+  ```
+]
+---
+
