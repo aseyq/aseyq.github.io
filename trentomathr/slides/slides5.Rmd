@@ -1,0 +1,169 @@
+---
+title: "Lecture 5 - Matrices (con'td)"
+output: 
+  xaringan::moon_reader:
+    css: styles.css
+
+date: "`r format(Sys.time(), '%d %B %Y')`"
+author: "Ali Seyhun Saral <ali.saral@unibo.it>"
+params:
+    twitter: "@seyhunsaral"
+header-includes: 
+  - \usepackage{tikz}
+  - \usepackage{pgfplots}
+---
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(collapse=TRUE, error=TRUE, warning=TRUE)
+knitr::opts_chunk$set(dpi=300, warning = FALSE, fig.align = 'center', message = FALSE)
+options(timeout= 4000000) 
+```
+## Recap of Last Week
+* We've seen some vector operations.
+--
+
+* We've learned how to create matrices from a vector: `matrix(c(1,2,3,4), nrow=2)`
+
+--
+
+* We've learned how to create special matrices:
+    * Same elements: `matrix(element, nrow, ncol)`
+    * Identity matrix: `diag(n)`
+
+--
+* We've learned how to multiply matrices  `%*%`
+
+
+--
+* We've learned how to find the inverse of a matrix `solve(M)`
+
+
+--
+
+---
+# Matrix Determinants
+
+$$
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+$$
+
+
+* The formula for the determinant for the 2x2:
+
+$$|A| = ad - bc $$
+---
+
+* For the larger matrices, we can break down matrices into 2x2 matrices and find the determinant. 
+
+$$
+\begin{bmatrix}
+a & b & c\\
+d & e & f \\
+g & h & i
+\end{bmatrix}  = a \begin{vmatrix}
+e & f \\
+h  & i
+\end{vmatrix} - b \begin{vmatrix}
+d & f \\
+g  & i
+\end{vmatrix} +  c \begin{vmatrix}
+d & e \\
+g  & h
+\end{vmatrix}
+$$
+---
+# Determinants
+
+* $Det(A) = 0$ : Singular (not invertible)
+
+--
+
+* $Det(A) \neq 0$: Invertible
+
+---
+## Determinants
+* In R, you can use `det()` function to find the determinant
+```{r}
+B = matrix(c(-1,2,4,3), byrow = TRUE, nrow= 2)
+print(B)
+
+det(B)
+
+```
+---
+
+## Properties of a unique solution
+$$ A\vec{x} = \vec{b} $$
+
+- Matrix A has inverse (is invertible)
+- Determinant of A is nonzero
+- The rows and columns of A form a basis for the set of all vectors with n elements
+
+```{r, error=TRUE}
+A  <- matrix(c(1,2,4,-1,1,-2), nrow=3)
+A
+solve(A)
+```
+---
+
+```{r, error=TRUE}
+B  <- matrix(c(1,2,0,0), nrow=2)
+B
+det(B)
+solve(B)
+```
+---
+
+```{r, error=TRUE}
+C <- matrix(c(1,2,1,0), nrow=2)
+C
+solve(C)
+```
+---
+
+$$ C\vec{x} = \vec{b} $$
+$$ C = 
+\begin{pmatrix}
+1 & 1 \\
+2 & 0
+\end{pmatrix}  $$
+
+--
+
+$$ b = \begin{bmatrix}
+1 \\
+2 
+\end{bmatrix}  $$
+$$ x = ? $$
+--
+
+```{r}
+x  <- matrix(c(1,2),nrow=2)
+C  <- matrix(c(1,2,1,0), nrow=2)
+
+b  <- solve(C)  %*% x
+b
+
+# Let's double check
+C  %*% b
+```
+---
+# Excercise 
+
+* Consider the system:
+
+$$
+9x + 10y = 34  \\ 
+$$
+
+$$
+-6x - 5y = -26
+$$
+
+* Write the system in a matrix form using R in the form Ax = B. (Don't write the vector of unknowns).
+
+* Check if the system has a solution by
+ * Matrix has A has inverse
+ * Determinant A is non-zero

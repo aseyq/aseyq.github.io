@@ -1,0 +1,767 @@
+---
+title: "Python + oTree Crash Course"
+subtitle: Session 2 - Python Basics 2
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "7 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format: 
+  revealjs:
+    theme: white
+    incremental: false
+    #smaller: true
+    slide-number: true
+    show-slide-number: print
+
+bibliography: bibliography.bib
+#css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+
+
+## Lists in Python
+- A list is a collection of items in a particular order.
+- Lists can contain different types of items.
+
+. . .
+```{python}
+#| output-location: column-fragment
+a = [10,20,30]
+print(a)
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+b = ["ali", "bob", "chiara"]
+print(b)
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+c = ["ali", 2]
+print(c)
+```
+
+## Reaching into List Items in Python
+- You can access the items in a list using the index.
+- The index starts from 0.
+
+|  |   |   |    |
+|--:|:---:|:---:|:----:|
+|my_list =|[ "ali", | "bob", | "chiara"] |
+| | `0` | `1` | `2`  |
+
+<br>
+<br>
+<br>
+
+. . . 
+```{python}
+#| echo: false
+my_list = ["ali", "bob", "chiara"]
+```
+. . . 
+```{python}
+#| output-location: column-fragment
+my_list[0]
+```
+. . . 
+```{python}
+#| output-location: column-fragment
+my_list[1]
+```
+. . . 
+```{python}
+#| output-location: column-fragment
+my_list[2]
+```
+
+## Reaching from the end
+- You can access the items from the end using a negative index starting from -1.
+
+|  |   |   |    |
+|--:|:---:|:---:|:----:|
+|my_list =|[ "ali", | "bob", | "chiara"] |
+| | `-3` | `-2` | `-1`  |
+
+<br>
+<br>
+<br>
+
+. . . 
+```{python}
+#| echo: false
+my_list = ["ali", "bob", "chiara"]
+```
+. . . 
+```{python}
+#| output-location: column-fragment
+my_list[-1]
+```
+. . . 
+```{python}
+#| output-location: column-fragment
+my_list[-3]
+```
+
+## List Slicing in Python
+- You can access a subset of a list using the slice operator `:`. 
+
+- Basic usage 
+
+<h3 class=".center"> [ start : end] </h3>
+
+- `end` is not included in the slice.
+
+. . .
+
+```{python}
+#| output-location: fragment
+my_list = ["ali", "bob", "chiara", "dominique", "elizabeth"]
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+# Get first three items
+my_list[0:3] 
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+# Get three items starting from 1
+my_list[1:4] 
+```
+
+## List Slicing in Python
+
+- If you leave the index empty, python will take from the beggining/end.
+
+```{python}
+#| output-location: fragment
+my_list = ["ali", "bob", "chiara", "dominique", "elizabeth"]
+```
+
+. . . 
+```{python}
+#| output-location: column-fragment
+# From the beginning until the index 4
+my_list[:4] 
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+# From index 1 until the end
+my_list[1:] 
+```
+
+
+
+## Updating List Items in Python
+- You can update the items in a list using the index.
+
+```{python}
+#| output-location: column-fragment
+#| code-line-numbers: "|3"
+
+my_list = ["ali", "bob", "chiara"]
+
+my_list[0] = "alice"
+print(my_list)
+```
+
+
+## List Type and Methods
+- Lists has the type `list`
+
+. . . 
+```{python}
+#| output-location: column-fragment
+my_list = ["ali", "bob", "chiara"]
+type(my_list)
+```
+. . . 
+
+- There are specific operations that can be performed on lists.
+
+. . . 
+
+- You can add items to a list using the `append()` function.
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+my_list.append("dominique")
+
+print(my_list)
+```
+
+## Removing Items from a List in Python
+- You can remove items from a list using the `pop()` function.
+- The `pop()` function removes the last item in the list.
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+my_list = ["ali", "bob", "chiara"]
+
+my_list.pop()
+print(my_list)
+```
+
+. . .
+
+- The `pop(index)` function removes the item at the specified index.
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+my_list = ["ali", "bob", "chiara"]
+
+my_list.pop(1)
+print(my_list)
+```
+
+## Removing items based on value
+
+- You can remove items from a list using the `remove()` function.
+- The `remove()` function removes the first item with the specified value.
+- Example: 
+
+```{python}
+#| output-location: fragment
+
+my_list = ["ali", "bob", "chiara", "bob"]
+
+my_list.remove("bob")
+print(my_list)
+```
+
+
+## Combining two lists
+- You can combine two lists with `+` operator.
+- Example: 
+
+```{python}
+#| output-location: column-fragment
+my_list1 = ["ali", "bob", "chiara"]
+my_list2 = ["zoe", "yoshua"]
+
+new_list = my_list1 + my_list2
+print(new_list)
+```
+
+## Check if an Item Exists in a List in Python
+- You can check if an item exists in a list using the `in` operator.
+- Example: 
+
+```{python}
+#| output-location: column-fragment
+my_list = ["ali", "bob", "chiara"]
+
+"ali" in my_list
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+my_list = ["ali", "bob", "chiara"]
+
+"alessandro" in my_list
+```
+
+
+## Practice time
+
+### `03_lists.ipynb`
+
+
+## Logical Operators
+* We have two logical values: `True` and `False`
+
+* `and` and `or` and `not` are the logical operators
+
+* `and` means that both conditions must be true
+
+* `or` means that at least one condition must be true
+
+* `not` reverses the logical value
+
+```{python}
+#| output-location: column-fragment
+a = 5
+b = 10
+```
+
+```{python}
+#| output-location: column-fragment
+print(a == 5 and b == 10)
+```
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+print(a == 5 and b == 5)
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+print(a == 1 or b == 10)
+```
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+print(not a == 1)
+```
+
+## Logical Operators
+```{python}
+#| output-location: column-fragment
+a = 5
+b = 10
+```
+
+. . .
+
+
+```{python}
+#| output-location: column-fragment
+print(a == 1 or b == 10)
+```
+
+. . .
+
+
+```{python}
+#| output-location: column-fragment
+print(not a == 1)
+
+```
+
+
+
+## `if` statement
+
+
+```{python}
+#| output-location: fragment
+my_variable = 42
+
+if my_variable < 50:
+    print("the variable is smaller than 50")
+
+```
+
+
+## Very important: Indentation
+```{.python}
+my_variable = 42
+
+if my_variable < 50:
+    print("the variable is smaller than 50")
+
+```
+
+. . . 
+
+- Python doesn't have braces like `{ }` or `end` statements to indicate the span. Instead the hierarchy/ownership of the statements are determined by indents.
+
+. . . 
+
+* `Four spaces` is the accepted convention but you can use `tab` or the another number of spaces as long as it is consistent.
+
+. . . 
+
+- Graphical user interfaces often add four spaces instead of a tab.
+
+
+
+## `else` statement
+
+```{python}
+#| output-location: fragment
+my_variable = 42
+
+if my_variable < 50:
+    print("the variable is smaller than 50")
+else:
+    print("the variable is bigger than 50")
+
+```
+
+
+
+## `elif` statement
+
+```{python}
+#| output-location: fragment
+my_variable = 42
+
+if my_variable < 40:
+    print("the variable is smaller than 40")
+elif my_variable < 50:
+    print("the variable is between 40 and 50")
+else:
+    print("the variable is bigger than 50")
+
+```
+
+
+
+
+## For loop over list items
+
+* Lists are not just good for collecting items. also for looping over them
+(Remember `Ex2` last question)
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+my_list = [1,2,3,4]
+```
+
+```{python}
+#| output-location: column-fragment
+for x in my_list:
+  print(x ** 2)
+```
+
+
+## Loop over a range of numbers
+
+- Python creates a range object that is iterable with `range()` function. 
+
+- Then one can loop over it to make calculations.
+
+```{python}
+#| output-location: column-fragment
+for i in range(3,6):
+  print(i**2)
+
+```
+
+
+
+## Creating a new list using for loop
+
+* We can generate an empty list and add items recursively.
+
+. . . 
+
+* `list_name.append()` to add an item to a list
+
+
+. . . 
+
+
+Example:
+
+```{python}
+#| output-location: column-fragment
+my_list = [1,2,3,4]
+
+squares = []
+
+for x in my_list:
+  squares.append(x ** 2)
+  
+```
+
+. . . 
+
+```{python}
+#| output-location: column-fragment
+print(squares)
+```
+
+
+
+## List Comprehension
+* List comprehension is a shorter syntax when you create a new list based on another list.
+```{python}
+#| output-location: column-fragment
+my_list = [1,2,3,4]
+```
+
+
+```{python}
+#| output-location: column-fragment
+squares = []
+
+for x in my_list:
+  squares.append(x ** 2)
+```
+
+
+
+. . . 
+
+we can write instead:
+
+```{python}
+#| output-location: fragment
+squares = [x ** 2 for x in my_list]
+print(squares)
+```
+
+<br/>
+
+. . . 
+
+$$ \text{Squares} = \{ x^2 | \text{ for all } x \in \text{my_list} \} $$
+
+
+## List Comprehension
+
+```{python}
+#| output-location: fragment
+my_list = [1,2,3,4]
+squares = [x ** 2 for x in my_list]
+print(squares)
+```
+<br>
+
+. . . 
+
+<br>
+
+- We can also add conditions
+
+```{python}
+#| output-location: fragment
+my_list = [1,2,3,4]
+squares = [x ** 2 for x in my_list if x > 2]
+print(squares)
+```
+
+$$ \text{Squares} = \{ x^2 | \text{ for all } x \in \text{my_list}, x > 2 \} $$
+
+## Enumerate function
+
+* Enumerate function returns a tuple with index and the item.
+
+```{python}
+#| output-location: fragment
+
+others_choices = ["15","30","45"]
+
+for i, x in enumerate(others_choices):
+  print("Participant with index", i,  "chose", x, "tokens")
+```
+
+## Practice time
+### Continue on `03_lists.ipynb`
+
+
+
+
+
+## Dictionaries
+:::{.incremental}
+- Also a collection of objects like `lists`
+- Unlike lists, items have keys (in other words keywords)
+- Can be created with:
+  - `{key1: value1, key2: value2}`, or
+  - `dict(key1=value1, key2=value2)`
+:::
+
+. . . 
+
+```{python}
+#| output-location: fragment
+my_dictionary = {'ali': 1987, 'bob': 1953, 'chiara':1980}
+print(my_dictionary)
+```
+. . . 
+
+```{python}
+#| output-location: fragment
+my_dictionary2 = dict(ali=1987, bob=1953, chiara=1980)
+
+print(my_dictionary2)
+```
+
+## Retrieving an item from dictionary
+ - You can retreive an item from a dictionary by its key.
+
+```{python}
+#| output-location: fragment
+birthyears = {"ali": 1987, "bob": 1953, "chiara":1980}
+```
+
+
+```{python}
+#| output-location: fragment
+birthyears["bob"]
+```
+
+
+## Adding a new item to dictionary
+
+```{python}
+#| output-location: fragment
+birthyears = {"ali": 1987, "bob": 1953, "chiara":1980}
+
+birthyears['dana'] = 1992
+print(birthyears)
+```
+
+## Dictionaries are good for storing and looping matched data
+
+```{python}
+#| output-location: fragment
+
+people = [{"name": "ali", "year": 1987, "city": "Istanbul"},
+          {"name": "bob", "year": 1953, "city": "London"},
+          {"name": "chiara", "year": 1980, "city": "Rome"}]
+
+for person in people:
+    print("My name is " + person["name"] + ". I live in " + person["city"])
+
+```
+
+
+## Practice time
+### `04_dictionaries.ipynb`
+
+## Functions in Python
+* Python has many built-in functions
+
+```{python}
+ages = [39,48,21,59]
+
+max(ages)
+```
+
+```{python}
+my_name = "ali"
+len(my_name)
+
+```
+
+## Some common functions
+
+- `print()` prints the value of the argument to the screen
+- `abs()` returns the absolute value of the argument
+- `len()` returns the length of the argument
+- `type()` returns the type of the argument
+- `max()` returns the maximum value of the argument
+- `min()` returns the minimum value of the argument
+- `round()` rounds the argument to the nearest integer
+- `sum()` returns the sum of all elements in the argument
+- `sorted()` returns a sorted version of the argument
+
+## We can build our own functions
+* Functions are defined with `def` keyword.
+```{python}
+#| output-location: fragment
+def max_min_difference(x):
+    difference = max(x) - min(x)
+    return(difference)
+    
+
+
+heights = [173, 153, 171, 190, 179] # in cm
+max_min_difference(heights)
+
+```
+## You will see functions in different forms
+
+- Indepedent functions
+```{python}
+#| output-location: column-fragment
+heights = [173, 153, 171, 190, 179]
+
+min(heights)
+```
+
+- Associated to objects (Methods)
+
+```{python}
+#| output-location: column-fragment
+
+heights.sort()
+print(heights)
+```
+
+- Associated to other objects than what it is applied to (Static methods)
+
+```{.python}
+helpers.shuffle(heights)
+print(heights)
+
+```
+
+## Functions may give output or not
+
+- Functions that give output are called `fruitful` functions
+
+```{python}
+#| output-location: column-fragment
+
+print(min(heights))
+
+```
+
+- Functions that do not give output are called `void` functions
+
+```{python}
+#| output-location: column-fragment
+
+print(heights.append(180))
+
+```
+
+## Functions may modify the objects they are applied to
+
+- Functions that modify the objects they are applied to are called `modifiers`
+
+```{python}
+#| output-location: column-fragment
+heights = [173, 153, 171, 190, 179]
+heights.sort()
+print(heights)
+
+```
+
+- Functions that do not modify the objects they are applied to are called `pure`
+
+```{python}
+#| output-location: column-fragment
+heights = [173, 153, 171, 190, 179]
+print(sorted(heights))
+print(heights)
+```
+
+## Practice time
+### `05_functions.ipynb`
+
+
+
+
+
+

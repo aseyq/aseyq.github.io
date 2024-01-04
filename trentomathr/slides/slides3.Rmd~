@@ -1,0 +1,64 @@
+---
+title: "Lecture 3 - Data Types, Vectors"
+output: 
+  xaringan::moon_reader:
+    css: styles.css
+
+date: "`r format(Sys.time(), '%d %B %Y')`"
+author: "Ali Seyhun Saral <ali.saral@unibo.it>"
+params:
+    twitter: "@seyhunsaral"
+---
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(collapse=TRUE, error=TRUE, warning=TRUE)
+knitr::opts_chunk$set(dpi=300, warning = FALSE, fig.align = 'center', message = FALSE)
+options(timeout= 4000000) 
+```
+## Recap of Last Week
+* We've seen how to create vectors `c(item1,item2,item3)`
+
+--
+
+* We saw the data types we will use commonly: `logical` (`TRUE`,`FALSE`), `numeric` (`-21`,`42`,`32.5`), and `character` (`"its raining today"`)
+
+--
+
+* We've learned how to change one type to another: (`as.numeric("32")`, `as.character(32)`)
+
+--
+
+* We've seen two ways to create longer vectors: `seq(4,12, by=2)` and `rep(0,20)`.
+
+
+---
+# Basic Plots in R
+
+Let's draw the points (1,1), (2,4), (3,8), (4,16), (5,12)
+
+
+-- 
+
+```{r}
+x  <- c(1,2,3,4,5)        
+
+y  <- c(1,4,8,16,32)
+```
+--
+
+```{r, eval=FALSE}
+plot(x,y)
+```
+
+--
+```{r img-rconsoledetail, echo=FALSE,fig.align = 'center', out.width = "50%"}
+plot(x,y)
+```
+
+
+
+
+
+
+
+
+

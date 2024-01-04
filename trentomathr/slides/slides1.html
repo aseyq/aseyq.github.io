@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lecture 1 - Introduction to R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ali Seyhun Saral ali.saral@unibo.it" />
+    <meta name="date" content="2021-11-08" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Lecture 1 - Introduction to R
+### Ali Seyhun Saral <a href="mailto:ali.saral@unibo.it" class="email">ali.saral@unibo.it</a>
+### 08 November 2021
+
+---
+
+
+
+# RStudio Interface
+
+&lt;span class="border"&gt;
+&lt;img src="./img/03-rconsole_detail.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;/span&gt;
+---
+# Introduction to R Programming
+The most simple way to interact with R is to use it as a calculator. If you go ahead and write `2 + 2` to the console and press enter you will get as the output:
+
+```
+## [1] 4
+```
+---
+## Arithmetic Operators
+You can use these **arithmetic operators** to carry out calculations:  
+--
+
+ - `+` addition  
+
+```r
+9 + 2
+```
+
+```
+## [1] 11
+```
+--
+ - `-` subtraction  
+
+```r
+9 - 2
+```
+
+```
+## [1] 7
+```
+--
+ - `*` multiplication  
+
+```r
+9 * 2
+```
+
+```
+## [1] 18
+```
+---
+ - `/` division  
+
+```r
+9 / 2
+```
+
+```
+## [1] 4.5
+```
+--
+ - `^` exponent  
+
+```r
+9 ^ 2
+```
+
+```
+## [1] 81
+```
+--
+ - `%%` modulus  
+
+```r
+9 %% 2
+```
+
+```
+## [1] 1
+```
+---
+
+## What is an operator?
+- A special symbol(s) to do a perform a specific operation.  
+
+
+--
+
+- Like functions but usually doing the essential bits of a language.  
+
+
+--
+- Usually take values on either side of them and return an output.   
+
+
+---
+- They are really simple. 
+  
+  - **Arithmetic operators**: calculate things
+  
+  - **Logical operators**: logical questions/operations
+  
+  - **Relational operators**: Compare things
+---
+## Logical Operators
+`R` have `TRUE` and `FALSE` values built in. The usual logical rules apply to manipulate and combine logical values.
+
+---
+
+ - `!` negation (NOT)  
+ 
+--
+
+
+```r
+! TRUE
+```
+
+```
+## [1] FALSE
+```
+
+---
+
+ - `&amp;` element-wise AND  
+ 
+--
+
+```r
+TRUE &amp; TRUE
+```
+
+```
+## [1] TRUE
+```
+--
+
+
+```r
+TRUE &amp; FALSE
+```
+
+```
+## [1] FALSE
+```
+--
+
+
+```r
+FALSE &amp; FALSE
+```
+
+```
+## [1] FALSE
+```
+
+
+---
+
+ - `*` element-wise OR  
+
+```r
+TRUE | TRUE
+```
+
+```
+## [1] TRUE
+```
+--
+
+```r
+TRUE | FALSE
+```
+
+```
+## [1] TRUE
+```
+--
+
+```r
+FALSE | FALSE
+```
+
+```
+## [1] FALSE
+```
+
+---
+
+## Relational Operators
+Relational operators are used to compare the values.
+- `==` Equal to
+Checks whether two values are equal. (Not to be confused with `=` which might be used for variable assignment. We will talk about that)
+
+```r
+2 == 9
+```
+
+```
+## [1] FALSE
+```
+
+```r
+9 == 2
+```
+
+```
+## [1] FALSE
+```
+
+```r
+3 == 3
+```
+
+```
+## [1] TRUE
+```
+---
+- `==` Equal to
+Checks whether two values are NOT equal. (Mind the single `=`)
+
+```r
+2 != 9
+```
+
+```
+## [1] TRUE
+```
+
+```r
+9 != 2
+```
+
+```
+## [1] TRUE
+```
+
+```r
+3 != 3
+```
+
+```
+## [1] FALSE
+```
+---
+
+ - `&lt;` less than  
+
+```r
+2 &lt; 9
+```
+
+```
+## [1] TRUE
+```
+
+```r
+9 &lt; 2
+```
+
+```
+## [1] FALSE
+```
+
+```r
+3 &lt; 3
+```
+
+```
+## [1] FALSE
+```
+---
+ - `&lt;=` less than or equal to  
+
+```r
+2 &lt;= 9
+```
+
+```
+## [1] TRUE
+```
+
+```r
+9 &lt;= 2
+```
+
+```
+## [1] FALSE
+```
+
+```r
+3 &lt;= 3
+```
+
+```
+## [1] TRUE
+```
+---
+
+ - `&gt;` greater than  
+
+```r
+2 &gt; 9
+```
+
+```
+## [1] FALSE
+```
+
+```r
+9 &gt; 2
+```
+
+```
+## [1] TRUE
+```
+
+```r
+3 &gt; 3
+```
+
+```
+## [1] FALSE
+```
+---
+ - `&gt;` greater than or equal to  
+
+```r
+2 &gt;= 9
+```
+
+```
+## [1] FALSE
+```
+
+```r
+9 &gt;= 2
+```
+
+```
+## [1] TRUE
+```
+
+```r
+3 &gt;= 3
+```
+
+```
+## [1] TRUE
+```
+---
+# Variables 
+- Usually our problems are generalizable  
+
+
+--
+- We don't write numbers and values to begin with  
+
+
+--
+
+- We often would like to save the output somewhere and use that value  
+
+---
+# Variables
+- Variables are **names** to give certain values.  
+
+
+--
+- Variable's name represent what information variable contains  
+
+
+--
+- We use the notation `&lt;-` to assign a value to a variable.  
+
+
+
+--
+
+```r
+ali &lt;- 34
+piero  &lt;- 24
+
+agetotal  &lt;- ali + piero
+```
+
+--
+
+
+```r
+print(agetotal)
+```
+
+```
+## [1] 58
+```
+---
+
+# `print()`
+
+`print()` function is used to write the contents of variables (or other objects) into our console. 
+
+
+```r
+print(44)
+```
+
+```
+## [1] 44
+```
+--
+
+
+```r
+ali = 11 * 3
+print(ali)
+```
+
+```
+## [1] 33
+```
+--
+You can print things on the fly
+
+```r
+print(4 * 10 + 2)
+```
+
+```
+## [1] 42
+```
+---
+
+
+
+
+## Functions 
+
+### Built-in functions
+`R` has many built in functions that are helpful for making calculations. Functions have the form:
+
+```
+functionname(parameter)
+```
+---
+Some examples:
+ - `abs(x)` absolute value  
+
+```r
+abs(9)
+```
+
+```
+## [1] 9
+```
+
+```r
+abs(-9)
+```
+
+```
+## [1] 9
+```
+---
+ - `sqrt(x)` square root  
+
+```r
+sqrt(9)
+```
+
+```
+## [1] 3
+```
+
+```r
+sqrt(10)
+```
+
+```
+## [1] 3.162278
+```
+---
+
+## Creating user-defined functions
+You can write your own functions in R. To define your own functions, you need a **name** for the function, a parameter or several parameters, and the **recipe** of what a function does.
+
+--
+
+
+```r
+square_root_and_multiply_by_2 &lt;- function(x) {
+    return(sqrt(x) * 2)
+    }
+
+square_root_and_multiply_by_2(9)
+```
+
+```
+## [1] 6
+```
+---
+
+### Example
+
+```r
+# Writing our own functions:
+
+P  &lt;- function(x, y) {
+    return(x &gt; y)
+    }
+
+P(4,3)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+P(-1,4)
+```
+
+```
+## [1] FALSE
+```
+
+---
+
+
+```r
+Q  &lt;- function(x,y,z) {
+    return(x^2 + y^2 == z^2)
+    }
+
+
+Q(3,4,5)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+Q(2,2,3)
+```
+
+```
+## [1] FALSE
+```
+---
+## Excercises
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

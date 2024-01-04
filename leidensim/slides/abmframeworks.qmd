@@ -1,0 +1,384 @@
+---
+title: "ABM Frameworks"
+subtitle: Session IV - Introduction to ABM
+author: "Ali Seyhun Saral (Uni. Bologna)"
+institute: "Institute of Psychology at Leiden University."
+date: "16 June 2022"
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: white
+    incremental: false
+    smaller: true
+    preview-links: auto
+    css: styles.css
+bibliography: bibliography.bib
+
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+
+---
+
+## Agent-Based Model Frameworks
+
+They can help you:
+
+- Create a world (grid, network, etc.)
+
+- Shorten the development time
+
+- Run faster simulations
+
+## Frameworks
+
+[List of frameworks-Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_agent-based_modeling_software)
+
+## Python Frameworks
+- [Repast4py](https://repast.github.io/repast4py.site/index.html)
+- [Mesa](https://mesa.readthedocs.io/en/latest/)
+- [AgentPy](https://agentpy.readthedocs.io/)
+
+## AgentPy framework
+- Simple Syntax
+- Beginner Friendly
+- Jupyter Friendly
+
+## AgentPy Components
+- `Agent`
+
+- Environments
+    - `Grid`: A matrix of cells
+    - `Network`: A network of nodes
+    - `Space`: A continous space
+
+- `Model`
+
+- `Experiment`
+
+## Creating an Agent
+
+```{python}
+import agentpy as ap
+
+class MyAgent(ap.Agent):
+    def setup(self):
+
+        self.payoff = 0
+
+    def do_something(self):
+        self.payoff += 1
+```
+- `.setup()` is like `__init__` but it automatically inherits from `ap.Agent` variables. (i.e. no need to call `super().__init__()`)
+
+- Just like `__init__()`, it will be called automatically when the agent is created.
+
+## Automated links to simulation objects
+
+:::{.incremental}
+- `myagent.model`: Model instance agent is in
+    - For instance `myagent.model.grid`: Grid instance agent is in
+- `myagent.id`: Agent ID
+- `p`: Parameter dictionary
+- `log`: Recorded variables
+:::
+
+
+## Model
+
+```{python}
+class MyModel(ap.Model):
+
+    def setup(self):
+        """ Initiate a list of new agents. """
+        self.agents = ap.AgentList(self, self.p.num_agents, MyAgent)
+
+    def step(self):
+        """ Call a method for every agent. """
+        # do something during the round
+        self.agents.do_something()
+
+    def update(self):
+        """ Record a dynamic variable. """
+        # do something at the end of the round
+        self.record('average_payoff', sum(self.agents.payoff)/len(self.agents))
+
+    def end(self):
+        """ Report an evaluation measure. """
+        self.report('my_measure', 1)
+```
+
+<br>
+
+```{python}
+#| echo: true
+#| output-location: column-fragment
+parameters = {'num_agents': 10, 'steps': 4}
+new_model = MyModel(parameters)
+results = new_model.run()
+```
+
+## Results
+
+```{python}
+#| output-location: column-fragment
+print(results)
+
+```
+
+<br>
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+print(results.info)
+
+```
+
+<br>
+
+. . .
+
+```{python}
+#| output-location: column-fragment
+print(results.variables.MyModel)
+
+```
+
+
+## Model components: `setup(self)`
+```{python}
+class MyModel(ap.Model):
+
+  def setup(self):
+    self.agents = ap.AgentList(self, self.p.num_agents, MyAgent)
+    print("hi")
+    print(self.agents)
+  
+```
+
+- Create the agents
+
+#### `ap.AgentList(self, num_agents, agent_class)`
+- We no longer need to create a loop for agent creation. `AgentList` does it by itself.
+
+
+## Model components: `step(self)`
+```{.python}
+class MyModel(ap.Model):
+# ...
+    def step(self):
+        """ Call a method for every agent. """
+        # do something during the round
+        self.agents.do_something()
+# ...
+```
+
+- This is where we do the main work of the model. What happens in each round?
+
+- We no longer have to run a loop over all the agents. 
+
+- `self.agents.do_something()` runs `do_something()` for every agent.
+
+
+## Model components: `update(self)`
+```{.python}
+
+class MyModel(ap.Model):
+# ...
+def update(self):
+        """ Record a dynamic variable. """
+        # do something at the end of the round
+        self.record('average_payoff', sum(self.agents.payoff)/len(self.agents))
+# ...
+```
+
+- This is where we record the dynamic variables.
+- If we need something to calculate only at the end of the round, this would be the place.
+
+## Model components: `end(self)`
+
+```{.python}
+class MyModel(ap.Model):
+#...
+    def end(self):
+        """ Report an evaluation measure. """
+        some_measure = calculate_measure()
+        self.report('my_measure', some_measure)
+```
+
+- You can run things at the end of the simulation
+- You can record measures belong to the general simulation at the end. Such as summary statistics.
+
+
+## Running a simulation
+
+- Model parameters are defined in a dictionary. 
+
+- Then it is plugged into a model
+
+```{.python}
+parameters = {
+    'my_parameter':42,
+    'agents':10,
+    'steps':10
+}
+
+model = MyModel(parameters)
+```
+<br>
+
+. . .
+
+- Then the model is run by model.run(). It returns a `Results` object which contains useful information about the simulation.
+
+```{.python}
+results = model.run()
+```
+
+## Model Procedure
+
+1. The model initializes with the time-step `Model.t = 0`.
+
+2. `Model.setup()` and Model.update() are called.
+
+3. The model’s time-step is increased by 1.
+
+4. `Model.step()` and `Model.update()` are called.
+
+5. Step 2 and 3 are repeated until the simulation is stopped.
+
+6. `Model.end()` is called.
+
+[https://agentpy.readthedocs.io/en/latest/overview.html](https://agentpy.readthedocs.io/en/latest/overview.html#structure)
+
+## Stopping the model
+- Calling the `Model.stop()` during the simulation.
+
+- Reaching the time-limit, which be defined as follows:
+
+  - Defining steps in the paramater dictionary.
+
+  - Passing steps as an argument to `Model.run()`.
+
+```{python}
+parameters = {
+    'my_parameter': 42,
+    'agents': ap.IntRange(10, 20),
+    'steps': ap.IntRange(10, 20)
+}
+sample = ap.Sample(parameters,n=10)
+print(sample)
+```
+
+## Practice
+<h3> `Ex_agentpy1.ipynb` </h3>
+
+
+## Spatial ABM's
+![](images/seggregation.png)
+
+:::{.incremental}
+- Spatial ABM's are models that use a space to represent the world.
+- Usually a torus/donut shape is used.
+- Can be:
+  - Continuous
+  - Gred
+  - Network
+::: 
+
+## Schelling's Seggregation Model
+- ![](images/seggregation.png)
+
+:::{.incremental}
+- 20x20 grid
+- Each cell is a house in the grid
+- Each agent live in a grid
+- There are two races
+- Each agent is happy at least a proportion of agents are like them
+:::
+
+## Practice
+<h3> `Ex_agentpy2.ipynb` </h3>
+
+
+## Consistency Analysis
+- How many times should I repeat the model?
+
+[@lee2015complexities]
+Coefficient variation: ratio of SD. of a sample to its mean.
+$$ c_v = \sigma / \mu $$
+
+. . .
+
+For increasing sample size calcuate the difference:
+
+$$ E = c_v^501 - c_v^500 $$
+
+Set a threshold of E. (0.01 is common)
+
+## Consistency Analysis
+![](images/consistencyanalysis.png)
+
+
+From: Introduction to Agent-Based Modeling, By Marco A. Janssen
+
+## Sensitivity analysis
+ - How robust are model results to changes parameters?
+- Sensitivity analyses are techniques for estimating the effect of parameters on the simulation.
+
+. . .
+
+- Local sensitivity analysis : [@cariboni2007role]
+  - The effect of a single parameter on the simulation.
+  - Vary one parameter at a time.
+
+. . . 
+
+- Global Sensitivity Analysis
+  - The effect of multiple parameters on the simulation.
+  - Sample from simulations with different values of parameters.
+  - For instances, regression based sensitivity analysis [@downing1985examination]
+
+
+## Sensitivity analysis
+![](images/sensitivity_analysis.png)
+
+## Reading List
+![](images/sensitivityread1.png){.absolute top=0 left=0 width="50%"}
+![](images/sensitivityread2.png){.absolute top=0 right=0 width="50%"}
+
+[@lee2015complexities; @ten2016sensitivity]
+
+## Future of Agent-Based Modeling
+- Developments in Machine Learning Models would affect ABM. [@rand2006machine]
+![](images/randmachine.png)
+
+- Assignment:
+
+:::{.incremental}
+  - Go back to our PD simulation
+  - Keep only Randomer agent
+  - Give a an attribute `p` stands for probability of cooperating. This should be randomly picked from a distribution.
+  - Create an agent type `Regressor`
+  - The agent decides to cooperate or defect based on the logistic regression results. `from sklearn.linear_model import LogisticRegression` in order do exploit the opponent.
+:::
+
+## Next: Choosing a framework:
+- You might not need a framework for all problems.
+- If problems are visual and spatial, you might pick Netlogo.
+- If you'd like to use external packages, you might pick Python based solutions.
+- `AgentPy` is simple but growing. 
+- 
+- `Mesa` can be a good trade-off.
+- If you are into Julia language, you can take a look at Agents.jl
+
+## Closing
+- We've covered the basics of Agent-Based Modeling.
+- We saw a small subset of examples. If you need inspiration, you can check [Netlogo's Model Library](http://www.netlogoweb.org/launch#http://ccl.northwestern.edu/netlogo/models/models/Sample%20Models/Social%20Science/Unverified/Prisoner's%20Dilemma/PD%20Basic%20Evolutionary.nlogo).
+
+# Thanks!
+
+## References

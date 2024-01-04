@@ -1,0 +1,314 @@
+---
+title: "Lecture 1 - Introduction to R"
+output: 
+  xaringan::moon_reader:
+    css: styles.css
+date: "`r format(Sys.time(), '%d %B %Y')`"
+author: "Ali Seyhun Saral <ali.saral@unibo.it>"
+params:
+    twitter: "@seyhunsaral"
+---
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(collapse=TRUE, error=TRUE, warning=TRUE)
+knitr::opts_chunk$set(dpi=300, warning = FALSE, fig.align = 'center', message = FALSE)
+options(timeout= 4000000) 
+```
+
+# RStudio Interface
+
+<span class="border">
+```{r img-rconsoledetail, echo=FALSE,fig.align = 'center', out.width = "100%"}
+knitr::include_graphics(here::here("img", "03-rconsole_detail.png"))
+```
+</span>
+---
+# Introduction to R Programming
+The most simple way to interact with R is to use it as a calculator. If you go ahead and write `2 + 2` to the console and press enter you will get as the output:
+```{r, echo=FALSE}
+2 + 2
+```
+---
+## Arithmetic Operators
+You can use these **arithmetic operators** to carry out calculations:  
+--
+
+ - `+` addition  
+```{r}
+9 + 2
+``` 
+--
+ - `-` subtraction  
+```{r}
+9 - 2
+``` 
+--
+ - `*` multiplication  
+```{r}
+9 * 2
+``` 
+---
+ - `/` division  
+```{r}
+9 / 2
+``` 
+--
+ - `^` exponent  
+```{r}
+9 ^ 2
+``` 
+--
+ - `%%` modulus  
+```{r}
+9 %% 2
+``` 
+---
+
+## What is an operator?
+- A special symbol(s) to do a perform a specific operation.  
+
+
+--
+
+- Like functions but usually doing the essential bits of a language.  
+
+
+--
+- Usually take values on either side of them and return an output.   
+
+
+---
+- They are really simple. 
+  
+  - **Arithmetic operators**: calculate things
+  
+  - **Logical operators**: logical questions/operations
+  
+  - **Relational operators**: Compare things
+---
+## Logical Operators
+`R` have `TRUE` and `FALSE` values built in. The usual logical rules apply to manipulate and combine logical values.
+
+---
+
+ - `!` negation (NOT)  
+ 
+--
+
+```{r}
+! TRUE
+``` 
+
+---
+
+ - `&` element-wise AND  
+ 
+--
+```{r}
+TRUE & TRUE
+``` 
+--
+
+```{r}
+TRUE & FALSE
+``` 
+--
+
+```{r}
+FALSE & FALSE
+``` 
+
+
+---
+
+ - `*` element-wise OR  
+```{r}
+TRUE | TRUE
+```
+--
+```{r}
+TRUE | FALSE
+```
+--
+```{r}
+FALSE | FALSE
+```
+
+---
+
+## Relational Operators
+Relational operators are used to compare the values.
+- `==` Equal to
+Checks whether two values are equal. (Not to be confused with `=` which might be used for variable assignment. We will talk about that)
+```{r}
+2 == 9
+9 == 2
+3 == 3
+``` 
+---
+- `==` Equal to
+Checks whether two values are NOT equal. (Mind the single `=`)
+```{r}
+2 != 9
+9 != 2
+3 != 3
+``` 
+---
+
+ - `<` less than  
+```{r}
+2 < 9
+9 < 2
+3 < 3
+``` 
+---
+ - `<=` less than or equal to  
+```{r}
+2 <= 9
+9 <= 2
+3 <= 3
+``` 
+---
+
+ - `>` greater than  
+```{r}
+2 > 9
+9 > 2
+3 > 3
+``` 
+---
+ - `>` greater than or equal to  
+```{r}
+2 >= 9
+9 >= 2
+3 >= 3
+```
+---
+# Variables 
+- Usually our problems are generalizable  
+
+
+--
+- We don't write numbers and values to begin with  
+
+
+--
+
+- We often would like to save the output somewhere and use that value  
+
+---
+# Variables
+- Variables are **names** to give certain values.  
+
+
+--
+- Variable's name represent what information variable contains  
+
+
+--
+- We use the notation `<-` to assign a value to a variable.  
+
+
+
+--
+```{r}
+ali <- 34
+piero  <- 24
+
+agetotal  <- ali + piero
+```
+
+--
+
+```{r}
+print(agetotal)
+```
+---
+
+# `print()`
+
+`print()` function is used to write the contents of variables (or other objects) into our console. 
+
+```{r}
+print(44)
+```
+--
+
+```{r}
+ali = 11 * 3
+print(ali)
+```
+--
+You can print things on the fly
+```{r}
+print(4 * 10 + 2)
+```
+---
+
+
+
+
+## Functions 
+
+### Built-in functions
+`R` has many built in functions that are helpful for making calculations. Functions have the form:
+
+```
+functionname(parameter)
+```
+---
+Some examples:
+ - `abs(x)` absolute value  
+```{r}
+abs(9)
+abs(-9)
+```
+---
+ - `sqrt(x)` square root  
+```{r}
+sqrt(9)
+sqrt(10)
+```
+---
+
+## Creating user-defined functions
+You can write your own functions in R. To define your own functions, you need a **name** for the function, a parameter or several parameters, and the **recipe** of what a function does.
+
+--
+
+```{r}
+square_root_and_multiply_by_2 <- function(x) {
+    return(sqrt(x) * 2)
+    }
+
+square_root_and_multiply_by_2(9)
+```
+---
+
+### Example
+```{r}
+
+# Writing our own functions:
+
+P  <- function(x, y) {
+    return(x > y)
+    }
+
+P(4,3)
+P(-1,4)
+```
+
+---
+
+```{r}
+
+Q  <- function(x,y,z) {
+    return(x^2 + y^2 == z^2)
+    }
+
+
+Q(3,4,5)
+Q(2,2,3)
+
+```
+---
+## Excercises

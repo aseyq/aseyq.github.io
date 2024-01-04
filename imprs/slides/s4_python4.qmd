@@ -1,0 +1,415 @@
+---
+title: "Python + oTree Crash Course"
+subtitle: Session 4 - Common Modules
+author: "Ali Seyhun Saral (IAST)"
+institute: "IMPRS Be Smart Summer School"
+date: "7 August 2023"
+footer: "<a href=\"https://github.com/aseyq/imprs\"> github.com/aseyq/imprs</a>"
+execute:
+  echo: true
+
+format: 
+  revealjs:
+    theme: white
+    incremental: false
+    #smaller: true
+    slide-number: true
+    show-slide-number: print
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+
+# Recap 
+
+## Modules
+- One great advantage of python that it has a vast ecosystem of packages.
+
+- Some packages are build in, but still needs to be imported.
+
+- Python use the syntax `import packagename` to import a package.
+
+- The functions, methods etc. comes as a subset of the package, which can be reached by a dot.
+
+## Importing modules
+- Modules usually contain a lot of functions, classes, etc.
+```{python}
+#| output-location: fragment
+import random
+
+random.choice(['ali', "bob", "chiara"])
+
+```
+
+You can find the documentation of the module [here](https://docs.python.org/3/library/random.html)
+## Modules
+
+
+
+
+## Modules
+- You can also import all objects directly. Then you wont need to call the package name before.
+. . .
+```{python}
+#| output-location: column-fragment
+from random import *
+
+choice(['ali', "bob", "chiara"])
+
+```
+
+
+. . .
+
+- Or a subset:
+
+```{python}
+#| output-location: fragment
+from random import choice
+
+choice(['ali', "bob", "chiara"])
+
+```
+
+## Modules
+- Or you can use an alias for the module
+. . .
+```{python}
+#| output-location: column-fragment
+import random as rnd
+
+rnd.choice(['ali', "bob", "chiara"])
+
+```
+
+
+## Built-in packages
+
+- Python has a lot of built-in modules that you can use without installing anything.
+
+- You can find the list of built-in modules here: [docs.python.org/3/library/](https://docs.python.org/3/library/)
+
+- Some common built-in modules are:
+  - `math` for mathematical functions
+  - `random` for random number generation
+  - `os` for operating system related functions
+  - `sys` for system related functions
+  - `datetime` for date and time related functions
+
+
+## Installing modules/packages {.smaller}
+
+:::{.incremental}
+- You can install modules using `pip` command.
+- `pip` is a package manager for python.
+
+- You can install a package using:
+
+:::
+
+. . .
+
+### `pip install packagename` {.center}
+
+
+
+:::{.incremental}
+- Some common packages are:
+  - `numpy` for numerical computing
+  - `pandas` for data analysis
+  - `scikit-learn` for machine learning
+  - ...
+  - And we will use `otree` for package!
+
+:::
+
+
+
+## Lists
+- Lists are very flexible and can hold different types
+- But they are not very good for mathematical operations
+- Not very efficient for larger data
+
+## List calcuations
+
+```{python}
+#| error: true
+prices = [3, 7, 9, 2]
+quantities = [3, 3, 2, 1]
+
+# this will not work
+total_cost = prices * quantities
+
+## you should loop over items
+```
+
+
+## NumPy
+
+- Numpy, "Numerical Python", is a library for scientific computing
+- Brings `Numpy Array` data type which is similar to vectors
+
+- Install it by:
+
+`pip install numpy`
+
+- And import it:
+
+`import numpy as np`
+
+## NumPy Arrays
+
+```{python}
+#| output-location: column-fragment
+import numpy as np
+
+prices = np.array([3, 7, 9, 2])
+print(prices)
+```
+
+```{python}
+#| output-location: column-fragment
+quantities = np.array([3, 3, 2, 1])
+print(quantities)
+```
+
+```{python}
+#| output-location: column-fragment
+
+# now this will work
+total_cost = prices * quantities
+print(total_cost)
+```
+
+## NumPy Arrays
+- It assumes that all elements are of the same type
+
+- It has its own methods
+
+```{python}
+#| output-location: column-fragment
+quantities1 = np.array([3, 3, 2, 1])
+
+quantities2 = np.array([1, 1, 2, 3])
+
+quantities1 + quantities2
+```
+
+## Indexing is similar to lists
+
+```{python}
+#| output-location: column-fragment
+quantities = np.array([3, 4, 2, 1])
+
+quantities[0]
+```
+
+
+```{python}
+# | output-location: column-fragment
+quantities[1:3]
+```
+
+
+## You can also subset based on a condition
+
+```{python}
+#| output-location: fragment
+quantities = np.array([3, 4, 2, 1])
+quantities[quantities > 2]
+```
+
+
+## Numpy can hold 2 (or more) dimensional arrays
+
+```{python}
+#| output-location: fragment
+locations = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9],[10, 11, 12]])
+
+print(locations)
+```
+
+. . . 
+```{python}
+#| output-location: fragment
+print(locations.shape)
+```
+
+```{python}
+#| output-location: fragment
+
+# get the second row, third column
+locations[1][2]
+
+# or 
+locations[1, 2]
+```
+
+## Numpy subsetting 
+  
+```{python}
+#| output-location: fragment
+locations = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9],[10, 11, 12]])
+print(locations)
+```
+
+```{python}
+#| output-location: fragment
+# get the second rows
+locations[1, :]
+
+```
+
+```{python}
+#| output-location: fragment
+# get the middle-right four elements
+locations[1:3, 1:3]
+```
+## Some other things you can do with NumPy
+
+- Statistical operations
+- Linear algebra
+- Random number generation
+- And many more
+
+Refer to the [documentation](https://numpy.org/doc/stable/reference/index.html) for more details
+
+## Pandas
+
+- Numpy likes only one type of data
+- Pandas is a library for data analysis
+- It brings `DataFrame` data type 
+
+```{python}
+#| echo: false
+import pandas as pd
+
+# Sample data in the form of a dictionary
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+    'Age': [25, 30, 22, 28],
+    'City': ['New York', 'Chicago', 'Chicago', 'Los Angeles']
+}
+
+# Create a DataFrame from the dictionary
+df = pd.DataFrame(data)
+
+print(df)
+```
+
+```{python}
+type(df)
+```
+
+## Pandas (2)
+- Select rows
+```{python}
+#| output-location: column-fragment
+# select the city Chicago
+df[df['City'] == 'Chicago']
+
+```
+
+## Pandas (3)
+- Select columns
+
+```{python}
+df[['Name', 'Age']]
+```
+
+## Statistical/Economic Analysis: Statsmodels
+
+
+- Statsmodels is a library for statistical and econometric analysis
+- It has many models and methods
+- Some of them are:
+    - Regression and Linear models
+    - Logistic regression
+    - Time series analysis
+    - Panel data analysis
+    - And many more
+
+
+## Linear regression
+
+```{python}
+import numpy as np
+import statsmodels.api as sm
+
+# Generate some data
+x = np.random.normal(size=100)
+y = 2 * x + np.random.normal(size=100)
+
+# Fit and summarize OLS model
+model = sm.OLS(y, sm.add_constant(x))
+results = model.fit()
+print(results.summary())
+```
+
+## Plotting: Seaborn
+
+## Seaborn
+
+- Seaborn is a library for statistical data visualization
+- It has many types of plots
+
+## Seaborn example
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.regplot(x=x, y=y)
+plt.title('Scatter Plot of x vs y')
+plt.show()
+
+```
+
+# Scikit-learn
+
+## Scikit-learn
+
+- Scikit-learn is a library for machine learning
+- It has many models and methods
+- Some of them are:
+    - Classification
+    - Regression
+    - Clustering
+    - Dimensionality reduction
+    - And many more
+
+## Python Ecosystem for Research (AFAIK 🤷‍♂️)
+![](2023-08-06-21-37-22.png){.width=135%}
+
+## What we covered
+:::{.incremental}
+- Python basics
+- Functions
+- Lists
+- Dictionaries
+- Classes
+:::
+## What we didn't cover
+- Tuples
+- Sets 
+- (many other things)
+
+## Things to do before the next class{.smaller}
+
+![](https://www.python.org/static/favicon.ico){width=80}  
+Install Python 3.8 or higher https://www.python.org/downloads/
+
+![](https://upload.wikimedia.org/wikipedia/commons/3/38/Jupyter_logo.svg){width=80}  
+
+Install Jupyter Lab https://jupyter.org/install
+
+
+![](https://code.visualstudio.com/assets/favicon.ico){width=80} 
+
+Install Visual Studio Code https://code.visualstudio.com/ 
+(or any other text editor)
+
+![](https://github.githubassets.com/favicons/favicon.svg){width=80}
+Get a Github account

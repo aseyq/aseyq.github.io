@@ -1,0 +1,71 @@
+---
+title: "oTree Crash Course"
+subtitle: Session X - Real-time interaction
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "9 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format:
+  revealjs:
+    #theme: white
+    incremental: false
+    slide-number: true
+    show-slide-number: print
+    highlight-style: tango
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+
+## Real-time interaction
+
+- oTree's main design is page-by-page interaction
+- However, sometimes we want to have real-time interaction:
+  - While a participant is on a page, we want to update the page
+  - Let them interact with other participants
+
+## Live Pages in oTree
+- Live pages is a feature that allows you to create real-time interaction
+- Live pages communicate with the server continuously, updating in real time.
+- Suitable for continuous time games with lots of back-and-forth interaction.
+- Examples include games with bidding, auctions, and interactive gameplay.
+
+## Sending data from server to player
+- Use `liveSend(data)` in JavaScript to send data to the server.
+
+```{.python code-line-numbers="false"}
+def live_method(player, data):
+    return {player.id_in_group: 'thanks'}
+```
+
+- `0` sends data to all players in the group
+```{.python code-line-numbers="false"}
+def live_method(player, data):
+    return {0: data}
+```
+
+
+## Sending data to the server
+  - Use `liveSend(data)` in JavaScript to send data to the server.
+
+```{.javacript code-line-numbers="false"}
+  liveSend("hello!");
+```
+
+- Define a receiving function, such as:
+  
+```{.python code-line-numbers="false"}
+  class MyPage(Page):
+      
+      def live_method(player, data):
+          print('received a bid from', player.id_in_group, ':', data)
+```
+
+
+## Example: Bidding game

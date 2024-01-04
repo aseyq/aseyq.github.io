@@ -1,0 +1,795 @@
+---
+title: "Online Experiments"
+subtitle: "Challenges and Tips"
+author: "Ali Seyhun Saral (IAST) & Holger Gerhardt (Uni. Bonn)"
+format:
+  revealjs: 
+    incremental: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    css: styles.css
+---
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" rel="stylesheet">
+
+
+
+## Trend towards online Experiments
+- During COVID-19, many projects were shifted online
+- Online experiments are different from traditional experiments in several ways
+- UX is more important
+- Many aspects to consider and control, but not many systematic review/checklists are available
+
+
+## Gold Standard: Lab Experiments
+
+![](images/lab_belis.jpg){.absolute top="50" left="75" height="300"}
+
+![](images/lab_ceel.jpg){.absolute .fragment top="50" right="75" height="300"}
+
+
+![](images/lab_bless.jpeg){.absolute .fragment top="350" right="75" height="340"}
+
+![](images/lab_decisionlab.jpg){.absolute .fragment top="350" left="75" height="340"}
+
+
+## The Next Best Thing: Online Experiments{style="font-size:0.8em"}
+![](images/good_participant.png){.absolute top="50" left="0" height="350"}[^1]
+
+![](images/bad_participant.png){.absolute .fragment top="50" right="0" height="350"}[^2]
+
+[^1]:  <p class="attribution">"<a target="_blank" rel="noopener noreferrer" href="https://www.flickr.com/photos/95352257@N06/48754451528">Farmer Using Computer and Ipad</a>" by <a target="_blank" rel="noopener noreferrer" href="https://www.flickr.com/photos/95352257@N06">UnitedSoybeanBoard</a> is licensed under <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0 <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img></a>. </p> 
+
+[^2]: Participant enjoying an online experiment. © 2021 Ali Seyhun Saral. 
+
+## Types of Online Experiments{style="font-size: 0.5em; text-align: center;"}
+
+::::: {.columns}
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tablegreen}
+
+ <i class="fa-solid fa-table-list fa-2xl"></i>
+
+**Non-interactive experiments**
+<!--
+- No interaction between participants
+
+- **Example:** Surevys, vignette studies, decision making experiments.
+-->
+:::
+
+::::
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tableorange}
+<i class="fa-solid fa-table-list fa-2xl"></i> 
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+<i class="fa-solid fa-table-list fa-2xl"></i>
+
+
+**Asynchronous experiments**
+<!-- 
+- Doesn't require real-time interaction
+
+- No need for feedback about the others during the game
+
+- Participants are grouped after the experiment
+
+- Only payment rely on others
+
+- **Example**: Simultaneous decision/imperfect information games. Strategy method  -->
+:::
+::::
+
+:::: {.column width="20%" }
+::: {.rcorners1 .tablered}
+
+
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+
+**Scheduled Synchronous Experiments**
+:::
+::::
+
+:::: {.column width="20%"}
+::: {.rcorners1 .tableblue}
+<i class="fa-solid fa-user rotateclock"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user rotatecounterclock"></i>
+
+**Joined Synchronous Experiments**
+:::
+
+::::
+:::::
+
+## Types of Online Experiments{style="font-size: 0.5em; text-align: center;"}
+
+::::: {.columns}
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tablegreen}
+
+ <i class="fa-solid fa-table-list fa-2xl"></i>
+
+**Non-interactive experiments**
+<!--
+- No interaction between participants
+
+- **Example:** Surevys, vignette studies, decision making experiments.
+-->
+:::
+
+::::
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tableorange .dimmed}
+<i class="fa-solid fa-table-list fa-2xl"></i> 
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+<i class="fa-solid fa-table-list fa-2xl"></i>
+
+
+**Asynchronous experiments**
+<!-- 
+- Doesn't require real-time interaction
+
+- No need for feedback about the others during the game
+
+- Participants are grouped after the experiment
+
+- Only payment rely on others
+
+- **Example**: Simultaneous decision/imperfect information games. Strategy method  -->
+:::
+::::
+
+:::: {.column width="20%" }
+::: {.rcorners1 .tablered  .dimmed}
+
+
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+
+**Scheduled Synchronous Experiments**
+:::
+::::
+
+:::: {.column width="20%"}
+::: {.rcorners1 .tableblue  .dimmed}
+<i class="fa-solid fa-user rotateclock"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user rotatecounterclock"></i>
+
+**Joined Synchronous Experiments**
+:::
+
+::::
+:::::
+
+- No interaction between participants
+
+- **Example:** Surevys, vignette studies, decision making experiments.
+
+
+
+## Types of Online Experiments{style="font-size: 0.5em; text-align: center;"}
+
+::::: {.columns}
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tablegreen .dimmed}
+
+ <i class="fa-solid fa-table-list fa-2xl"></i>
+
+**Non-interactive experiments**
+<!--
+- No interaction between participants
+
+- **Example:** Surevys, vignette studies, decision making experiments.
+-->
+:::
+
+::::
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tableorange }
+<i class="fa-solid fa-table-list fa-2xl"></i> 
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+<i class="fa-solid fa-table-list fa-2xl"></i>
+
+
+**Asynchronous experiments**
+
+:::
+::::
+
+:::: {.column width="20%" }
+::: {.rcorners1 .tablered  .dimmed}
+
+
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+
+**Scheduled Synchronous Experiments**
+:::
+::::
+
+:::: {.column width="20%"}
+::: {.rcorners1 .tableblue  .dimmed}
+<i class="fa-solid fa-user rotateclock"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user rotatecounterclock"></i>
+
+**Joined Synchronous Experiments**
+:::
+
+::::
+:::::
+
+- Doesn't require real-time interaction
+
+- No need for feedback about the others during the game
+
+- Participants are grouped after the experiment
+
+- Only the payment rely on others
+
+- **Example**: Simultaneous decision/imperfect information games. Strategy method  
+
+
+## Types of Online Experiments{style="font-size: 0.5em; text-align: center;"}
+
+::::: {.columns}
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tablegreen .dimmed}
+
+ <i class="fa-solid fa-table-list fa-2xl"></i>
+
+**Non-interactive experiments**
+<!--
+- No interaction between participants
+
+- **Example:** Surevys, vignette studies, decision making experiments.
+-->
+:::
+
+::::
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tableorange .dimmed}
+<i class="fa-solid fa-table-list fa-2xl"></i> 
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+<i class="fa-solid fa-table-list fa-2xl"></i>
+
+
+**Asynchronous experiments**
+
+:::
+::::
+
+:::: {.column width="20%" }
+::: {.rcorners1 .tablered  }
+
+
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+
+**Scheduled Synchronous Experiments**
+:::
+::::
+
+:::: {.column width="20%"}
+::: {.rcorners1 .tableblue  .dimmed}
+<i class="fa-solid fa-user rotateclock"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user rotatecounterclock"></i>
+
+**Joined Synchronous Experiments**
+:::
+
+::::
+:::::
+
+- Real-time interaction
+
+- Participants show-up at the same time at a scheduled date
+
+- In that sense similar to lab experiments
+
+
+## Types of Online Experiments{style="font-size: 0.5em; text-align: center;"}
+
+::::: {.columns}
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tablegreen .dimmed}
+
+ <i class="fa-solid fa-table-list fa-2xl"></i>
+
+**Non-interactive experiments**
+<!--
+- No interaction between participants
+
+- **Example:** Surevys, vignette studies, decision making experiments.
+-->
+:::
+
+::::
+
+:::: {.column width="20%"}
+
+::: {.rcorners1 .tableorange .dimmed}
+<i class="fa-solid fa-table-list fa-2xl"></i> 
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+<i class="fa-solid fa-table-list fa-2xl"></i>
+
+
+**Asynchronous experiments**
+
+:::
+::::
+
+:::: {.column width="20%" }
+::: {.rcorners1 .tablered  .dimmed}
+
+
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+
+**Scheduled Synchronous Experiments**
+:::
+::::
+
+:::: {.column width="20%"}
+::: {.rcorners1 .tableblue}
+<i class="fa-solid fa-user rotateclock"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user rotatecounterclock"></i>
+
+**Joined Synchronous Experiments**
+:::
+
+::::
+:::::
+
+- Real-time interaction
+
+- Participants join the experiment in a time frame
+
+- Usually experiments on crowdsourcing platforms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 
+::: {.r-fit-text}
+<h2> Online experiments are different </h2>
+:::
+
+. . . 
+
+And we should not use the same design patterns for all the experiments.
+
+## What aspects are different from Lab Experiments?
+
+- <i class="fa-solid fa-comments"></i> &nbsp; Communication
+
+- <i class="fa-solid fa-mask"></i> &nbsp; Privacy/Anonimity/Survelliance
+
+- <i class="fa-solid fa-id-card"></i> &nbsp; Identity confirmation
+
+- <i class="fa-solid fa-clipboard-question"></i> &nbsp; Comprehension
+
+- <i class="fa-solid fa-money-bill"></i> &nbsp; Payments
+
+- <i class="fa-solid fa-users"></i>   &nbsp; Matching
+
+- <i class="fa-solid fa-paper-plane"></i> &nbsp; Flow 
+
+- <i class="fa-solid fa-computer"></i> Computerization
+
+
+## <i class="fa-solid fa-comments"></i> &nbsp; Communication
+
+- How to give verbal information?
+- How to take questions?
+- What information to give?
+- How to handle the request flow?
+
+## <i class="fa-solid fa-comments"></i> &nbsp; Communication - Built-in by platforms
+- Built-in communication by the platforms
+- mTurk, Prolific
+
+## <i class="fa-solid fa-comments"></i> &nbsp; Communication - Zoom, Webex etc.
+  - Zoom/Webex Chat
+  - Note that the default settings are not privacy friendly.
+
+
+## <i class="fa-solid fa-comments"></i> &nbsp; Communication - oTree Implementations
+- [Papercups Chat](https://papercups.io){preview-link="true"} 
+
+- [chapkovski/adminchat](https://github.com/chapkovski/adminchat){preview-link="true"} (oTree 3)
+
+- [Furuneko/otree_admin_chat](https://github.com/Furuneko/otree_admin_chat){preview-link="true"} (oTree 3)
+
+
+
+## <i class="fa-solid fa-comments"></i> &nbsp; Communication {style="font-size: 0.8em;"}
+
+::::: {.columns}
+
+:::: {.column width="50%" }
+
+**Lab Experiments**
+
+- Questions are private
+- If necessary answers are public
+- Managable environment
+- Real-time feedback
+
+::::
+
+:::: {.column width="50%"}
+
+**Online Experiments**
+
+- Questions can be private/public
+- Might be difficult to manage in real time
+- Feedback if experminters are busy?
+
+::::
+:::::
+
+
+## <i class="fa-solid fa-id-card"></i> &nbsp; Identity confirmation
+- Bot-checks are useful
+- Will verify the identity or not?
+- Estimating the time it takes to check the ID's.
+- Estimating costs if there is no control mechanism.
+- Privacy concerns
+
+## <i class="fa-solid fa-id-card"></i> &nbsp; Identity confirmation - Some options
+- Trust on platforms
+- Photo ID over Webcam
+- Random checks
+
+
+## <i class="fa-solid fa-clipboard-question"></i> &nbsp; Comprehension
+
+In online experiments:
+
+- Attention span is lower
+
+- Potentially there are tons of distractors
+
+## <i class="fa-solid fa-clipboard-question"></i> &nbsp; Comprehension
+
+:::{.columns}
+
+:::: {.column width="30%"}
+
+::::: {.fragment fragment-index=3 style="font-size: 0.8em;"}
+Lab Instructions are often not suitable for online experiments.
+:::::
+
+::::
+
+:::: {.column width="70%"}
+::::: {.r-stack}
+![](images/long_instructions.png){.fragment fragment-index=1}
+
+![](images/long_instructions_html.png){.fragment fragment-index=2}
+:::::
+::::
+
+:::
+
+## <i class="fa-solid fa-clipboard-question"></i> &nbsp; Suggetions for Increasing Comprehension
+
+- Small chunks of information
+
+- Guide your participants to the information they need
+
+- Help your participants with visual cues/components
+
+- Control questions as a tool to increase comprehension
+
+## Example
+
+[link](https://interactivestudy.herokuapp.com)
+
+## {style="margin:0;"}
+
+![](images/instr1.png)
+
+## {style="margin:0;"}
+![](images/instr2.png)
+
+## {style="margin:0;"}
+![](images/instr3.png)
+
+## {style="margin:0;"}
+![](images/instr_ques.png)
+
+
+
+
+## <i class="fa-solid fa-money-bill"></i> &nbsp; Payments
+
+- Crowdsourcing platforms
+
+- Bank Transfers
+
+- Paypal
+
+- Semi-automatic payments
+
+
+## <i class="fa-solid fa-money-bill"></i> &nbsp; Payments - Some Tips
+
+- Make sure that you avoid selection
+
+- Paypal / Privacy Concerns
+
+- Neutral payment names that are communicated before the experiment
+
+- "**EXPERIMENT-PARTICIPATION-2022-09-01**" 
+- "**BLESS-S201-2022-09-01**"
+- "**DECISIONLAB-S201-2023-08-01**"
+
+## What aspects are different from Lab Experiments?
+::: {.nonincremental}
+- ~~<i class="fa-solid fa-comments"></i> &nbsp; Communication~~
+
+- ~~<i class="fa-solid fa-mask"></i> &nbsp; Privacy/Anonimity/Survelliance~~
+
+- ~~<i class="fa-solid fa-id-card"></i> &nbsp; Identity confirmation~~
+
+- ~~<i class="fa-solid fa-clipboard-question"></i> &nbsp; Comprehension~~
+
+- ~~<i class="fa-solid fa-money-bill"></i> &nbsp; Payments~~
+
+- <i class="fa-solid fa-users"></i>   &nbsp; Matching
+
+- <i class="fa-solid fa-paper-plane"></i> &nbsp; Flow 
+
+- <i class="fa-solid fa-computer"></i> Computerization
+:::
+
+
+## A disaster scenario{style="font-size: 0.65em;"}
+
+You are running an online experiment with university students using the particiant pool of the lab. You group them in 10 as they showed up.
+
+- 69 people showed up, so you have 6 groups. 
+- The last 9 people got stuck in the waiting page.
+- Somebody from **group 2** dropped at the control questions
+- Somebody from **group 3** doesn't proceed, doesn't answer the messages. He does after 15 minutes. The rest of his group move on after that decision.
+- Somebody from **group 4** answered the control qustions correctly, but later sent a message that slider task you have doesn't show up
+- When you analyze the data, you realized that somebody prom **group 5** solved 200 sliders in 3 minutes and you wonder how
+- Turns out one person from the **group 6** called Freddie Mercury his answers seem to be random.
+- After you ran several sessions like this, you got group 1 and 2's data (and those are formed by fastest people).
+
+
+
+## A disaster scenario{style="font-size: 0.65em;"}
+::: {.nonincremental}
+You are running an online experiment with university students using the particiant pool of the lab. You group them in 10 as they showed up.
+
+- 69 people showed up, so you have 6 groups. 
+- The last 9 people stuck in the waiting page. <span class="fragment remark" data-fragment-index="1"> **(Dead-ends)** </span>
+- Somebody from **group 2** dropped at the control questions <span class="fragment remark" data-fragment-index="2"> **(Dropout)** </span>
+- Somebody from **group 3** doesn't proceed, doesn't answer the messages. He does after 15 minutes. The rest of his group move on after that decision. <span class="fragment remark" data-fragment-index="3"> **(Inattention)** </span>
+- Somebody from **group 4** answered the control qustions correctly, but later sent a message that slider task you have doesn't show up <span class="fragment remark" data-fragment-index="4"> **(Compatbility)** </span>
+- When you analyzde the data, you saw that somebody prom **group 5** solved 200 sliders in 3 minutes and you wonder how. <span class="fragment remark" data-fragment-index="5"> **(Manipulation)** </span>
+- Turns out one person from the **group 6** called Freddie Mercury and his answers seem to be random.<span class="fragment remark" data-fragment-index="6"> **(Sneak-Peek)** </span>
+- After you ran several sessions like this, you got group 1 and 2's data. (and those are formed by fastest people) <span class="fragment remark" data-fragment-index="7"> **(Bad grouping)** </span>
+:::
+
+
+## Problems affecting the flow of the experiment
+- Dropouts
+
+- Compatibility issues
+
+- Interruption & Inattention & Slow Participants
+
+- Low attention & Comprehension
+
+- Manipulation
+
+- Sneak Peek
+
+## Dropouts
+- People might leave the experiment:
+  - Due to a connection problem
+  - Due to an urgency/interruption
+  - Because they don't like it, bored or not engaged 
+  - Because they are stuck/have been waiting for a long time
+
+## Dropouts: Automize things
+- Deal with excess participants
+- Put time-outs
+- Always keep the slowest-performing participant in mind
+- Properly hook participants in the experiment
+- Group after a proof of capability
+
+
+## Grouping after a task
+### Joined Synchronous Experiments {style="font-size: 0.65em;"}
+![](images/grouping1.png)
+
+- Each participant reads the instructions.
+- When they finish, they are assigned to a group
+
+## Grouping after a task
+### Joined Synchronous Experiments {style="font-size: 0.65em;"}
+![](images/grouping2.png)
+
+- Grouping seems fine in many cases.
+
+## Grouping after a task
+### Scheuled Synchronous Experiments {style="font-size: 0.65em;"}
+![](images/grouping3.png)
+
+- This time they are invited at a particular time, and maybe we are using a Zoom to communicate with them.
+
+## Grouping after a task
+### Scheuled Synchronous Experiments {style="font-size: 0.65em;"}
+![](images/grouping4.png)
+
+- Fastest people are assigned to the first group. Slowest people are assigned to the last group.
+
+
+## Grouping after a task
+### Solution 1: Wait for all before matching
+![](images/matching_wait.png)
+
+## Grouping after a task
+### Solution 2: Add a random wait time
+![](images/matching_wait_random.png)
+
+
+## Compatibility Issues
+- Test with a lot of browsers and devices
+
+- Identify the requirements and let participants know
+
+- Block those who don't satisfy the criteria
+  - Browser
+  - Screen size
+  - Javascript etc.
+
+
+## Compatibility Issues
+![](images/screenblock.png)
+
+## Interruption & Inattention & Slow Participants {style="font-size: 0.65em;"}
+- Add timers on each page
+- Mass/joined experiments: Hard timer
+- Scheduled experiments: Soft timer + Hard timer
+  - Soft timer: 5 minutes
+  - Hard timer: 30 minutes (enough, because problems might arise)
+  - If no response for a while, you can "advance slowest users"
+
+- There is no single right way. You should design the page behavior before you code and you should iterate.
+
+## Low attention
+- Make things interactice
+- Inform participants well
+
+. . . 
+
+![](images/grouping_inform.png)
+
+## Manipulation 
+
+- Make sure that you test manipulability 
+  - JavaScript runs on the browser
+  - CSS is rendered on browser
+
+## Manipulation 
+
+  ![](images/grouping_inform.png)
+
+## Manipulation
+- devtools-detect: https://github.com/sindresorhus/devtools-detect
+
+  ![](images/devtools.png)
+
+## Sneak Peek
+- Use individlal/single use links whenever possible
+  - oTree Room Labels 
+
+## Sneak Peek
+::::: {.columns}
+
+:::: {.column width="50%"}
+  ![](images/sneak1.png)
+
+::::
+:::: {.column width="50%"}
+  ![](images/sneak2.png)
+
+::::
+:::::
+
+## Summary
+![](images/problems_summary.png)
+
+## Conclusions
+- Online experiments are not "lab experiments runnning online"
+
+- Plan your online experiment type according to your design
+  - Non-interactive
+  - Asynchronous
+  - Joined Synchronous
+  - Scheduled Synchronous
+
+- Plan well, code well, test obsessively
+
+. . .
+
+# Wrapping up the course
+
+## Wrapping up the course
+
+### Python
+- Python basics
+- Data types and structures
+- Object-oriented programming
+- Python packages and libraries
+
+### oTree
+- A majority of the features
+- How to turn an experimental design into an oTree design
+- Common types of experiments
+- Common pitfalls
+
+
+# Thanks
+
+E-mail: ali.saral@iast.fr
+
+

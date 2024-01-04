@@ -1,0 +1,8 @@
+            You are about to contribute to the public project. You are playing in a group of <strong> {{ C.PLAYERS_PER_GROUP }} players (including you) </strong>.
+            Each player has {{ C.ENDOWMENT }}. You can contribute any amount between 0 and {{ C.ENDOWMENT }} to the public project
+            The amount you contribute will be multiplied by {{ C.MULTIPLIER }} and added to the public project.
+            The total amount in the public project will be divided equally among all the players in the group.
+            In other words final payoff will be:
+            
+            {{C.ENDOWMENT}} - Your contribution + Total contribution in your group * {{ C.MULTIPLIER }} / {{ C.PLAYERS_PER_GROUP }}
+    

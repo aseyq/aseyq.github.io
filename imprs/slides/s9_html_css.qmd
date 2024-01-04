@@ -1,0 +1,363 @@
+---
+title: "oTree Crash Course"
+subtitle: Session X - Advanced Templates
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "9 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format:
+  revealjs:
+    #theme: white
+    incremental: false
+    slide-number: true
+    show-slide-number: print
+    highlight-style: tango
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+
+## Components of an oTree Experiment
+:::{.center}
+![](images/otree_components.png)
+:::
+
+
+## What are template files?
+
+:::{.incremental}
+- Templates are HTML files that contain the text and variables that are displayed to the participant
+
+- They are not actual HTML files, but rather HTML files with special syntax which oTree fills some special parts
+:::
+## We can use HTML tags in templates
+
+
+## Paragraphs
+
+- `<p>`: Paragraphs
+
+```{.html}
+<p> This is a paragraph </p>
+<p> This is another paragraph </p>
+```
+
+
+. . .
+
+
+<p> This is a paragraph </p>
+<p> This is another paragraph </p>
+
+
+
+## Bold and italics
+- `<strong>`: Bold
+- `<em>`: Italics
+
+```{.html}
+<strong> This is bold </strong>.
+
+<em> This is italic </em>.
+
+You can mix <strong> bold </strong> and <em> italics </em>.
+```
+
+. . .
+
+<p>
+<strong> This is bold </strong>.
+</p>
+
+<p>
+<em> This is italics </em>.
+</p>
+
+<p>
+You can mix <strong> bold </strong> and <em> italics </em>.
+</p>
+
+
+## Headings
+
+- `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`: Headings
+
+```{.html}
+<h1> Super title </h1>
+<h2> Less super title </h2>
+<h3> Even less super title </h3>
+<h4> An okay title </h4>
+```
+
+. . . 
+
+<h1> Super title </h1>
+<h2> Less super title </h2>
+<h3> Even less super title </h3>
+<h4> An okay title </h4>
+
+
+## Images
+
+- `<img>`: Images
+
+```{.html}
+<img src="https://www.saral.it/vehicles.jpeg" width="600" />
+```
+
+. . .
+
+<img src="https://www.saral.it/vehicles.jpeg" width="600" />
+
+. . . 
+
+Not robots
+
+## Lists
+
+- `<ul>`: Unordered list
+  
+```{.html}
+<ul>
+    <li> Item 1 </li>
+    <li> Item 2 </li>
+    <li> Item 3 </li>
+</ul>
+```
+
+. . .
+
+<ul>
+    <li> Item 1 </li>
+    <li> Item 2 </li>
+    <li> Item 3 </li>
+</ul>
+
+
+## Tables 
+
+- `<table>`: Table
+- `<tr>`: Table row
+- `<td>`: Table data
+
+```{.html}
+
+<table>
+    <tr>
+        <td> 1 </td>
+        <td> 2 </td>
+        <td> 3 </td>
+    </tr>
+    <tr>
+        <td> 4 </td>
+        <td> 5 </td>
+        <td> 6 </td>
+    </tr>
+</table>
+  
+  ```
+
+## Tables
+
+<table class="stripped">
+    <tr>
+        <td> 1 </td>
+        <td> 2 </td>
+        <td> 3 </td>
+    </tr>
+    <tr>
+        <td> 4 </td>
+        <td> 5 </td>
+        <td> 6 </td>
+    </tr>
+
+</table>
+
+## Making things prettier with Bootstrap
+
+- Bootstrap is a popular CSS framework that makes it easy to make your templates look good
+
+- oTree comes with Bootstrap already installed and loaded
+
+- [Documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+
+## Styling tables with Bootstrap
+
+
+![](2023-08-09-06-33-21.png)
+
+```{.html}
+<table class="table table-striped">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </table>
+```
+
+
+## Modifying the templates appearance by using CSS
+
+- CSS stands for Cascading Style Sheets
+- CSS is a language that describes the style of an HTML document
+- CSS describes how HTML elements should be displayed
+
+## Example
+
+```{.html}
+<style>
+    body {
+        background-color: lightblue;
+    }
+
+    .mytable {
+        border: 1px solid black;
+    }
+</style>
+```
+
+## Modifying the templates appearance by using CSS
+
+- One easy way to add CSS to your oTree experiment is to create section with `<style>` tag.
+
+```{.html}
+{{ block title }}
+    My oTree Experiment
+{{ endblock }}
+
+{{ block content }}
+    <style>
+        body {
+            background-color: lightblue;
+        }
+    </style>
+
+    Welcome to the experiment.
+
+{{ endblock }}
+
+```
+
+## Creating a div and modifying its appearance
+
+- `<div>`: A division or section in an HTML document
+
+::::{.columns}
+:::{.column width="50%"}
+
+
+```{.html}
+<div class="mystyle">
+    I feel blue today.
+</div>
+
+<style>
+  .mystyle {
+    background-color: lightblue;
+    width: 200px;
+    height: 100px;
+    padding-top: 30px;
+    border: 1px solid black;
+    text-align: center;
+    }
+</style>
+```
+:::
+:::{.column width="50%"}
+
+![](2023-08-09-07-21-37.png){width=100%}
+
+:::
+::::
+
+## Modifying the templates appearance by using CSS
+![](2023-08-09-06-39-54.png)
+
+
+## Practice (or assignment){.smaller}
+
+- Go to your `pgg` app and modify the template so that it looks like this:
+  - Bullet list for instructions `<ul> <li> </li> </ul>`
+  - `<strong>` in two places for bold
+  - Check bootstrap documentation to find the container
+
+![](2023-08-09-07-06-11.png){width=100%}
+
+## You can use chatGPT to generate html and css for you
+
+## Previewing HTML files in VS Code
+- Go to extensions panel and search for `live preview`
+![](2023-08-09-06-06-31.png)
+
+
+## JavaScript
+
+- JavaScript is a programming language that adds interactivity to your pages
+
+- You can add them to your templates by using `<script>` tag
+
+- Example: 
+```{.html}
+<script>
+    alert("Hello World!");
+</script>
+```
+
+![](2023-08-09-07-29-08.png)
+
+## JavaScript
+
+- It takes a bit more than this session to learn JavaScript so we will not cover it in detail
+
+- Oftentimes you can find examples of JavaScript code online and copy-paste them to your templates
+
+- It runs on the client side (browser) 
+
+## Lets use chatGPT
+
+## Running on the browser
+
+- It is open to manipulation by the user
+- You need some extra step to connect it to your models.
+
+
+## Connecting JavaScript to your models
+
+- JavaScript runs on browser and we dont have acess to the users' JS variables
+- We need to create an empty field in our model and then fill it with JS
+
+
+```{.python}
+dieroll = models.IntegerField()
+
+# page
+form_fields = ['dieroll']
+
+# JavaScript
+document.getElementById('dieroll').value = 4;
+
+# or with the new otree syntax
+forminputs.dieroll.value = 4;
+
+```
+
+## We usually should hide the field from the user
+
+- Remove `formfields` from the page
+- Build your own input field
+
+```{.html}
+<input type="hidden" name="contribution" id="contribution" />
+```

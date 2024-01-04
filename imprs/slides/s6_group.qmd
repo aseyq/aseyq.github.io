@@ -1,0 +1,497 @@
+---
+title: "oTree Crash Course"
+subtitle: Session VI - Group Decisions
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "8 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format:
+  revealjs:
+    #theme: white
+    incremental: false
+    slide-number: true
+    show-slide-number: print
+    highlight-style: tango
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+
+## Individual Experiments
+
+* We have covered individual experiments so far.
+* Create `Player` fields for the variables written in the data
+
+* Create `Pages` for each page we will see and add fields with `form_fields`
+
+* Create/modify the templates for each page. (`PageName.html`, `AnotherPage.html`)
+
+## Individual Experiments
+![](images/model_page_template.png)
+
+
+## Group Experiments
+* **Homogenous Groups** 
+
+  * All players have the same role.
+  
+  * They see the same pages.
+
+* **Heterogenous Groups**
+
+  * Players are in some set of roles.
+  
+  * They see different pages based on their roles.
+
+## Homogenous Group Experiments {.smaller}
+
+* Some technical aspects differ from the individual experiments:
+
+| Aspect                     | Individual Task        | Group Task                                     |
+| -----------------          | ------------------     | --------                                       |
+| **Pages**                  | My own pace | Sometimes have to wait for others|
+| **Variables / Calculations** | My own variables   | Need to reach other players' variables        |
+
+
+## Waiting for other players
+
+:::{.incremental}
+* oTree has a specific type of page called "WaitPage"
+* Waits for all players in the group. When everybody is thereo, it moves on to the next page. 
+* You need to add it to `PageSequence` list at the bottom but you don't need to create a template.
+* It can also trigger some functions when all players in the group reach to the point.
+:::
+
+## Wait Pages
+* Syntax:
+```{.python}
+class ResultsWaitPage(WaitPage):
+    pass
+```
+
+- You already get an example when you create a new app.
+
+## oTree models
+**`__init__.py`**:
+```{.python}
+# MODELS
+class Constants(BaseConstants):
+    name_in_url = 'my_survey'
+    players_per_group = None
+    num_rounds = 1
+
+
+class Subsession(BaseSubsession):
+    pass
+
+
+class Group(BaseGroup):
+    pass
+
+
+class Player(BasePlayer):
+    some_individual_variable = models.IntegerField()
+
+```
+
+
+# Models
+* They are manage objects which represent players/groups/the constants and handle database entries.
+
+* Four built-in models:
+  * `Player`: Parameters that are unique for each individual.
+  
+  * `Group` : Parameters that are unique for the group, same for each individual in the group.
+  
+  * `Constants`: Parameters that are the same for the experiment.
+     * Beware:Constants are not written on the data!
+  
+  * `Subsession`: Parameters that are same for the "subsession". More often used to initiate some specific settings. We will see it next week.
+
+## Setting group size
+
+* Groups structure is created and handled automatically by oTree
+
+```{.python code-line-numbers="|2"}
+class C(BaseConstants):
+    NAME_IN_URL = 'pgg'
+    PLAYERS_PER_GROUP = 3
+    NUM_ROUNDS = 1
+```
+
+## `Player` and `Group` classes
+- Remember, classes are like blueprints
+- They are capitalized. (`Player`, `Group`)
+  
+- Instances of classes (objects) are not capitalized. (`player`, `group`)
+- We deal with instances in computations.
+
+![](images/classes.png)
+
+## `Player` and `Group` classes
+* They have some attributes(variables) 
+    * Built-in or defined in the relevant model
+    * Each player object holds its own value
+
+* They have some built-in functions(methods) too
+
+* We can also define top-level functions to interact with them.
+
+* We can reach from one object to another.
+
+![](images/classes.png)
+
+## Reaching to players in a group
+* Groups contain players
+* `some_list = group.get_players()`
+* That list contains players (remember the exercises)
+* `some_list[0]`, `some_list[1]`, `some_list[2]`
+* 
+* We can loop over that:
+
+```{.python code-line-numbers=false}
+players = group.get_players()
+
+for p in players:
+  p.my_player_variable = some_value
+
+```
+
+# Building a Public Goods Game
+
+## Creating a new app
+1. `otree startapp pgg`
+2. Add it to `settings.py`.
+
+```{.python filename="settings.py" code-line-numbers="false"}
+# ...
+SESSION_CONFIGS = [
+    dict(
+        name='pgg',
+        app_sequence=['pgg'],
+        num_demo_participants=3,
+    ),
+]
+# ...
+```
+
+## Let's plan first our pages
+| Page           | Description       |
+| -------------- | ----------------- |
+| `Contribution` | Contribute screen |
+| `Results`      | Results screen    |
+
+## We need a WaitPage before the calculations
+
+| Page                  | Description       |
+| --------------------- | ----------------- |
+| `Contribution`        | Contribute screen |
+| **`ResultsWaitPage`** | Waiting page      |
+| `Results`             | Results screen    |
+
+
+## Fields {.smaller}
+
+| Variable       | Model         | Type              |                              |
+| -------------- | ------------- | ----------------- | ---------------------------- |
+| `contribution` | `Player`      | `CurrencyField()` | Player's contribution        |
+| `ENDOWMENT`    | `C` Constants | Currency (`cu`)   | Initial endowment            |
+| `MULTIPLIER`   | `C` C         | Integer           | Multiplier for contributions |
+
+## Group Fields {.smaller}
+
+- We should think of group fields as the variables that are the same for all players in the group.
+
+- `total_contribution`
+- `individual_share` (not strictly necessary but useful for a cleaner calculation)
+
+## Fields {.smaller}
+
+| Variable       | Model         | Type              |                              |
+| -------------- | ------------- | ----------------- | ---------------------------- |
+| `contribution` | `Player`      | `CurrencyField()` | Player's contribution        |
+| `payoff`       | `Player`      | `CurrencyField()` | Player's payoff              |
+| `ENDOWMENT`    | `C` Constants | Currency (`cu`)   | Initial endowment            |
+| `MULTIPLIER`   | `C` C         | Integer           | Multiplier for contributions |
+| `total_contribution` | `Group` | `CurrencyField()` | Total contribution of the group |
+| `individual_share` | `Group` | `CurrencyField()` | Individual share of the group |
+
+## `Currency` and `payoff` built-in features in oTree
+
+:::{.incremental}
+* oTree has built-in currency field : `Currency`
+* Handles monetary calculations and currency symbols.
+* Each player has already a `payoff` field
+* Payoff will be converted to real money at the end.
+* `settings.py` controls the conversion rate.
+* It has `USE_POINTS` and `REAL_WORLD_CURRENCY_CODE` variables.
+:::
+
+## Setting payoffs
+
+- Again we will define `set_payoffs` function. (name is not important)
+- But this time it will take `group` as an argument (as opposed to `player`)
+- We will use `group` to reach to players in the group.
+
+## Let's write `set_payoffs`
+```{.python code-line-numbers=false}
+def set_payoffs(group):
+    print("my function set payoffs worked!")
+
+    players = group.get_players()
+
+    contributions = []
+
+    for p in players:
+        contributions.append(p.contribution)
+
+    group.total_contribution = sum(contributions)
+
+    group.individual_share = group.total_contribution * C.MULTIPLIER / C.PLAYERS_PER_GROUP
+
+    for p in players:
+        p.payoff = C.ENDOWMENT - p.contribution + group.individual_share
+
+```
+
+
+
+
+## Triggering `set_payoffs`
+- In the individal experiment, we triggered it by defining `before_next_page` function inside a page.
+
+- This time we will trigger it from `ResultsWaitPage`.
+
+## Triggering `set_payoffs` in a WaitPage
+
+Option 1: Define a function and give the function name to `after_all_players_arrive` attribute.
+
+```{.python}
+class ResultsWaitPage(WaitPage):
+    
+    def after_all_players_arrive(group):
+        set_payoffs(group)
+
+
+```
+
+Option 2: Just give the function name to `after_all_players_arrive` variable.
+
+```{.python}
+class ResultsWaitPage(WaitPage):
+  after_all_players_arrive = set_payoffs
+```
+
+## Lets set the trigger in our ResultsWaitPage
+
+
+
+## Template features
+
+* Templates have access to `player`, `group` and `Constants` variables.
+
+   ```
+       Your guess was {{ player.guess }}.
+       Your group decided on {{ group.decision }}
+       The reward was {{ Constants.reward }}
+       You will get {{session.config.participation_fee}} for participating.
+   ```   
+   
+* You can show less digits of decimals with `| to0`, `|to1`, `|to2`.
+
+## Let's write our templates
+
+```{.html filename="Contribution.html"}
+{{ block title }}
+    Please decide on your contribution
+{{ endblock }}
+{{ block content }}
+
+    Round: {{ player.round_number }}
+
+    {{ formfields }}
+
+    {{ next_button }}
+
+{{ endblock }}
+```
+
+## Let's write our templates
+```{.html filename="Results.html"}
+{{ block title }}
+    Results
+{{ endblock }}
+
+
+{{ block content }}
+    <p> You contributed {{ player.contribution }} </p>
+    <p> The total contribution was {{ group.total_contribution }} </p>
+    <p> Each person got {{ group.individual_share }} from the group project </p>
+    <p> And your final payoff was {{ player.payoff }} </p>
+
+    {{ next_button }}
+{{ endblock }}
+```
+
+
+## Practice 
+- Create a new page called "Welcome" at the beginning of the game
+- Set the title to "Welcome" and write a welcome message
+
+Remember: Steps to create a new page:
+
+- Create a new class that inherits from `Page`: `Welcome(Page)`
+- Create a template file Welcome.html
+- Add the page to `page_sequence`
+
+
+## Assignment {.smaller}
+Take the Public Goods Game we used. Do the following:
+
+- Set the number of rounds to 3
+
+- Add a Welcome page and add some welcome messages to it. Make it visible only on the first page (hint: look at the documentation for is_displayed)
+
+
+## Assignment (.contd)
+
+- Show the contributions of other players in the group (including or excluding myself) Hint:
+
+  - Path 1: You can create a list of contributions and input it into the template. Then you need to check vars_for_template in the documentation.
+
+  - Path 2: You can loop over the players in the group in the template. Check {{ for p in group.get_players }} in the documentation. This is the template version of group.get_players().
+
+
+
+
+## Dislaying pages conditionally
+* Built in method `is_displayed(player)` should be defined under the page class.
+* This method should return `True` or `False` (or `None`)
+* If this method returns `True` for current player, the page is displayed. Otherwise, it will not.
+
+* If there are any calculations triggered by page, they will be skipped as well.
+
+```{.python code-line-numbers=false}
+
+class ScaryPage(Page):
+
+    def is_displayed(player):
+        return player.age > 18
+    
+```
+
+## Dislaying pages conditional on the round number
+
+- `player.round_number` is a built-in variable in oTree.
+- Also available in `group` and `subsession`.
+- Starts from 1.
+
+```{.python code-line-numbers=false}
+class Welcome(Page):
+
+    def is_displayed(player):
+        return player.round_number == 1
+    
+```
+
+## Looping in templates
+
+- You can loop over some iterables in the templates. (Very limited)
+- One option is to loop over the players in the group.
+
+```{.python code-line-numbers=false}
+{{ for p in group.get_players }}
+    Player {{ p.id_in_group }} contributed {{ p.contribution }}.
+{{ endfor }}
+
+```
+
+```
+Player 1 contributed 10 points. Player 2 contributed 30 points. Player 3  contributed 40 points.
+```
+
+## Looping in templates
+
+- You can add a condition to note yourself.
+
+```{.python code-line-numbers=false}
+    {{ for p in group.get_players }}
+        {{ if p == player }}
+            You contributed {{ p.contribution }}.
+        {{ else }}
+            Player {{ p.id_in_group }} contributed {{ p.contribution }}.
+        {{ endif }}
+    {{ endfor }}
+```
+
+```
+Player 1 contributed 10 points. Player 2 contributed 30 points. You contributed 40 points.
+
+```
+
+## Template features
+
+* If you want to show a variable that are not in your fields, you can use a page function called `vars_for_template`
+
+```{.python code-line-numbers="false"}
+
+class Results(Page):
+    def vars_for_template(player):
+        return dict(
+            variable_to_show=432,
+        )
+```
+  
+* Then you can reach it in the template by:
+
+```
+{{ variable_to_show }}
+```
+
+## Template features
+
+```{.python code-line-numbers="false"}
+
+class Results(Page):
+    def vars_for_template(player):
+        other_players = player.get_others_in_group()
+        other_contributions = [p.contribution for p in other_players]
+
+        return dict(
+            other_contributions=other_contributions
+        )
+```
+  
+* Then you can reach it in the template by:
+
+```
+{{ other_contributions }}
+
+[ 10, 20 ]
+```
+
+
+
+## Discussion and Assignment{.smaller}
+
+Prisoners' Dilemma
+
+|     |   Cooperate |   Defect |
+|:----|------------:|---------:|
+| **Cooperate** | 2, 2 | 0, 3 |
+| **Defect** | 3, 0 | 1, 1 |
+
+### Discussion
+- How would you implement it in oTree? 
+- How would you design the payoff function?
+
+### Assignment 
+- Build a Prisoners' Dilemma game in oTree
+- Use the payoff matrix above
+

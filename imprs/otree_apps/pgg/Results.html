@@ -1,0 +1,51 @@
+{{ block title }}
+    Results
+{{ endblock }}
+
+{{ block content }}
+
+<!-- alert -->
+<div class="alert alert-info" role="alert">
+    <p> You are in round {{ player.round_number }} of {{ C.NUM_ROUNDS }}. Please click <strong>Next</strong>  to proceed.</p>
+    
+</div>
+
+<p>
+    <h4> Your contribution</h4>
+    You had {{ C.ENDOWMENT }}. <br/>
+    You contributed {{ player.contribution }}. <br/>
+    <br>
+    <h4> Your group</h4>
+    Your group contributed {{ group.total_contribution }} in total. <br/>
+    People in the group each got {{ group.individual_share }} as a divident. Those were:
+    <table class="table table-striped m-3">
+        <tr>
+            <th>Player</th>
+            <th>Contribution</th>
+        </tr>
+        {{ for p in group.get_players }}
+            <tr>
+                {{ if p.id_in_group == player.id_in_group }}
+                    <td><strong> You </strong></td>
+                {{ else }}
+                    <td>Player {{ p.id_in_group }}</td>
+                {{ endif }}
+                <td>{{ p.contribution }}</td>
+                
+            </tr>
+        {{ endfor }}
+
+    </table> 
+
+
+    <h4> Your profit</h4>
+    Your profit is therefore {{ player.payoff }}.
+</p>
+
+
+
+{{ next_button }}
+
+{{ endblock }}
+
+

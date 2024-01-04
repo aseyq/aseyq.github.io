@@ -1,0 +1,56 @@
+---
+title: "Excercies 6"
+author: "Ali Seyhun Saral \\ `<ali.saral@unibo.it>`"
+date: "20.12.2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Working with functions
+1. Create a vector of numbers from -10 to 10 with 0.1 increments, i.e. $[-10, -9.9, -9.8, ... , 9.8, 9.9, 10]$).  
+Store those values in a variable as `x`.
+
+
+2. Consider the mathematical function `y` :
+ $$ y = -2x ^ 2 + 10x - 12.5. $$
+ 
+    Create y values of the function for given x values you've created in the earlier step.
+
+3. Plot a line graph of the function above 
+
+
+4. Find the maximum value of y in the vector you created. Save it to a variable called `maxy`. Print it out to see the value of it.
+
+5. Put a vertical line on the graph using this maximum value. You can change its color to red.
+
+
+6. We would like to have an R function described above which gives us the y value when we give the x value. 
+The function should look like this: `calculate_y(0)`, `calculate_y(-5)` etc.  
+Write that function and check if the numbers you wrote match well with the graph you've created. (Keep in mind that you can copy paste your function definition above.)  
+
+7. Try to find the x value that maximizes the function, by plugging different values in your function.
+
+## Matrices and Linear Systems
+
+1. Consider these equations:
+
+
+ $$ v + 2x - 3y + 12z = -2 $$
+ $$ v +  x  + 2y +  3z = 6 $$
+ $$ 2v + 2x  + 2y +  2z = 2 $$
+ $$ 3v + x   - 2y  + z = -10 $$
+   You can write this linear system in a matrix algebric form: $AX = B$.   
+
+   Write the left side of the equation as a coefficient matrix. Save it as A. (You can first create a vector, then convert it to a matrix). 
+
+
+2. Create the vector of constants (the right hand side of equations). Save it as `v`. 
+
+
+3. First get the determinant of matrix A. Is the determinant non-zero? If so, get the inverse of A ($A^{-1}$) and save it as `invA`.
+
+4. Assume that you multiplied both sides with $A^{-1}$. Get the multipication of the right hand side: $A^{-1}B$ (use matrix mutliplication `%*%`). This will give you $X$, i.e. solution of the system. Confirm that you got the correct values by trying out these values on equations.
+

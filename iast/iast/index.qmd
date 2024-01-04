@@ -1,0 +1,1088 @@
+---
+title: "Wisdom of Crowds Under Social Influence"
+subtitle: "A Comparison of Voting Rules"
+author: "Ali Seyhun Saral <br><x-institute>Institute for Advanced Study in Toulouse</x-institute> <br><br> Annika Hennes <br> <x-institute> University of Düsseldorf </x-institute>"
+format:
+  revealjs: 
+    slide-number: false
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: https://www.iast.fr/sites/all/themes/tse/images/site/logo-tse.png
+    css: styles.css
+    theme: [default]
+    footer: ""
+title-slide-attributes:
+  data-background-image: images/background.png
+  data-background-size: cover
+---
+## Voting to find the best option 
+
+:::{.columns}
+
+::::{.column}
+![](images/printer.jpg){width=80%}
+
+::::
+::::{.column}
+You will buy a new printer for the department:
+
+- Printer A
+- Printer B
+- Printer C
+- Printer D
+
+
+::::
+
+:::
+
+## Aggregating information/insight
+
+:::{.columns}
+
+::::{.column width="70%"}
+![](images/thejury.jpg){width=100%}
+
+::::
+::::{.column width="30%"}
+
+- Juries
+- Teams
+- Communities
+- Crowdsourcing
+
+::::
+
+::: aside
+Image: The Jury by John Morgan (1961). Public Domain.
+:::
+
+:::
+
+
+## Voting to find the best option
+
+![](images/stack1_logo.png){.fragment .absolute top=100 left=50}
+![](images/stack2_question.png){.fragment .absolute top=150 left=0}
+![](images/stack3_answer1.png){.fragment .absolute top=350 left=0}
+![](images/stack4_answer2.png){.fragment .absolute top=100 left=500}
+
+## Voting in digital public goods?
+
+![](images/pythonlogo.png){.fragment .absolute top=300 left=0}
+![](images/rlogo.png){.fragment .absolute top=100 left=250}
+![](images/wikipedia.png){width=35% height=70% .fragment .absolute top=250 left=500 }
+![](images/pythonelection.png){height=80% .fragment .absolute top=100 left=100 }
+
+
+
+## Rules in various projects/platforms
+
+| **Project**   | **Decision Rule**                                               |
+|---------------|-----------------------------------------------------------------|
+| Wikipedia     | Consensus                                                       |
+| PHP           | 2/3 Majority for Accept/Reject <br> Plurality for Implemenation |
+| Apache        | Consent/Veto <br> Majority rule <br>                            |
+| Django        | 4/5 majority for core team <br> Simple majority for technical decisions |
+| Reddit        | Upvote/Downvote                                                 |
+| StackExchange | Upvote/Downvote                                                 |
+
+## Framework
+
+- Candidates are substitutes.
+- Individuals' interests are aligned.
+- Underlying quality of each candidate, not perfectly observable.
+
+<br>
+
+:::{.noborder}
+|             |                                     |
+|-------------|-------------------------------------|
+|Individuals: |  $N = \{1,\ldots,10\}$              |
+|Candidates : |  $C = \{c_1, c_2, c_3, c_4\}$       |
+::: 
+
+## Framework 
+
+Each candidate has an underlying quality:
+$$ q_i = q(c_i) $$
+
+Each individual gets a noisy signal of the quality:
+$$\hat{q}^j_i = q_i + \epsilon^n_i $$
+
+## Framework 
+Individuals vote for the alternatives (i.e. they provide a ballot) and voting rule aggregates the votes:
+$$ f(b^1, \ldots, b^{10})$$
+
+Each individual earn according to the outcome, increasing for quality:
+
+$$ \pi_j = \pi(f(b^1, \ldots, b^{10})) $$
+
+Thus, preferences are aligned according to underlined quality.
+
+
+## Aggregating opinions 
+```{r, engine = 'tikz'}
+\begin{tikzpicture}
+	
+%\node[circle,draw,text=red,draw=red] at (1,-3.5){1};
+%\node[circle,draw,text=red,draw=red] at (-1.5,-0.75){2};
+%\node[circle,draw,text=red,draw=red] at (6.8,-0.75){2};
+%\node[circle,draw,text=red,draw=red] at (2.5,-0.3){3};
+%\node[circle,draw,text=red,draw=red] at (2.5,-2){4};
+
+  % draw rectangle node
+    \node[draw,
+        fill=gray!30,
+        minimum width=2cm,
+        minimum height=1cm] at (0,0) (MO) {My opinion};
+ 
+% Change line color
+    \node[draw,
+        fill=gray!30,
+        minimum width=2cm, 
+        minimum height=1cm] at (5,0) (OO) {Others' opinions};
+ 
+% draw rectangle node
+    \node[draw,
+        fill=yellow!50,
+        minimum width=2cm,
+        minimum height=1cm] at (0,-1.5) (MB) {My ballot};
+
+% draw rectangle node
+    \node[draw,
+        fill=yellow!50,
+        minimum width=2cm,
+        minimum height=1cm] at (5,-1.5) (OB) {Others' ballots};
+
+% draw rectangle node
+    \node[draw,
+        fill=orange!50,
+        minimum width=2cm,
+        minimum height=1cm] at (2.5,-3.5) (VR) {Voting Rule};
+
+% draw rectangle node
+    \node[draw,
+        fill=cyan!50,
+        minimum width=1cm,
+        minimum height=1cm] at (2.5,-5) (OUT) {Outcome};
+        
+
+\draw [->] (MO) -- (MB);
+\draw [->] (OO) -- (OB);
+\draw [->] (OB) -- (VR);
+\draw [->] (MB) -- (VR);
+\draw [->] (VR) -- (OUT);
+
+%\draw[dashed] [->] (MB) -- (OO);
+%\draw[dashed] [->] (OB) -- (MO);
+%\draw[dashed] [<->] (OB) -- (MB);
+
+\end{tikzpicture}
+```
+
+
+
+
+## Aggregating opinions 
+```{r, engine = 'tikz'}
+\begin{tikzpicture}
+	
+\node[circle,draw,text=red,draw=red] at (1,-3.5){1};
+\node[circle,draw,text=red,draw=red] at (-1.5,-0.75){2};
+\node[circle,draw,text=red,draw=red] at (6.8,-0.75){2};
+%\node[circle,draw,text=red,draw=red] at (2.5,-0.3){3};
+%\node[circle,draw,text=red,draw=red] at (2.5,-2){4};
+
+  % draw rectangle node
+    \node[draw,
+        fill=gray!30,
+        minimum width=2cm,
+        minimum height=1cm] at (0,0) (MO) {My opinion};
+ 
+% Change line color
+    \node[draw,
+        fill=gray!30,
+        minimum width=2cm, 
+        minimum height=1cm] at (5,0) (OO) {Others' opinions};
+ 
+% draw rectangle node
+    \node[draw,
+        fill=yellow!50,
+        minimum width=2cm,
+        minimum height=1cm] at (0,-1.5) (MB) {My ballot};
+
+% draw rectangle node
+    \node[draw,
+        fill=yellow!50,
+        minimum width=2cm,
+        minimum height=1cm] at (5,-1.5) (OB) {Others' ballots};
+
+% draw rectangle node
+    \node[draw,
+        fill=orange!50,
+        minimum width=2cm,
+        minimum height=1cm] at (2.5,-3.5) (VR) {Voting Rule};
+
+% draw rectangle node
+    \node[draw,
+        fill=cyan!50,
+        minimum width=1cm,
+        minimum height=1cm] at (2.5,-5) (OUT) {Outcome};
+        
+
+\draw [->] (MO) -- (MB);
+\draw [->] (OO) -- (OB);
+\draw [->] (OB) -- (VR);
+\draw [->] (MB) -- (VR);
+\draw [->] (VR) -- (OUT);
+
+%\draw[dashed] [->] (MB) -- (OO);
+%\draw[dashed] [->] (OB) -- (MO);
+%\draw[dashed] [<->] (OB) -- (MB);
+
+\end{tikzpicture}
+```
+
+
+
+## Aggregating opinions (w/ influence)
+```{r, engine = 'tikz'}
+\begin{tikzpicture}
+	
+\node[circle,draw,text=red,draw=red] at (1,-3.5){1};
+\node[circle,draw,text=red,draw=red] at (-1.5,-0.75){2};
+\node[circle,draw,text=red,draw=red] at (6.8,-0.75){2};
+\node[circle,draw,text=red,draw=red] at (2.5,-0.3){3};
+\node[circle,draw,text=red,draw=red] at (2.5,-2){4};
+
+  % draw rectangle node
+    \node[draw,
+        fill=gray!30,
+        minimum width=2cm,
+        minimum height=1cm] at (0,0) (MO) {My opinion};
+ 
+% Change line color
+    \node[draw,
+        fill=gray!30,
+        minimum width=2cm, 
+        minimum height=1cm] at (5,0) (OO) {Others' opinions};
+ 
+% draw rectangle node
+    \node[draw,
+        fill=yellow!50,
+        minimum width=2cm,
+        minimum height=1cm] at (0,-1.5) (MB) {My ballot};
+
+% draw rectangle node
+    \node[draw,
+        fill=yellow!50,
+        minimum width=2cm,
+        minimum height=1cm] at (5,-1.5) (OB) {Others' ballots};
+
+% draw rectangle node
+    \node[draw,
+        fill=orange!50,
+        minimum width=2cm,
+        minimum height=1cm] at (2.5,-3.5) (VR) {Voting Rule};
+
+% draw rectangle node
+    \node[draw,
+        fill=cyan!50,
+        minimum width=1cm,
+        minimum height=1cm] at (2.5,-5) (OUT) {Outcome};
+        
+
+\draw [->] (MO) -- (MB);
+\draw [->] (OO) -- (OB);
+\draw [->] (OB) -- (VR);
+\draw [->] (MB) -- (VR);
+\draw [->] (VR) -- (OUT);
+
+\draw[dashed] [->] (MB) -- (OO);
+\draw[dashed] [->] (OB) -- (MO);
+
+%\draw[dashed] [->] (MB) -- (OB);
+\draw[dashed] [<->] (OB) -- (MB);
+
+% Change filling color
+%    \node[draw,
+%        fill=cyan!50,
+%        minimum width=2cm, 
+%        minimum height=1cm] at (0,-2) {Process 2};
+ 
+% Change text color
+%    \node[draw,
+%        text=red,
+%        minimum width=2cm, 
+%        minimum height=1cm] at (3,-2) {Process 2};
+ 
+\end{tikzpicture}
+```
+
+
+## Condorcet Jury Theorem
+
+(Condorcet, 1785)
+
+:::{.columns}
+
+::::{.column width="40%" .center}
+![](images/condorcet.png){width=70%}
+
+:::::{.fs .fdim}
+Nicolas de Condorcet (1776-1793)
+:::::
+
+::::
+
+::::{.column width="60%"}
+
+
+
+- A group wants to find the truth through majority rule
+- Probabilty of correct choice $p > \frac{1}{2}$.
+- Probability that the rule gives the correct decision increases monotonically in $n$ and approaches to 1 as $n \rightarrow \infty$
+
+:::: 
+
+:::
+
+::: aside
+:::: {.ft}
+Image: Anonymous. (between 1789-1794) Public Domain.
+::::
+:::
+
+## Wisdom of Crowds
+:::{.columns}
+::::{.column width="60%"}
+(Galton, 1907, Surowiecki, 2004)
+
+- When many individuals estimate an unknown parameter, the central tendency is closer to the truth.
+
+
+::::
+
+::::{.column width="40%"}
+![](images/jar.jpg){width=100%}
+
+:::::{.ft .fdim}
+Image: "Money Jar" by crschmidt. CC BY 2.0. <a href="https://www.flickr.com/photos/56541240@N00/532742899">Source</a>
+:::::
+::::
+:::
+
+## Wisdom of Crowds
+:::{.columns}
+::::{.column width="60%"}
+- Estimating quantities/weights
+- Estimating probabilities (Ariely et al 2000; Lee and Danileiko  2014)
+- Political forecasts 
+- Online platforms
+::::
+
+::::{.column width="40%"}
+![](images/jar.jpg){width=100%}
+
+:::::{.ft .fdim}
+Image: "Money Jar" by crschmidt. CC BY 2.0. <a href="https://www.flickr.com/photos/56541240@N00/532742899">Source</a>
+:::::
+::::
+:::
+
+
+
+## Does social influence help or hurt?
+
+
+- **Social influence undermines wisdom of crowds** (Lorenz et al, 2011)
+
+- **Social influence undermines the wisdom of crowds in majority voting** (Frey and van de Rijt, 2021)
+
+- **Social influence biases the ratings of options** (Muchnik et al. 2013, Cicognani et al. 2022)
+
+- **Social influence can help in decentralized networks** (Becker et al. 2017)
+
+
+## Voting Rules and Wisdom of Crowds
+
+
+- **Borda rule performs well both in theory and in practice** (Mao et al. 2013)
+
+- **Unanimity rule performs better than majority rule, social information might help in some cases** (Guarnaschelli et al. 2000)
+
+- **Voting can help to solve also for complex tasks**  
+  - Cancer diagnosis - (Kurvers et al. 2016)
+
+  - NASA Moon Survival Task (Hamada et al. 2020)
+
+
+## Our Study
+:::{.fragment}
+- Voting rules are unexplored in wisdom of crowds literature.
+- Mixed results on social influence 
+:::
+<br>
+
+:::{.fragment}
+
+<h4> <span style="color:#E54A37">Research Question I </span></h4>
+How different voting rules affect the quality of the outcome?
+<br>
+
+:::
+
+:::{.fragment}
+
+<br>
+<h4> <span style="color:#E54A37">Research Question II </span></h4>
+Does social influence help or undermine the wisdom of crowds?
+
+::: 
+
+## Our study
+<!-- this is a hack to align voting rules and social influence lists -->
+:::{.columns}
+
+::::{.column width="50%"}
+- Groups of 10 participants
+
+- 2x2 design
+::::
+
+::::{.column width="50%"}
+
+::::
+
+:::
+
+<br>
+<br> 
+
+:::{.columns}
+
+
+::::{.column width="50%"}
+- **Voting rules**
+  - Plurality
+  - Borda
+  - Approval
+  - Upvote/downvote
+
+::::
+
+::::{.column width="50%"}
+
+- **Social influence**
+  - Independent voting
+  - Sequential voting
+
+::::
+:::
+
+## Treatments
+
+```{r}
+library("huxtable")
+library("tidyverse")
+
+df <- data.frame(`rules`=c("Plurality","Approval","Updown", "Borda"), 
+                 Independent=c("T1", "T2", "T3", "T4"), 
+                 Sequential=c("T5", "T6", "T7", "T8"))
+#as_hux(df)
+
+as_hux(df) %>%
+      set_align(everywhere,everywhere, "center") %>%
+      set_markdown_contents(1,1, "") %>%
+      set_background_color(2:5, 2:3, "grey90") %>% 
+      set_background_color(1:1, 2:2, "#FFFF00") %>%
+      set_background_color(1:1, 3:3, "#FFFF00") %>%
+      set_background_color(2:5, 1:1, "#FFFF00") %>%
+      #set_background_color(1:2, 1:3, "orange") %>% 
+      set_all_borders(brdr(5, "solid", "white")) %>%
+      set_tb_padding(5) %>%
+      set_col_width(c(0.2,0.3,0.3))
+      #set_caption("Treatments")
+
+      
+```
+
+## The Task
+
+:::{.columns}
+
+::::{.column width="70%"}
+:::::{.spacey}
+- *"Target picture"*: 20x20 pixel images 
+
+- Target images are blurred
+
+- Participant should choose from *4 candidate pictures*
+
+- 10 rounds
+:::::
+::::
+
+::::{.column .center width="30%"}
+
+![Target Picture](images/target.png){width=50%}  
+
+<br>
+
+![Participants see a blurred version](images/target_blurred.png){width=50%}  
+
+
+::::
+
+:::
+
+## The Task
+![](images/thetask.png){width=100%}  
+
+## Accuracy Measure
+![](images/accuracy1.png){width=100%}  
+
+## Accuracy Measure
+![](images/accuracy2_1.png){width=100%}  
+![](images/accuracy2.png){width=100%}  
+
+
+## Target and Candidade Images
+- Target images are generated by a computer program
+
+- Candidate images are generated by humans using a crowdsourcing platform 
+
+## Target and Candidate Images
+{{< video src="./images/drawing.mp4" >}}
+
+
+## Target Images
+{{< video https://www.youtube.com/embed/hekfZ62KSEA width="1050" height="700">}}
+
+## Treatments
+:::{.incremental}
+- **Independent voting**: Participants vote independently. They don't get any information about other participants' votes.
+- **Sequential voting**: Participants vote sequentially*. They see aggregated votes (points) of those voted before them.
+:::
+<br> <br>
+
+:::{.fragment}
+* Cyclic order to avoid long waiting times
+:::
+```{r}
+library("huxtable")
+library("tidyverse")
+df <- data.frame(`Voter1`=c("a", "b", "c","d"), 
+                `Voter2`=c("a", "c", "b","d"),
+                `Voter3`=c("c", "b", "a","d"),
+                `Voter4`=c("b", "c", "a","d"))
+#as_hux(df)
+
+example_profile <- as_hux(df) %>% 
+      set_font_size(28) %>%
+      set_background_color(everywhere, everywhere, "grey90") %>% 
+      set_align(everywhere, everywhere, "center")  %>% 
+      #set_background_color(1:2, 2:2, "green") %>% 
+      set_background_color(1:1, everywhere, "#FFFF00") %>% 
+      set_all_borders(brdr(5, "solid", "white"))
+   #   set_caption("Voter Profile")
+```
+
+## Voting Rules
+
+:::{.columns}
+
+::::{.column width="50%"}
+
+:::::{.profiletable}
+```{r}
+example_profile
+```
+:::::
+
+::::
+
+::::{.column width="50%"}
+
+::::
+:::
+
+## Plurality Rule
+:::{.columns}
+
+::::{.column width="50%"}     
+```{r}
+example_profile %>%
+set_background_color(2:2, everywhere, "green") 
+```
+::::
+
+::::{.fragment .column width="50%"}     
+
+```{r}
+points_plurality <- tibble(
+                `a`=c(2), 
+                `b`=c(1),
+                `c`=c(1),
+                `d`=c(0)
+                )
+#as_hux(df)
+
+as_hux(points_plurality) %>% 
+      set_font_size(28) %>%
+      set_background_color(everywhere, everywhere, "grey90") %>% 
+      set_align(everywhere, everywhere, "center")  %>% 
+      set_background_color(1:1, everywhere, "#FFFF00") %>% 
+      set_all_borders(brdr(5, "solid", "white")) %>%
+      set_left_padding(30) %>%
+      set_right_padding(30) %>%
+      set_caption("Points")
+   
+```
+::::
+:::
+
+:::{.fragment}
+**Winner**: a
+:::
+
+## Plurality Rule 
+
+:::{.center}
+![](images/voting_PI.jpg){width=50%}
+:::
+
+## Plurality Rule 
+
+:::{.center}
+![](images/voting_PS.jpg){width=50%}
+:::
+
+
+## Approval Voting
+:::{.columns}
+
+::::{.column width="50%"}     
+```{r}
+example_profile %>%
+set_background_color(2:2, everywhere, "green") %>%
+set_background_color(3:3, 2:2, "green") %>%
+set_background_color(3:3, 4:4, "green") 
+```
+```
+```
+::::
+
+::::{.fragment .column width="50%"}     
+
+```{r}
+# approval voting
+tibble(`a`=c(2), `b`=c(1),`c`=c(3),`d`=c(0)) %>%
+      as_hux() %>% 
+      set_font_size(28) %>%
+      set_background_color(everywhere, everywhere, "grey90") %>% 
+      set_align(everywhere, everywhere, "center")  %>% 
+      set_background_color(1:1, everywhere, "#FFFF00") %>% 
+      set_all_borders(brdr(5, "solid", "white")) %>%
+      set_left_padding(30) %>%
+      set_right_padding(30) %>%
+      set_caption("Points")
+   
+```
+::::
+:::
+
+:::{.fragment}
+**Winner**: c
+:::
+
+## Approval Voting
+
+:::{.center}
+![](images/voting_AI.jpg){width=50%}
+:::
+
+## Approval Voting
+
+:::{.center}
+![](images/voting_AS.jpg){width=50%}
+:::
+
+
+
+## Upvote/Downvote
+:::{.columns}
+
+::::{.column width="50%"}     
+```{r}
+example_profile %>%
+set_background_color(2:2, everywhere, "green") %>%
+set_background_color(3:3, 1:1, "green") %>%
+set_background_color(3:3, 3:3, "green") %>%
+set_background_color(4:5, 1:1, "red") %>%
+set_background_color(3:5, 4:4, "red") 
+```
+```
+```
+::::
+
+::::{.fragment .column width="50%"}     
+
+```{r}
+
+tibble(`a`=c(1), `b`=c(3),`c`=c(-1),`d`=c(-2)) %>%
+      as_hux() %>% 
+      set_font_size(28) %>%
+      set_background_color(everywhere, everywhere, "grey90") %>% 
+      set_align(everywhere, everywhere, "center")  %>% 
+      set_background_color(1:1, everywhere, "#FFFF00") %>% 
+      set_all_borders(brdr(5, "solid", "white")) %>%
+      set_left_padding(30) %>%
+      set_right_padding(30) %>%
+      set_caption("Points")
+   
+```
+::::
+:::
+
+:::{.fragment}
+**Winner**: b
+:::
+
+## Upvote/Downvote
+
+:::{.center}
+![](images/voting_UI.jpg){width=50%}
+:::
+
+## Upvote/Downvote
+
+:::{.center}
+![](images/voting_US.jpg){width=50%}
+:::
+
+
+
+## Borda Rule
+:::{.columns}
+
+::::{.column width="50%"}     
+```{r}
+example_profile %>%
+set_background_color(2:2, everywhere, "green") %>%
+set_background_color(3:3, everywhere, "#88FF00") %>%
+set_background_color(4:5, everywhere, "#BBFFAA") %>%
+set_background_color(5:5, everywhere, "#EEFFAA") 
+```
+```
+```
+::::
+
+::::{.fragment .column width="50%"}     
+
+```{r}
+
+tibble(`a`=c(12), `b`=c(12),`c`=c(12),`d`=c(4)) %>%
+      as_hux() %>% 
+      set_font_size(28) %>%
+      set_background_color(everywhere, everywhere, "grey90") %>% 
+      set_align(everywhere, everywhere, "center")  %>% 
+      set_background_color(1:1, everywhere, "#FFFF00") %>% 
+      set_all_borders(brdr(5, "solid", "white")) %>%
+      set_left_padding(30) %>%
+      set_right_padding(30) %>%
+      set_caption("Points")
+   
+```
+::::
+:::
+
+:::{.fragment}
+**Winner**: a,b,c
+:::
+
+## Borda Rule
+
+:::{.center}
+![](images/voting_BI.jpg){width=50%}
+:::
+
+## Borda Rule
+
+:::{.center}
+![](images/voting_BS.jpg){width=50%}
+:::
+
+
+## Simulation
+
+- We simulate independent voting
+- Mallow's model
+- Approval, Borda and Plurality 
+- 1000 iterations
+
+:::{.fragment .center}
+![](images/mallows.png){width=80%}  
+:::
+
+## Simulation
+:::{.center}
+![](images/simulation.png){width=70%}  
+:::
+
+
+
+
+
+## Experiment 
+
+:::{.columns}
+
+::::{.fm .column width="50%"}
+
+- Conducted online with 520 participants
+- Participant pool at the Decision Lab of th Max Planck Institute for Research on Collective Goods
+- Participants were randomly assigned to one of the eight treatments
+- Payments varied between 5 and 12.5 EUR with the average of 9.3 EUR.
+- Preregistered
+::::
+::::{.fragment .column width="50%"}
+
+```{r}
+library("huxtable")
+library("tidyverse")
+
+df <- data.frame(`rules`=c("Plurality","Approval","Updown", "Borda"), 
+                 Independent=c("60", "60", "70", "60"), 
+                 Sequential=c("70", "60", "70", "70"))
+#as_hux(df)
+
+as_hux(df) %>%
+      set_font_size(22) %>%
+      set_align(everywhere,everywhere, "center") %>%
+      set_markdown_contents(1,1, "") %>%
+      set_background_color(2:5, 2:3, "grey90") %>% 
+      set_background_color(1:1, 2:2, "#FFFF00") %>%
+      set_background_color(1:1, 3:3, "#FFFF00") %>%
+      set_background_color(2:5, 1:1, "#FFFF00") %>%
+      #set_background_color(1:2, 1:3, "orange") %>% 
+      set_all_borders(brdr(5, "solid", "white")) %>%
+      set_tb_padding(5) %>%
+      set_col_width(c(0.2,0.3,0.3))
+      #set_caption("Treatments")
+
+      
+```
+::::
+:::
+
+## Experiment 
+Experimental flow:
+
+:::{.noborder}
+
+|      |                            |               |
+|:-----|:---------------------------|:--------------|
+| 1.   | General instructions (Zoom)|               |
+| 2.   | Instructions for the task  |               |
+| 3.<br> 4.   | Guesing Stage  <br> Voting Stage            |    x 10           |
+| 5.   | Survey                     |               |  
+| 6.   | Feedback                   |               |  
+
+:::
+
+
+## Guessing Stage
+:::{.center}
+![](images/guessing.png){width=80%}  
+:::
+
+## Incentives
+
+:::{.columns}
+
+::::{.column width="50%"}
+
+#### Earnings - Group Outcome
+- Rank 1: 200 points
+- Rank 2: 100 points
+- Rank 3: 50 points
+- Rank 4: 25 points
+
+::::
+
+::::{.fragment .column width="50%"}
+
+#### Earnings - Guessing Stage
+For each image, if the guess is near 10% distance in accuracy:
+
+:::::{.center}
+
+10 points - difference in % accuracy
+
+:::::
+
+::::
+:::
+
+:::{.fragment}
+- We select **two rounds for group outcome** and **two rounds for guessing stage** for payments.
+:::
+
+
+## Results
+:::{.center}
+![](images/result1.png){width=70%}  
+:::
+
+## Results
+:::{.center}
+![](images/result2.png){width=70%}  
+![](images/information_treatment.png)
+:::
+
+## Results
+:::{.center}
+![](images/result3.png){width=70%}  
+![](images/information_treatment.png)
+:::
+
+## Results
+:::{.center}
+![](images/result4.png){width=70%}  
+![](images/information_treatment.png)
+:::
+
+## Results
+:::{.center}
+![](images/result5.png){width=70%}  
+![](images/information_treatment.png)
+:::
+
+## Results
+:::{.columns}
+
+::::{.column width="70%"}
+
+:::::{.center}
+
+![](images/result5.png){width=100%}  
+![](images/information_treatment.png)
+
+:::::
+::::
+
+::::{.column width="30%"}
+![](images/reg_table.png)
+
+::::
+
+:::
+
+## Simulations
+![](images/sim_calibre.png){width=100%}  
+
+
+## Results
+:::{.center}
+![](images/allranks.png){width=100%}  
+:::
+
+- No significant difference when voting independently
+- Seqential voting: Borda > Plurality, Borda > Updown <br>
+ <span class="ft"> Wilcoxon, p < 0.05</span>
+
+
+## Survey Results - Clarity 
+:::{.center}
+![](images/clarity.png){width=55%}
+:::
+
+1- I did not undertand the task at all.  
+5- It was easy to understand the task.
+
+## Survey Results - Difficulty
+:::{.center}
+![](images/difficulty_voting.png){width=55%}
+:::
+1- It was difficult to decide on how to vote for the candidates.  
+5- It was easy to decide on how to vote for the candidates.
+
+## Survey Results - Boredom
+:::{.center}
+![](images/boredom.png){width=70%}
+:::
+1- The task was very boring.  
+5- The task was very fun.
+
+## Survey Results - Time Voting
+:::{.center}
+![](images/time_voting.png){width=55%}
+:::
+1- I was not able to finish the task in given time.  
+5- There was too much time to finish the task.
+
+## Survey Results - Fairness
+:::{.center}
+![](images/rule_fairness.png){width=55%}
+:::
+I think this voting method is a fair way to aggregate different opinions.  
+1- Completely disagree  
+5- Completely agree
+
+## Conclusions
+1. Social influence may harm or help the wisdom of crowds depending on the voting rule/setting.
+
+2. Even when there is no social influence, the theoretical/simulted model differs widely from the experimental results.
+
+### Next Steps
+- **The borda switch?** (as a discussion)
+
+- Further analysis and simulations
+
+- **Follow up**: What happens when people produce them?
+
+# Thank you!
+ali.saral@iast.fr
+
+## Grid Difficulties
+:::{.fm}
+| Grid Code| Individual  | Independent  | Sequential |
+|---------:|:------------:|:-----------:|:----------:|
+|         0|    63.4     | 96%        |  85%         |
+|         1|    30.4     | 40%        |  14%         |
+|         2|    88.1     | 100%       |  100%        |
+|         3|    39.9     | 56%        |  55.6%       |
+|         4|    43.3     | 48%        |  55.6%       |
+|         5|    17.3     | 0%         |  7.4%        |
+|         6|    57.7     | 92%        |  96.3%       |
+|         7|    24.9     | 28%        |  25.9%       |
+|         8|    53.9     | 80%        |  81.5%       |
+|         9|    40.5     | 56%        |  55.6%       |
+
+:::
+
+## Feedback
+<a href="images/feedback.png"> image </a> 
+
+:::{.scrollable}
+![](images/feedback.png){width=80%}
+:::
+
+## Rank Variable
+:::{.center}
+![](images/outcomereg.png){width=50%}
+:::
+
+
+## Simulations
+:::{.center}
+![](images/sim_extra1.png){width=70%}
+:::
+
+## Bootstrapped Simulations
+:::{.center}
+![](images/mcsim.png){width=50%}
+:::

@@ -1,0 +1,27 @@
+code {
+    color: #e96900;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+#TOC {
+  color: #708090;
+  font-size: 18px; 
+  border-color: #708090;
+}
+h1 {
+  color: #520000ff;
+  opacity: 0.6;
+  font-size: 36px;
+}
+body {
+  color: #708090;
+  background-color: #F5F5F5;
+  font-size: 18px;
+}
+pre {
+  color: #708090;
+  background-color: #F8F8FF;
+}
+
+

@@ -1,0 +1,640 @@
+---
+title: "oTree Crash Course"
+subtitle: Session V - oTree Introduction & Individual Experiments
+author: "Ali Seyhun Saral (Institute for Advanced Study in Toulouse)"
+institute: "IMPRS Be Smart Summer School"
+date: "8 August 2023"
+footer: ""
+execute:
+  echo: true
+
+format:
+  revealjs:
+    #theme: white
+    incremental: false
+    slide-number: true
+    show-slide-number: print
+
+bibliography: bibliography.bib
+css: styles.css
+title-slide-attributes:
+  data-background-image: images/fishmarket.jpg
+  data-background-size: cover
+---
+
+## Check oTree in action:
+<h1>
+[experiment.lol](https://www.experiment.lol)
+</h1>
+# oTree Introduction
+
+## About oTree
+![](images/2023-08-07-20-03-58.png)
+
+* oTree is a platform/software to run lab/online experiments.
+* Participants interact with each other using their browsers
+* oTree runs on a web server:
+  * It runs on your computer for development
+  * It may run on a physical server
+  * It may run on a cloud server
+
+. . . 
+
+![](images/2023-08-04-14-20-18.png){width=50%}
+
+## About oTree (2)
+* It essentially works as a "web-app"
+* oTree handles necessary components like database, pages, urls, ...
+* Defines a specialized data structure for our needs
+  * Players
+  * Groups
+  * Session
+
+. . .
+
+![](images/2023-08-04-14-24-07.png){width=50%}
+
+## Managing your experiment
+[link](https://interactive2.herokuapp.com)
+
+## Ways to build your experiment
+
+- Using a text editor
+
+- oTree studio (https://www.otreehub.com/)
+
+## What do you need?
+* A Python 3 installation
+* A text editor/IDE to develop Python
+  * Visual Studio Code (preferred)
+  * PyCharm
+  * RStudio
+  * Notepad++
+  * Even notepad
+* A command-line interface
+
+## Components of an oTree Experiment
+
+![](images/otree_components.png)
+
+
+## Virtual Environments in Python
+* A virtual environment is essentially a directory that contains:
+  * Python installation
+  * A number of additional packages
+
+* They provide *isolated* python development enviromens with different packages and dependencies.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](images/venv1.png)
+:::
+
+::: {.column width="50%"}
+![](images/venv2.png)
+:::
+
+::::
+
+
+## oTree Development Installation Structure
+(my suggestion)
+```
+ot (or your project name)
+├── oTree
+│   ├── app1
+│   ├── app2
+│   ├── ...
+└── venv
+```
+
+* `ot`: A container folder
+* `oTree`: oTree software (project folder)
+* `venv`: Virtual Environment
+
+
+## oTree Installation
+1. Create the parent folder `ot`
+  ```{.bash}
+  mkdir ot
+  ```
+
+2. Go to the folder
+  ```{.bash}
+  cd ot
+  ```
+
+3. Create a virtual enviroment
+  ```{.bash}
+  python3 -m venv venv
+  ```
+
+4. Activate the virtual environment
+  ```{bash}
+  # MacOS or Linux
+  source venv/bin/activate
+  ```
+  ```{bash}
+  # Windows
+  venv\Scripts\activate
+  ```
+
+
+# oTree Installation
+
+::::{.columns}
+:::{.column}
+5. Install `otree` Package
+  ```{.bash}
+  pip install otree
+  ```
+
+6. Create an oTree project
+  ```{.bash}
+  otree startproject oTree
+  ```
+
+7. Go to oTree folder
+  ```{.bash}
+  cd oTree
+  ```
+
+8. Check if oTree is can be startd
+  ```{.bash}
+  otree devserver
+  ```
+
+:::
+
+:::{.column}
+```
+~/ot/oTree> otree devserver
+Open your browser to http://localhost:8000/
+To quit the server, press Control+C.
+```
+:::
+::::
+
+
+
+## Command Line Mini Cheatsheet {.smaller}
+
+|Command                  |  Windows               | MacOS/Linux               |
+|-------------------------|------------------------|---------------------------|
+| print current location  | `pwd`                  |  `cd`                     |
+| list files here         | `dir`                  |  `ls`                     |
+| go to directory         | `cd NAME`              | `cd NAME`                 |
+| create directory        | `mkdir NAME`           | `mkdir NAME`              |
+| delete file             | `del filename`         | `rm filename`             |
+| activate virtual env.   | `PATH\Scripts\activate`| `source PATH\bin\activate`|
+| deactivate virtual env. | `deactivate`           | `deactivate`              |
+| run oTree server (dev.) | `otree devserver`      | `otree devserver`         |
+| create app              | `otree startapp APPNAME`| `otree startapp APPNAME` |
+
+
+
+## oTree Interface
+
+![](images/otree_interface.png)
+
+* Demo: A quick way to test experiments
+* Sessions: To create and manage sessions
+* Rooms: A tool to run experiments on specific links with specific participants
+* Data: To download data (all together)
+* Server check: Shows a summery of server configuration
+
+
+
+## What is an app?
+![](images/single_app.png)
+
+
+## What is an app (cont'd)?
+- App is the basic unit of an experiment.
+- Each experiment should consist at least one app.
+- Each app has its own: 
+  - Pages
+  - Fields/data structure for participant
+  - Other components like images, csv files etc.
+  - ...
+
+
+
+
+## What is an app?
+* Experiments may contain more than one app
+
+![](images/multiple_apps.png)
+
+## Create blank app and register it
+* Make sure you have your virtual environment activated
+
+* Make sure you are in the `oTree` (project) folder
+
+* Create the app
+
+  ```{.bash}
+  otree startapp APPNAME
+  ```
+
+
+* In our case we will use the name `my_survey`:
+  ```{.bash}
+  otree startapp my_survey
+  ```
+
+## Register the app in the project
+* Go to `settings.py`
+
+* Modify `SESSION_CONFIGS` as below
+
+  ```{.python}
+  SESSION_CONFIGS = [
+    dict(
+      name='my_survey',
+      app_sequence=['my_survey'],
+      num_demo_participants=10,
+    ),
+  ]
+  ```
+
+
+## oTree File Structure
+::::{.columns}
+:::{.column}
+![](images/otree_filestructure.png)
+:::
+:::{.column}
+* `settings.py`: oTree settings file
+* `my_survey` folder: the app in our oTree project. We apps on our own.
+  * `__init__.py`: Backend components (pages and models)
+  * `*.html`: Frontend components (templates)
+
+:::
+::::
+
+
+## How `__init__.py` looks like?
+
+::::{.columns}
+:::{.column}
+
+```{.python}
+from otree.api import *
+
+
+doc = """
+Your app description
+"""
+
+
+class Constants(BaseConstants):
+    name_in_url = 'newapp'
+    players_per_group = None
+    num_rounds = 1
+
+## MODELS
+class Subsession(BaseSubsession):
+    pass
+
+
+class Group(BaseGroup):
+    pass
+
+
+class Player(BasePlayer):
+    pass
+```
+:::
+:::{.column}
+
+
+```{.python}
+# PAGES
+class MyPage(Page):
+    pass
+
+
+class ResultsWaitPage(WaitPage):
+    pass
+
+
+class Results(Page):
+    pass
+
+
+page_sequence = [MyPage,
+                 ResultsWaitPage,
+                Results]
+```
+:::
+::::
+
+
+
+## oTree Structure
+![](images/otree_structure.png)
+
+
+# Individual Decisions: Building a survey
+
+## Survey 
+- The simplest experiment is a survey experiment
+
+- We ask some questions and collect the answers
+
+- Usually we only need only `Player` and `Constants` classes
+
+
+## Let create a survey
+
+ - We would like to ask following questions:
+   - Name (`name`)
+   - Age (`age`)
+   - Continent you live in (`continent`)
+   - Enjoyment level (1-5) (`enjoyment`)
+   - Further Comments (`comments`)
+
+## Things to do to create a survey (very briefly)
+
+(Assume we created the project and the app)
+
+:::{.incremental}
+1. Create data structure (**models** in `__init__.py`)
+2. Create page classes (**pages** in `__init__.py`)
+3. Create HTML ***templates** for each page (in HTML files)
+4. Add the pages to `page_sequence` (in `__init__.py`)
+:::
+
+## Things to do to create a survey (more detailed) {.smaller}
+:::{.incremental}
+- Step 1 - Implement your data structure by adding fields to `Player` model (in `__init__.py` in app folder)
+  - Every question you ask should be a field (if not more than one)
+  
+- Step 2 - Create Page classes (in `__init__.py` in app folder)
+  - Each page is represented by a class
+  - This class manages the page logic, and calculations
+  - Define which field you want to ask in a form in each page
+
+- Step 3 - Create HTML templates for each page (in HTML files in app folder)
+  - These templates are rendered by the page classes
+
+- Step 4 - Add the pages to `page_sequence` (in `__init__.py` in app folder)
+  - This is the order of the pages in the experiment
+:::
+
+## Creating Fields in our models
+
+| Variable          |  Field Type      |
+|-------------------|------------------|
+| `name`            | `StringField`    |
+| `age`             | `IntegerField`   | 
+| `continent`       | `StringField`    |
+| `enyjoyment`      | `IntegerField`   |
+| `comments`        | `LongStringField`|
+
+* Each field will be defined under `Player` class
+
+
+## Fields 
+* Fields create the data structure to record the data. They can be thought as “columns” in a spreadsheet. 
+* They are placed in Player or Group classes in `__init__.py`
+* You can create a field for form input, or to save the data without an explicit input
+
+## Fields (cont'd) {.smaller}
+| Field Name      | What for?                  | Example                                  |
+|-----------------|----------------------------|------------------------------------------|
+| StringField     | Short text, Categories     | `department = Models.StingField()`       |
+| IntegerField    | Integer (whole numbers)    | `age = Models.IntegerField()`            |
+| FloatField      | Decimals                   | `percentage = Models.FloatField()`       |
+| BooleanField    | True or False              | `is_dictator = Models.BooleanField()`    |
+| CurrencyField   | Numbers in currency format | `earned_stage1 = Models.CurrencyField()` |
+| LongStringField | Long test                  | `diary_entry = Models.LongStringField()` |
+
+## Some field options {.smaller}
+
+- `label`: The label of the field
+
+```{.python}
+name = models.StringField(label = “What is your name”)
+```
+
+- `min` and `max`: The minimum and maximum values for the field
+```{.python}
+age = models.IntegerField(min = 18, max = 100)
+```
+
+- `blank`: Empty field allowed or not
+```{.python}
+comments = models.LongStringField(blank = True)
+```
+
+- `initial`: Default value for the field
+```{.python}
+age = models.IntegerField(default = 18)
+```
+
+- `choices`: Multiple choices for the field 
+```{.python}
+mood = models.StringField(choices = ['happy', 'sad', 'neutral'])
+```
+
+## Creating Pages
+
+| Page                |  Description                   |
+|---------------------|--------------------------------|
+| `Survey`            |  Survey questions              |
+| `Results`           |  Feedback. Thanks etc          |
+ 
+:::{.incremental}
+- Each page will have a 
+  - Class in `__init__.py` 
+  - They should be added to `page_sequence` list
+  - Will have a `html` template in the same folder
+:::
+
+## Creating Templates
+* We will modify the default template
+
+```{.html}
+{{ block title }}
+    TITLE HERE
+{{ endblock }}
+
+{{ block content }}
+CONTENT HERE
+    {{ formfields }}   <--- This generates input fields automatically
+
+{{ next_button }}      <--- This creates a next button
+{{ endblock }}
+```
+
+## Template Syntax
+
+* Templates use HTML codes, and oTree template items (indicated by `{{ }}`).
+
+* Indentation is not important in templates.
+
+* oTree has two default blocks:` {{ block title }}`, and `{{ block content }}`
+
+* You can reach variables of the player with `{{ player.variablename }}`
+
+* You can have conditional content by `{{ if CONDITION }}`
+
+## Conditional Content in Templates
+
+```{.html}
+  {{ if CONDITION}}
+  ...
+  {{ endif }}
+```
+<br>
+
+. . . 
+
+<br>
+```{.html}
+{{ if CONDITION}}
+...
+{{ else }}
+...
+{{ endif }}
+
+```
+
+## Conditional Content in Templates: Example
+
+```{.html}
+{{ if player.age < 18 }}
+  You are too young to participate
+{{ else }}
+  You are old enough to participate
+{{ endif }}
+```
+
+# Individual Decisions: Building an interactive experiment
+
+## Risky Choice
+- Now we will build a simple interactive experiment.
+
+- We will ask participants two options:
+  - Take the safe option (and get 5 points for sure)
+  - Take the risky option (and get 10 points with 50% chance, and 0 points with 50% chance)
+
+
+## Pages
+  | Page        |  Description          |
+  |-------------|-----------------------|
+  | `Choice`    | Choice between risky and safe options|
+  | `Results`   | Feedback. Thanks etc  |
+
+
+## Data Structure
+
+| Variable      | Description    |
+| ------------- | -------------- |
+| `wants_risky` | Whether the player wants the risky option or not|
+| `is_lucky`    | If the player won the lottery or not|
+
+## Data Structure (cont'd)
+
+| Variable      | Place          | Type           |
+| ------------- | -------------- | -------------- |
+| `wants_risky` | `Player` class | BooleanField() |
+| `is_lucky`    | `Player` class | BooleanField   |
+| `RISKY_PAYOFF` | `C` class (Constants) |  integer |
+| `SAFE_PAYOFF` | `C` class (Constants) | integer |
+
+
+## Implementation
+
+Let's implement those at first. We will deal later with the payoffs.
+
+
+## Setting payoffs
+
+:::{.incremental}
+- It is common to define a function to set payoffs. 
+- We can call it whatever we want but `set_payoffs` is a common name.
+- This function will be written in the top level (as opposed to a method of a class)
+- It should take `player` object as input and set the payoffs of the player.
+- We should call this function at some point. 
+:::
+
+## Modifying player fields
+
+:::{.incremental}
+- We can modify the fields of the player object by using `player.fieldname`
+- We should make sure we give the right type of input to the field
+- oTree already has a built in attribute `player.payoff` which we can use to set the payoff of the player
+- It is a currency field, but we can also give it an integer value (it will be converted to currency automatically)
+:::
+
+## Setting payoffs
+
+```{.python}
+def set_payoffs(player):
+    if player.wants_risky_choice:
+        player.is_lucky = random.choice([True, False])
+
+        if player.is_lucky:
+            player.payoff = C.RISKY_PAYOFF
+        else:
+            player.payoff = 0
+    else:
+        player.payoff = C.SAFE_PAYOFF
+```
+
+
+## Triggering the payoff function
+
+:::{.incremental}
+- We need to call the `set_payoffs` function at some point.
+
+- One option is to call it at the end of the `Choice` page.
+
+- We can do this by using the `before_next_page()` function (method).
+
+- This can defined in the `Choice` class. If it is defined, it will be called before the next page is loaded.
+
+- It takes two arguments: `player` and `timeout_happened`
+:::
+
+. . . 
+
+```{.python code-line-numbers="|5-6"}
+class Choice(Page):
+    form_model = 'player'
+    form_fields = ['wants_risky_choice']
+
+    def before_next_page(player, timeout_happened):
+        do_something()
+```
+
+
+## Finishing the template `Results.html`
+
+Remember that we can conditionally show participants different content.
+
+
+```{.html}
+{{ if CONDITION}}
+...
+{{ else }}
+...
+{{ endif }}
+
+```
+
+## Conditionally showing content
+
+```{.html}
+{{ if player.wants_risky_choice }}
+You chose the risky option
+{{ else }}
+  You chose the safe option
+{{ endif }}
+```
+
+
