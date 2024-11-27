@@ -126,6 +126,7 @@ display: none;
 
 .img-inst {
     max-height: 100px;
+    max-width: 100px;
     display: block;
 }
 
