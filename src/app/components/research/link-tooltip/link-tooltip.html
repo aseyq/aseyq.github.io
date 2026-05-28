@@ -1,0 +1,24 @@
+<div class="tooltip-host">
+  <ng-content></ng-content>
+  <div class="tooltip-panel">
+    @if (cover()) {
+      <img [src]="cover()" alt="Paper cover" class="cover-img" />
+    }
+    <div class="tooltip-info">
+      @if (title()) {
+        <p class="paper-title">{{ title() }}</p>
+      }
+      @if (shortRefWithoutYear()) {
+        <p class="short-ref">{{ shortRefWithoutYear() }}</p>
+      }
+      @if (citation()) {
+        <p class="citation">{{ citation() }}</p>
+      }
+      @if (doi()) {
+        <p class="doi"><span class="label">DOI</span> {{ doi() }}</p>
+      }
+
+    </div>
+  </div>
+</div>
+

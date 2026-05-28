@@ -1,0 +1,292 @@
+.expertise-chart {
+  margin-top: 28px;
+
+  h2 {
+    margin: 0 0 12px;
+  }
+}
+
+.expertise-intro {
+  margin: 0 0 8px;
+  max-width: 760px;
+  line-height: 1.6;
+  color: var(--mat-sys-on-surface-variant);
+
+  &:last-of-type {
+    margin-bottom: 16px;
+  }
+}
+
+.venn-wrap {
+  position: relative;
+  height: 440px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+$tooltip-bg: rgba(28, 28, 32, 0.94);
+$arrow: 7px;
+
+.venn-tooltip {
+  position: absolute;
+  z-index: 10;
+  width: 200px;
+  padding: 11px 15px;
+  background: $tooltip-bg;
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  animation: tooltip-in 150ms ease both;
+
+  &::before {
+    content: '';
+    position: absolute;
+    border: $arrow solid transparent;
+  }
+}
+
+// top circle — label above → tooltip below, arrow up
+.tooltip-behavioralEconomics {
+  top: 273px;  // circle bottom (85+180) + 8px
+  left: 140px; // circle center x (150+90) − half width (100)
+  &::before {
+    top: -($arrow * 2);
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-color: $tooltip-bg;
+  }
+}
+
+// right circle — label right → tooltip left of circle, arrow right
+.tooltip-softwareEngineering {
+  top: 205px;  // circle center y (155+90) − ~40
+  left: 12px;  // right edge (12+200=212) sits near circle left edge (220)
+  &::before {
+    top: 50%;
+    right: -($arrow * 2);
+    transform: translateY(-50%);
+    border-left-color: $tooltip-bg;
+  }
+}
+
+// bottom circle — label below → tooltip above, arrow down
+.tooltip-aiMlDataScience {
+  top: 138px;  // circle top (225) − tooltip height (~80) − gap (7)
+  left: 140px; // centered on circle x
+  &::before {
+    bottom: -($arrow * 2);
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: $tooltip-bg;
+  }
+}
+
+// left circle — label left → tooltip right of circle, arrow left
+.tooltip-causalInference {
+  top: 205px;  // circle center y (155+90) − ~40
+  left: 268px; // circle right edge (80+180) + 8px
+  &::before {
+    top: 50%;
+    left: -($arrow * 2);
+    transform: translateY(-50%);
+    border-right-color: $tooltip-bg;
+  }
+}
+
+@keyframes tooltip-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.venn-circle {
+  position: absolute;
+  z-index: 1;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-ink-black);
+  border: 1px solid color-mix(in srgb, var(--color-ink-black) 14%, transparent);
+  backdrop-filter: blur(1px);
+  mix-blend-mode: multiply;
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  cursor: default;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.12;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  &.is-active {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    z-index: 5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--mat-sys-primary);
+    outline-offset: 2px;
+  }
+}
+
+.circle-label {
+  position: absolute;
+  z-index: 6;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.circle-top {
+  left: 150px;
+  top: 85px;
+  background: rgba(213, 85, 95, 0.28);
+}
+
+.circle-right {
+  left: 220px;
+  top: 155px;
+  background: rgba(243, 162, 63, 0.28);
+}
+
+.circle-bottom {
+  left: 150px;
+  top: 225px;
+  background: rgba(119, 192, 147, 0.28);
+}
+
+.circle-left {
+  left: 80px;
+  top: 155px;
+  background: rgba(121, 145, 216, 0.28);
+}
+
+.label-top {
+  left: 260px;
+  top: 58px;
+  width: 210px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.label-right {
+  left: 445px;
+  top: 252px;
+  width: 155px;
+  transform: translateY(-50%);
+  text-align: left;
+}
+
+.label-bottom {
+  left: 140px;
+  top: 440px;
+  width: 230px;
+  text-align: center;
+}
+
+.label-left {
+  left: -72px;
+  top: 252px;
+  width: 140px;
+  transform: translateY(-50%);
+  text-align: right;
+}
+
+.tooltip-text {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .venn-wrap {
+    height: 380px;
+    max-width: 340px;
+  }
+
+  .venn-circle {
+    width: 140px;
+    height: 140px;
+  }
+
+  .circle-top {
+    left: 100px;
+    top: 80px;
+  }
+
+  .circle-right {
+    left: 160px;
+    top: 140px;
+  }
+
+  .circle-bottom {
+    left: 100px;
+    top: 200px;
+  }
+
+  .circle-left {
+    left: 40px;
+    top: 140px;
+  }
+
+  .circle-label {
+    font-size: 0.78rem;
+  }
+
+
+  .label-top {
+    left: 170px;
+    top: 58px;
+    width: 170px;
+    transform: translateX(-50%);
+  }
+
+  .label-right {
+    left: 314px;
+    top: 210px;
+    width: 118px;
+  }
+
+  .label-bottom {
+    left: 75px;
+    top: 360px;
+    width: 190px;
+  }
+
+  .label-left {
+    left: -56px;
+    top: 210px;
+    width: 100px;
+  }
+
+  .venn-tooltip { width: 150px; padding: 9px 12px; }
+
+  // mobile circle positions: size 140px
+  // top: left:100 top:80 → bottom 220, center-x 170
+  .tooltip-behavioralEconomics { top: 228px; left: 95px; }
+  // right: left:160 top:140 → center-y 210, left-x 160
+  .tooltip-softwareEngineering { top: 170px; left: 5px; }
+  // bottom: left:100 top:200 → top-y 200, center-x 170
+  .tooltip-aiMlDataScience     { top: 112px; left: 95px; }
+  // left: left:40 top:140 → right-x 180, center-y 210
+  .tooltip-causalInference     { top: 170px; left: 188px; }
+}

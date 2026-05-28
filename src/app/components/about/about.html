@@ -1,0 +1,59 @@
+<div class="about-layout">
+  <aside class="profile-photo">
+    <img src="img/pp.jpg" alt="Ali Seyhun Saral" class="photo" />
+
+    <h3 class="profiles-heading">Public Profiles</h3>
+    <div class="profiles-grid">
+      @for (profile of profiles; track profile.label) {
+        <a class="profile-item" [href]="profile.url" target="_blank" rel="noopener">
+          <fa-icon [icon]="profile.icon" size="lg"></fa-icon>
+          <span class="profile-text">
+            <span class="profile-label">{{ profile.label }}</span>
+            <span class="profile-handle">{{ profile.handle }}</span>
+          </span>
+        </a>
+      }
+    </div>
+  </aside>
+
+  <main class="bio" style="text-align: justify;">
+    <h2>Hi, I'm Ali Seyhun.</h2>
+
+    <p>
+      I'm a <span class="bio-highlight">Data and Behavioral Scientist</span> working at the
+      intersection of human behavior and data-driven decision-making, currently at the
+      <a href="https://unsceb.org" target="_blank" rel="noopener">CEB Secretariat, United Nations Common System</a>.
+    </p>
+    <p>
+      As an economist with a data science and software developer skill set, I build statistical
+      models for analysis and prediction, develop data pipelines, software, and dashboards, create
+      machine-learning and LLM-supported tools, and design causal inference strategies and experiments to understand human behavior and inform policy.
+    </p>
+
+    <p>
+      I come from an academic background. I hold a PhD in Economics and Management from the University of Trento, Italy.
+      After my doctorate, I worked as a researcher and lab manager at institutions such as
+      the Max Planck Institute, the University of Bologna, and the
+      Institute for Advanced Study in Toulouse. <span class="bio-see-also">(See <a href="#experience">Experience</a> section for details.)</span>
+    </p>
+
+    <p>
+      I have an <span class="bio-highlight">interdisciplinary approach to human behavior</span> and applications of its reseach on industry and policy. For my research, I had the opportunity to collaborate with brilliant researchers from various disciplines, including economists,
+      psychologists, anthropologists, biologists, computer scientists, and mathematicians.
+      Together with my co-authors, I have published work on cooperation, reciprocity,
+      group decision-making, social learning, cultural evolution, and the economics of
+      inequality and migration, on various impactful multidisciplinary and specialized journals <span class="bio-see-also">(See <a href="#research">Research</a> section for details.)</span> 
+    </p>
+
+    <p>
+      I am an experimentalist by training (and by heart) but my work draws on methods from various fields such as microeconomics, applied economics, causal inference, game theory, evolutionary biology, agent-based modeling, and social choice theory.
+    </p>
+
+
+
+    <mat-divider></mat-divider>
+  </main>
+</div>
+
+<app-expertise-venn></app-expertise-venn>
+

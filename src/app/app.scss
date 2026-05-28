@@ -1,0 +1,13 @@
+:host {
+	display: block;
+}
+
+.page-section {
+	scroll-margin-top: 80px;
+}
+
+.page-section + .page-section {
+	margin-top: 24px;
+	padding-top: 24px;
+	border-top: 1px solid var(--mat-sys-outline-variant);
+}

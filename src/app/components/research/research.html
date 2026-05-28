@@ -1,0 +1,17 @@
+<h1>Research</h1>
+
+<h2>Publications</h2>
+<div class="papers-list">
+  @for (paper of publications; track paper.title) {
+    <app-paper-card [paper]="paper" />
+  }
+</div>
+
+<h2>Work in Progress</h2>
+<div class="papers-list">
+  @for (paper of workInProgress; track paper.title) {
+    <app-paper-card [paper]="paper" />
+  }
+</div>
+
+

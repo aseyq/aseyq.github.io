@@ -1,0 +1,27 @@
+title: "The roles of cultural transmission and causal reasoning in the cultural evolution of technology"
+coauthors: "with Paula Ibáñez De Aldecoa and Maxime Derex"
+venue: "PNAS Nexus"
+year: 2026
+month: 3
+category: publication
+status: published
+citation: "PNAS Nexus, 5(4), pgag090 (2026)"
+shortRef: "Saral AS, Ibáñez De Aldecoa P, Derex M (2026)"
+bibtex: |
+  @article{saral2026roles,
+    title     = {The roles of cultural transmission and causal reasoning in the cultural evolution of technology},
+    author    = {Saral, Ali Seyhun and Ib{\'a}{\~n}ez De Aldecoa, Paula and Derex, Maxime},
+    journal   = {PNAS Nexus},
+    volume    = {5},
+    number    = {4},
+    pages     = {pgag090},
+    year      = {2026},
+    publisher = {Oxford University Press},
+    doi       = {10.1093/pnasnexus/pgag090}
+  }
+links:
+  paper:
+    url: "https://doi.org/10.1093/pnasnexus/pgag090"
+    doi: "10.1093/pnasnexus/pgag090"
+    cover: "img/papers/2026-nexus-cover.png"
+  supplementary: "https://github.com/aseyq/causal-reasoning"

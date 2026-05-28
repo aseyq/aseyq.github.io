@@ -1,0 +1,94 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+// Custom palette
+:root {
+  --color-ink-black:      #001514;
+  --color-white:          #fbfffe;
+  --color-dark-garnet:    #6b0504;
+  --color-rust-brown:     #a3320b;
+  --color-sunflower-gold: #e6af2e;
+}
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  // Override Material CSS variables with our custom palette
+  --mat-sys-primary:              #a3320b;
+  --mat-sys-on-primary:           #fbfffe;
+  --mat-sys-primary-container:    #e6af2e;
+  --mat-sys-on-primary-container: #001514;
+  --mat-sys-surface:              #fbfffe;
+  --mat-sys-surface-variant:      #f2ebe8;
+  --mat-sys-on-surface-variant:   #4a3a35;
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--color-white);
+  color: var(--color-ink-black);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
+
+main {
+  padding-top: 64px; // offset for fixed navbar
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+a {
+  color: var(--color-rust-brown);
+}
+
+// Allow tooltips to overflow from cards
+mat-card.paper-card,
+mat-card.paper-card .mat-mdc-card-actions,
+mat-card.paper-card [mat-card-actions] {
+  overflow: visible !important;
+}
+
+app-link-tooltip {
+  display: inline-block;
+}
+
+.page-section h1 {
+  color: var(--color-dark-garnet);
+  font-size: clamp(1.85rem, 2.8vw, 2.4rem);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.page-section h2 {
+  color: var(--color-rust-brown);
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  line-height: 1.25;
+  letter-spacing: 0.005em;
+  margin-bottom: 0.5rem;
+}
+
+.bibtex-tooltip {
+  font-family: monospace;
+  font-size: 0.75rem;
+  white-space: pre;
+  max-width: 420px !important;
+}
+
