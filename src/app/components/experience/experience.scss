@@ -1,0 +1,76 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 0;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--mat-sys-surface-variant);
+
+  &:hover {
+    background: var(--mat-sys-surface-container-high);
+  }
+}
+
+.logo-col {
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: var(--color-white);
+}
+
+.inst-logo {
+  max-width: 86px;
+  max-height: 86px;
+  object-fit: contain;
+  transition: transform 120ms ease-out;
+}
+
+.timeline-item:hover .inst-logo {
+  transform: scale(1.12);
+}
+
+.info-col {
+  h3 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .role {
+    margin: 0 0 2px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .period {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .location {
+    margin: 4px 0 0;
+    font-size: 0.82rem;
+    color: color-mix(in srgb, var(--mat-sys-on-surface-variant) 78%, transparent);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      color: inherit;
+    }
+  }
+}

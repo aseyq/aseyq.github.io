@@ -1,0 +1,25 @@
+title: "The stability of conditional cooperation: beliefs alone cannot explain the decline of cooperation in social dilemmas"
+coauthors: "with Luciano Andreozzi and Matteo Ploner"
+venue: "Scientific Reports"
+year: 2020
+category: publication
+status: published
+citation: "Scientific Reports, 10, 13610 (2020)"
+shortRef: "Andreozzi L, Ploner M, Saral AS (2020)"
+bibtex: |
+  @article{andreozzi2020stability,
+    title     = {The stability of conditional cooperation: beliefs alone cannot explain the decline of cooperation in social dilemmas},
+    author    = {Andreozzi, Luciano and Ploner, Matteo and Saral, Ali Seyhun},
+    journal   = {Scientific Reports},
+    volume    = {10},
+    pages     = {13610},
+    year      = {2020},
+    publisher = {Nature Publishing Group},
+    doi       = {10.1038/s41598-020-70681-z}
+  }
+links:
+  paper:
+    url: "https://www.nature.com/articles/s41598-020-70681-z"
+    doi: "10.1038/s41598-020-70681-z"
+    cover: "img/papers/2020-scirep-cover.png"
+  supplementary: "https://github.com/seyhunsaral/stabilitycondcoop"

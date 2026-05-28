@@ -1,0 +1,25 @@
+title: "Direct and indirect reciprocity among individuals and groups"
+coauthors: "with Angelo Romano and Junhui Wu"
+venue: "Current Opinion in Psychology"
+year: 2022
+category: publication
+status: published
+tag: "Review paper"
+citation: "Current Opinion in Psychology, 43, 254-259 (2022)"
+shortRef: "Romano A, Saral AS, Wu J (2022)"
+bibtex: |
+  @article{romano2022direct,
+    title     = {Direct and indirect reciprocity among individuals and groups},
+    author    = {Romano, Angelo and Saral, Ali Seyhun and Wu, Junhui},
+    journal   = {Current Opinion in Psychology},
+    volume    = {43},
+    pages     = {254--259},
+    year      = {2022},
+    publisher = {Elsevier},
+    doi       = {10.1016/j.copsyc.2021.08.003}
+  }
+links:
+  paper:
+    url: "https://www.sciencedirect.com/science/article/pii/S2352250X21001366"
+    doi: "10.1016/j.copsyc.2021.08.003"
+    cover: "img/papers/2022-cop-cover.gif"

@@ -1,0 +1,26 @@
+title: "Reciprocity evolves more readily in competitive than cooperative socio-ecologies"
+coauthors: "with Angelo Romano and Carsten K. W. De Dreu"
+venue: "Proceedings of the Royal Society B: Biological Sciences"
+year: 2025
+category: publication
+status: published
+citation: "Proceedings of the Royal Society B, 292(2050), 20250973 (2025)"
+shortRef: "Romano A, Saral AS, De Dreu CKW (2025)"
+bibtex: |
+  @article{romano2025reciprocity,
+    title     = {Reciprocity evolves more readily in competitive than cooperative socio-ecologies},
+    author    = {Romano, Angelo and Saral, Ali Seyhun and De Dreu, Carsten K. W.},
+    journal   = {Proceedings of the Royal Society B: Biological Sciences},
+    volume    = {292},
+    number    = {2050},
+    pages     = {20250973},
+    year      = {2025},
+    publisher = {The Royal Society},
+    doi       = {10.1098/rspb.2025.0973}
+  }
+links:
+  paper:
+    url: "https://doi.org/10.1098/rspb.2025.0973"
+    doi: "10.1098/rspb.2025.0973"
+    cover: "img/papers/2025-rspb-cover.gif"
+  supplementary: "https://datadryad.org/dataset/doi:10.5061/dryad.bcc2fqzrb"

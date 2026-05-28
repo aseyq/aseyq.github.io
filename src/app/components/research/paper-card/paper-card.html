@@ -1,0 +1,49 @@
+<mat-card class="paper-card">
+  <div class="card-header">
+    @if (paper().status) {
+      <span class="status-badge status-{{ paper().status }}">{{ statusLabel[paper().status!] }}</span>
+    }
+    @if (paper().tag) {
+      <p class="eyebrow">{{ paper().tag }}</p>
+    }
+    <p class="card-title">{{ paper().title }}</p>
+    <p class="card-subtitle">{{ paper().coauthors }}</p>
+    @if (paper().venue) {
+      <p class="card-subtitle"><em>{{ paper().venue }}@if (paper().year) { ({{ paper().year }}) }</em></p>
+    }
+  </div>
+
+  @if (paper().links?.paper || paper().links?.supplementary || paper().links?.workingPaper || getDoi() || paper().bibtex) {
+    <mat-card-actions>
+      @let pl = paperLink(paper().links);
+      @if (pl) {
+        <app-link-tooltip [url]="pl.url" label="Paper" [doi]="pl.doi" [cover]="pl.cover" [citation]="paper().citation" [shortRef]="paper().shortRef" [title]="paper().title">
+          <a mat-stroked-button [href]="pl.url" target="_blank" rel="noopener">
+            <mat-icon>article</mat-icon> Paper
+          </a>
+        </app-link-tooltip>
+      }
+      @if (paper().links?.supplementary) {
+        <a mat-stroked-button [href]="paper().links!.supplementary" target="_blank" rel="noopener">
+          <mat-icon>folder_open</mat-icon> Supplementary Materials
+        </a>
+      }
+      @if (paper().links?.workingPaper) {
+        <a mat-stroked-button [href]="paper().links!.workingPaper" target="_blank" rel="noopener">
+          <mat-icon>description</mat-icon> Working Paper
+        </a>
+      }
+      @if (getDoi()) {
+        <button mat-stroked-button (click)="copyDoi()" [matTooltip]="getDoi()!" matTooltipShowDelay="300">
+          <mat-icon>content_copy</mat-icon> Copy DOI
+        </button>
+      }
+      @if (paper().bibtex) {
+        <button mat-stroked-button (click)="copyBibtex()" [matTooltip]="bibtexPreview()" matTooltipShowDelay="300" matTooltipClass="bibtex-tooltip">
+          <mat-icon>format_quote</mat-icon> Copy BibTeX
+        </button>
+      }
+    </mat-card-actions>
+  }
+</mat-card>
+

@@ -1,0 +1,52 @@
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 0;
+}
+
+.project-card {
+  .card-inner {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .card-text {
+    flex: 1;
+  }
+
+  .card-cover {
+    flex-shrink: 0;
+
+    .book-cover {
+      max-height: 220px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  mat-card-content {
+    p { margin-top: 8px; line-height: 1.6; }
+    mat-chip-set { margin-bottom: 8px; }
+  }
+
+  mat-card-actions {
+    padding: 0 16px 16px;
+  }
+}
+
+.github-note {
+  margin-top: 16px;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+@media (max-width: 600px) {
+  .project-card .card-inner {
+    flex-direction: column-reverse;
+  }
+
+  .card-cover .book-cover {
+    max-height: 160px;
+  }
+}
