@@ -13,14 +13,12 @@
   --color-ink-black:      #001514;
   --color-white:          #fbfffe;
   --color-dark-garnet:    #6b0504;
-  --color-rust-brown:     #a3320b;
   --color-sunflower-gold: #e6af2e;
 
   // Semantic aliases — use these everywhere instead of raw palette / mat vars
-  --accent:        var(--color-rust-brown);   // links, icons, accents
+  --accent:        var(--color-dark-garnet);  // links, icons, accents
   --accent-soft:   color-mix(in srgb, var(--accent) 12%, transparent);
   --heading:       var(--color-dark-garnet);  // section h1
-  --gold:          var(--color-sunflower-gold);
 
   // Font (single sans-serif family throughout; headings differ by weight only)
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -67,7 +65,7 @@ html {
   );
 
   // Override Material CSS variables with our custom palette
-  --mat-sys-primary:              #a3320b;
+  --mat-sys-primary:              #6b0504;
   --mat-sys-on-primary:           #fbfffe;
   --mat-sys-primary-container:    #e6af2e;
   --mat-sys-on-primary-container: #001514;
