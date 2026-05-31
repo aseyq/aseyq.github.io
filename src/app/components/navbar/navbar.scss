@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-white) 12%, transparent);
   --mat-toolbar-container-background-color: var(--color-dark-garnet);
   --mat-toolbar-container-text-color: var(--color-white);
 }
@@ -18,8 +19,10 @@
 }
 
 .brand-name {
-  font-size: 1.2rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
   font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .brand-title {

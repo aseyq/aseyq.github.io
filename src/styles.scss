@@ -5,13 +5,50 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-// Custom palette
+// ---------------------------------------------------------------------------
+// Design tokens
+// ---------------------------------------------------------------------------
 :root {
+  // Brand palette
   --color-ink-black:      #001514;
   --color-white:          #fbfffe;
   --color-dark-garnet:    #6b0504;
   --color-rust-brown:     #a3320b;
   --color-sunflower-gold: #e6af2e;
+
+  // Semantic aliases — use these everywhere instead of raw palette / mat vars
+  --accent:        var(--color-rust-brown);   // links, icons, accents
+  --accent-soft:   color-mix(in srgb, var(--accent) 12%, transparent);
+  --heading:       var(--color-dark-garnet);  // section h1
+  --gold:          var(--color-sunflower-gold);
+
+  // Fonts
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  // Spacing scale
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  // Radius scale
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  // Motion
+  --transition: 150ms ease;
+
+  // Elevation
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 22px rgba(0, 0, 0, 0.12);
+
+  // Layout
+  --content-max: 900px;
 }
 
 html {
@@ -41,21 +78,100 @@ body {
   color-scheme: light;
   background-color: var(--color-white);
   color: var(--color-ink-black);
-  font: var(--mat-sys-body-medium);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
   margin: 0;
   height: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 main {
   padding-top: 64px; // offset for fixed navbar
-  max-width: 900px;
+  max-width: var(--content-max);
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
 }
 
 a {
-  color: var(--color-rust-brown);
+  color: var(--accent);
+}
+
+// ---------------------------------------------------------------------------
+// Typography
+// ---------------------------------------------------------------------------
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+// ---------------------------------------------------------------------------
+// Shared section header (used by every page section)
+// ---------------------------------------------------------------------------
+.section-header {
+  margin-bottom: var(--space-4);
+
+  .eyebrow {
+    display: inline-block;
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  h1 {
+    color: var(--heading);
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin-top: var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+  }
+}
+
+// Sub-headings within a section (e.g. Publications / Work in Progress)
+.page-section h2 {
+  color: var(--accent);
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  line-height: 1.25;
+  margin: 0 0 var(--space-3);
+}
+
+// ---------------------------------------------------------------------------
+// Shared surface / card style (global utility classes — usable in any template)
+// ---------------------------------------------------------------------------
+.surface {
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--radius-md);
+  background: var(--mat-sys-surface);
+  transition:
+    border-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.surface-interactive {
+  @extend .surface;
+
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 // Allow tooltips to overflow from cards
@@ -69,26 +185,9 @@ app-link-tooltip {
   display: inline-block;
 }
 
-.page-section h1 {
-  color: var(--color-dark-garnet);
-  font-size: clamp(1.85rem, 2.8vw, 2.4rem);
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  margin-bottom: 0.75rem;
-}
-
-.page-section h2 {
-  color: var(--color-rust-brown);
-  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
-  line-height: 1.25;
-  letter-spacing: 0.005em;
-  margin-bottom: 0.5rem;
-}
-
 .bibtex-tooltip {
   font-family: monospace;
   font-size: 0.75rem;
   white-space: pre;
   max-width: 420px !important;
 }
-

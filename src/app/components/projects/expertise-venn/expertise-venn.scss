@@ -1,19 +1,15 @@
 .expertise-chart {
-  margin-top: 28px;
-
-  h2 {
-    margin: 0 0 12px;
-  }
+  margin-top: var(--space-5);
 }
 
 .expertise-intro {
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-2);
   max-width: 760px;
   line-height: 1.6;
   color: var(--mat-sys-on-surface-variant);
 
   &:last-of-type {
-    margin-bottom: 16px;
+    margin-bottom: var(--space-3);
   }
 }
 

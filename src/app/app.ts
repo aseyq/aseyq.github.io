@@ -18,4 +18,5 @@ import { siteConfig } from './site.config';
 export class App {
   readonly maintenanceMode = siteConfig.maintenanceMode;
   readonly maintenanceMessage = siteConfig.maintenanceMessage;
+  readonly year = new Date().getFullYear();
 }
