@@ -3,17 +3,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAws, faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 import {
   IconDefinition,
-  faSquareRootVariable,
   faPlug,
   faRightLeft,
   faFlask,
   faVialCircleCheck,
   faUsers,
   faUserGroup,
-  faChartLine,
   faDice,
   faTableList,
-  faTableColumns,
+  faMicrochip,
   faNetworkWired,
   faDatabase,
 } from '@fortawesome/free-solid-svg-icons';
@@ -48,24 +46,24 @@ export class Skills {
         { name: 'JavaScript / TypeScript', logo: LOGO('typescript') },
       ],
       more: [
-        { name: 'MATLAB', icon: faSquareRootVariable },
         { name: 'Rust', logo: LOGO('rust') },
         { name: 'PHP', logo: LOGO('php') },
-        { name: 'Mathematica', logo: LOGO('wolframmathematica') },
       ],
     },
     {
-      title: 'Statistics, Data & Visualization',
+      title: 'Stats, Maths, & Data',
       preview: [
         { name: 'tidyverse / ggplot2', logo: LOGO('tidyverse') },
         { name: 'pandas / NumPy', logo: LOGO('pandas') },
-        { name: 'Stata', icon: faChartLine },
+        { name: 'Stata', logo: LOGO('stata') },
       ],
       more: [
+        { name: 'MATLAB', logo: LOGO('matlab') },
+        { name: 'Mathematica', logo: LOGO('wolframmathematica') },
         { name: 'Stan / brms', icon: faDice },
         { name: 'Polars', logo: LOGO('polars') },
         { name: 'data.table', icon: faTableList },
-        { name: 'Apache Arrow', icon: faTableColumns },
+        { name: 'Apache Arrow', logo: LOGO('apachearrow') },
         { name: 'Jupyter', logo: LOGO('jupyter') },
         { name: 'Shiny', logo: LOGO('posit') },
         { name: 'D3.js', logo: LOGO('d3') },
@@ -82,6 +80,7 @@ export class Skills {
         { name: 'OpenAI / Anthropic API', logo: LOGO('anthropic') },
         { name: 'LangChain / LlamaIndex', logo: LOGO('langchain') },
         { name: 'Ollama', logo: LOGO('ollama') },
+        { name: 'llama.cpp', icon: faMicrochip },
       ],
     },
     {

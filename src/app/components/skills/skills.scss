@@ -128,8 +128,9 @@
   }
 
   .skill-logo {
-    width: 1.05rem;
     height: 1.05rem;
+    width: auto;
+    max-width: 4.5rem;
     object-fit: contain;
     flex: 0 0 auto;
   }
