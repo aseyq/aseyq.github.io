@@ -1,59 +1,64 @@
-# AseyqWebsite
+# aseyq.github.io
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+Personal academic website built with Angular 21 (SSR/prerendered) and deployed as a
+static site to GitHub Pages at [aseyq.github.io](https://aseyq.github.io). Uses Angular
+Material and FontAwesome.
 
-## Development server
-
-To start a local development server, run:
+## Setup
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Development
 
 ```bash
-ng generate component component-name
+npm start          # regenerates papers data, then serves at http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The app reloads automatically when you change source files.
+
+## Editing papers
+
+Publications and works-in-progress are generated from YAML files, not edited directly
+in TypeScript:
+
+1. Edit / add files in `src/data/papers/` (`pub-*.yaml` for publications, `wip-*.yaml`
+   for works-in-progress). The fields must match the `Paper` interface in
+   `src/app/components/research/paper-card/paper-card.ts`.
+2. Regenerate the data:
+   ```bash
+   npm run generate   # writes src/app/data/papers.generated.ts
+   ```
+   (`npm start` and `npm run build` run this automatically.)
+3. **Commit the regenerated `src/app/data/papers.generated.ts`** along with the YAML —
+   the deploy build does not regenerate it (see Deployment below).
+
+## Testing
+
+Unit tests run with [Vitest](https://vitest.dev/) via the Angular build system.
 
 ```bash
-ng generate --help
+npm test                                     # run all unit tests
+npx ng test --include src/app/app.spec.ts    # run a single spec file
 ```
 
 ## Building
 
-To build the project run:
-
 ```bash
-ng build
+npm run build      # regenerates papers data, then production build into dist/
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The static site to deploy is the prerendered browser output in
+`dist/aseyq-website/browser`.
 
-## Running unit tests
+## Deployment
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Deployment is automatic via GitHub Actions (`.github/workflows/deploy.yml`): every push
+to `main` builds the site and publishes `dist/aseyq-website/browser` to GitHub Pages.
 
-```bash
-ng test
-```
+> **Note:** the CI workflow runs `npx ng build` directly, which does **not** run the
+> papers generate step. Always commit an up-to-date `src/app/data/papers.generated.ts`,
+> otherwise the deployed site will show stale paper data.
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The custom domain is configured via the `CNAME` file.

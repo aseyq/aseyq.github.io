@@ -15,15 +15,15 @@ export class ExpertiseVenn {
     'default' | 'behavioralEconomics' | 'causalInference' | 'aiMlDataScience' | 'softwareEngineering',
     string
   > = {
-    default: 'Hover over a circle to see how each domain contributes to my work.',
+    default: '',
     behavioralEconomics:
-      'Behavioral economics grounds my research questions in how people actually make decisions under social and strategic contexts.',
+      'Behavioral economics frames my questions around how people really decide — cooperation, reciprocity, social preferences, and norms in strategic and social settings.',
     causalInference:
-      'Causal inference helps identify what interventions and mechanisms drive observed outcomes, beyond simple correlations.',
+      'I design lab and online experiments, and synthesize many of them through meta-analysis, to isolate the mechanisms behind behavior rather than settle for correlations.',
     aiMlDataScience:
-      'AI/ML and data science provide scalable modeling, prediction, and pattern-discovery tools for rich experimental and observational data.',
+      'Statistical modeling, machine learning, and agent-based and evolutionary simulations let me analyze rich experimental and large multi-lab data, predict, and uncover patterns.',
     softwareEngineering:
-      'Software engineering turns methods into robust, reusable tools and interactive systems that researchers and teams can rely on.',
+      'I build the tools the research runs on — experimental software, data pipelines, and dashboards that teams can reuse and rely on.',
   };
 
   setActiveDomain(domain: 'behavioralEconomics' | 'causalInference' | 'aiMlDataScience' | 'softwareEngineering') {
