@@ -1,4 +1,18 @@
-<h1>Contact</h1>
+<div class="contact-card">
+  <p class="contact-line">
+    For requests, comments, collaboration proposals, or questions, feel free to reach out.
+  </p>
 
-<p class="contact-line">For requests, comments, collaboration proposals or questions: seyhunsaral&#64;gmail.com</p>
+  <a class="email-action" [href]="'mailto:' + email">
+    <fa-icon [icon]="emailIcon"></fa-icon>
+    <span>{{ email }}</span>
+  </a>
 
+  <div class="contact-links">
+    @for (link of links; track link.label) {
+      <a class="contact-link" [href]="link.url" target="_blank" rel="noopener" [attr.aria-label]="link.label">
+        <fa-icon [icon]="link.icon" size="lg"></fa-icon>
+      </a>
+    }
+  </div>
+</div>

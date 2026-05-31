@@ -1,19 +1,22 @@
-<h1>Experience & Education</h1>
-
 <div class="timeline">
   @for (pos of positions; track pos.institution) {
     <div class="timeline-item">
-      <div class="logo-col">
-        <img [src]="pos.logo" [alt]="pos.institution" class="inst-logo" />
+      <div class="timeline-marker">
+        <span class="timeline-dot"></span>
       </div>
-      <div class="info-col">
-        <h3>{{ pos.institution }}</h3>
-        <p class="role">{{ pos.role }}</p>
-        <p class="period">{{ pos.period }}</p>
-        <p class="location">
-          <mat-icon>location_on</mat-icon>
-          {{ pos.city }}
-        </p>
+      <div class="timeline-card">
+        <div class="logo-col">
+          <img [src]="pos.logo" [alt]="pos.institution" class="inst-logo" />
+        </div>
+        <div class="info-col">
+          <h3>{{ pos.institution }}</h3>
+          <p class="role">{{ pos.role }}</p>
+          <p class="period">{{ pos.period }}</p>
+          <p class="location">
+            <mat-icon>location_on</mat-icon>
+            {{ pos.city }}
+          </p>
+        </div>
       </div>
     </div>
   }

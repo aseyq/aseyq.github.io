@@ -1,13 +1,5 @@
-.skills {
-  margin-top: 36px;
-
-  h2 {
-    margin: 0 0 8px;
-  }
-}
-
 .skills-intro {
-  margin: 0 0 22px;
+  margin: 0 0 var(--space-4);
   max-width: 760px;
   line-height: 1.6;
   color: var(--mat-sys-on-surface-variant);
@@ -16,15 +8,20 @@
 .skills-categories {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
   max-width: 760px;
 }
 
 .skill-category {
-  border: 1px solid color-mix(in srgb, var(--color-rust-brown) 14%, transparent);
-  border-radius: 12px;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--radius-md);
   background: var(--mat-sys-surface-variant);
   overflow: hidden;
+  transition: border-color var(--transition);
+
+  &[open] {
+    border-color: var(--accent-soft);
+  }
 }
 
 .skill-summary {
@@ -38,7 +35,7 @@
   }
 
   &:hover {
-    background: color-mix(in srgb, var(--color-rust-brown) 6%, transparent);
+    background: var(--accent-soft);
   }
 }
 
@@ -50,7 +47,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-rust-brown);
+  color: var(--accent);
 
   // custom chevron (points down when collapsed)
   &::after {
@@ -79,15 +76,15 @@
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
-  color: var(--color-rust-brown);
-  background: color-mix(in srgb, var(--color-rust-brown) 10%, transparent);
-  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: var(--radius-pill);
   padding: 2px 10px;
-  transition: background 120ms ease;
+  transition: background var(--transition);
 }
 
 .skill-summary:hover .skill-toggle {
-  background: color-mix(in srgb, var(--color-rust-brown) 18%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 .toggle-less {
@@ -119,17 +116,18 @@
   align-items: center;
   gap: 8px;
   padding: 8px 13px;
-  border: 1px solid color-mix(in srgb, var(--color-rust-brown) 14%, transparent);
-  border-radius: 999px;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--radius-pill);
   background: var(--mat-sys-surface);
   font-size: 0.9rem;
   line-height: 1;
   transition:
-    transform 120ms ease,
-    box-shadow 120ms ease;
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
 
   fa-icon {
-    color: var(--color-rust-brown);
+    color: var(--accent);
     font-size: 1.05rem;
   }
 
@@ -142,7 +140,8 @@
 
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
   }
 }
 
