@@ -19,8 +19,8 @@
   overflow: hidden;
   transition: border-color var(--transition);
 
-  &[open] {
-    border-color: var(--accent-soft);
+  &:hover {
+    border-color: var(--accent);
   }
 }
 
@@ -32,10 +32,6 @@
 
   &::-webkit-details-marker {
     display: none;
-  }
-
-  &:hover {
-    background: var(--accent-soft);
   }
 }
 

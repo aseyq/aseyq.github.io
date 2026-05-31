@@ -22,9 +22,9 @@
   --heading:       var(--color-dark-garnet);  // section h1
   --gold:          var(--color-sunflower-gold);
 
-  // Fonts
-  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  // Fonts (sans-serif throughout)
   --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-body);
 
   // Spacing scale
   --space-1: 4px;
@@ -104,7 +104,8 @@ a {
 // ---------------------------------------------------------------------------
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 // ---------------------------------------------------------------------------
