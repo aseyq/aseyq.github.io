@@ -11,3 +11,25 @@
 	padding-top: 24px;
 	border-top: 1px solid var(--mat-sys-outline-variant);
 }
+
+.maintenance {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 24px;
+	text-align: center;
+}
+
+.maintenance-card {
+	max-width: 480px;
+
+	h1 {
+		margin: 0 0 12px;
+	}
+
+	p {
+		margin: 0;
+		color: var(--mat-sys-on-surface-variant);
+	}
+}

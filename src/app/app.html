@@ -1,26 +1,39 @@
-<app-navbar></app-navbar>
-<main>
-  <section id="about" class="page-section">
-    <app-about></app-about>
-  </section>
+@if (maintenanceMode) {
+  <main class="maintenance">
+    <div class="maintenance-card">
+      <h1>Under maintenance</h1>
+      <p>{{ maintenanceMessage }}</p>
+    </div>
+  </main>
+} @else {
+  <app-navbar></app-navbar>
+  <main>
+    <section id="about" class="page-section">
+      <app-about></app-about>
+    </section>
 
-  <section id="research" class="page-section">
-    <app-research></app-research>
-  </section>
+    <section id="research" class="page-section">
+      <app-research></app-research>
+    </section>
 
-  <section id="experience" class="page-section">
-    <app-experience></app-experience>
-  </section>
+    <section id="experience" class="page-section">
+      <app-experience></app-experience>
+    </section>
 
-  <!-- <section id="projects" class="page-section">
-    <app-projects></app-projects>
-  </section> -->
+    <!-- <section id="projects" class="page-section">
+      <app-projects></app-projects>
+    </section> -->
 
-  <section id="teaching" class="page-section">
-    <app-teaching></app-teaching>
-  </section>
+    <section id="teaching" class="page-section">
+      <app-teaching></app-teaching>
+    </section>
 
-  <section id="contact" class="page-section">
-    <app-contact></app-contact>
-  </section>
-</main>
+    <section id="skills" class="page-section">
+      <app-skills></app-skills>
+    </section>
+
+    <section id="contact" class="page-section">
+      <app-contact></app-contact>
+    </section>
+  </main>
+}
