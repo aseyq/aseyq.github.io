@@ -9,11 +9,11 @@
   background: var(--mat-sys-surface);
 
   th {
-    background: var(--accent);
-    color: var(--color-white);
+    background: var(--mat-sys-surface-variant);
+    color: var(--mat-sys-on-surface);
     font-weight: 600;
     font-size: 0.95rem;
-    letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
   }
 
   td, th {
