@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
 
 export interface TeachingItem {
   title: string;
@@ -11,13 +10,10 @@ export interface TeachingItem {
 
 @Component({
   selector: 'app-teaching',
-  imports: [MatTableModule],
   templateUrl: './teaching.html',
   styleUrl: './teaching.scss',
 })
 export class Teaching {
-  displayedColumns = ['title', 'institution', 'year', 'location'];
-
   courses: TeachingItem[] = [
     { title: 'Introduction to Python & Experiments with oTree', url: 'https://github.com/aseyq/imprs',          institution: 'International Max Planck Research Schools (IMPRS) Summer School', year: '2023', location: 'Immenstaad, Germany' },
     { title: 'Games and Agents: Agent-Based Modeling',          url: 'https://github.com/aseyq/leidensim',       institution: 'Leiden University, Conflict and Cooperation Laboratory',           year: '2022', location: 'Leiden, Netherlands' },
