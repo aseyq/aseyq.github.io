@@ -7,7 +7,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LinkTooltip } from '../link-tooltip/link-tooltip';
 
-export type PaperStatus = 'published' | 'accepted' | 'revise-and-resubmit' | 'in-submission' | 'draft' | 'data-collection' | 'design-stage' | 'dormant';
+export type PaperStatus = 'published' | 'accepted' | 'conditional-acceptance' | 'revise-and-resubmit' | 'in-submission' | 'draft' | 'data-collection' | 'design-stage' | 'dormant';
 
 export interface Paper {
   title: string;
@@ -18,6 +18,7 @@ export interface Paper {
   status?: PaperStatus;
   category: 'publication' | 'wip';
   tag?: string;
+  note?: string;
   citation?: string;
   shortRef?: string;
   bibtex?: string;
@@ -31,6 +32,7 @@ export interface Paper {
 export const STATUS_LABEL: Record<PaperStatus, string> = {
   'published':          'Published',
   'accepted':           'Accepted',
+  'conditional-acceptance': 'Accepted',
   'revise-and-resubmit': 'Revision requested',
   'in-submission':      'In submission',
   'draft':              'Writing paper',
