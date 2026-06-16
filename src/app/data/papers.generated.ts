@@ -4,6 +4,15 @@ import { Paper } from '../components/research/paper-card/paper-card';
 
 export const publications: Paper[] = [
   {
+    "title": "The emergence and cultural persistence of ineffective solutions",
+    "coauthors": "with Manvir Singh, Antoine Jacquet, Haneul Jang, Maxime Derex",
+    "category": "publication",
+    "status": "conditional-acceptance",
+    "year": 2026,
+    "month": 12,
+    "note": "Conditionally accepted by <em>Nature Communications</em>"
+  },
+  {
     "title": "The roles of cultural transmission and causal reasoning in the cultural evolution of technology",
     "coauthors": "with Paula Ibáñez De Aldecoa and Maxime Derex",
     "venue": "PNAS Nexus",
@@ -142,12 +151,6 @@ export const publications: Paper[] = [
 
 export const workInProgress: Paper[] = [
   {
-    "title": "The Evolution of cognitively appealing practices",
-    "coauthors": "with Manvir Singh, Antoine Jacquet, Haneul Jang, Maxime Derex",
-    "category": "wip",
-    "status": "revise-and-resubmit"
-  },
-  {
     "title": "Generating representative preferences: An algorithm to enumerate root profiles",
     "coauthors": "with Fatma Aslan, Sebastian Kanunzinger and Jochen Staudacher",
     "category": "wip",
@@ -158,12 +161,6 @@ export const workInProgress: Paper[] = [
     "coauthors": "with Annika Hennes",
     "category": "wip",
     "status": "draft"
-  },
-  {
-    "title": "Artificially Inspired: An experiment on AI's effects on creative skill enhancement",
-    "coauthors": "with Almudena Claasen, Piero Ronzani and Luca Verginer",
-    "category": "wip",
-    "status": "design-stage"
   },
   {
     "title": "Reciprocity in Dictator Games: An Experimental Study",

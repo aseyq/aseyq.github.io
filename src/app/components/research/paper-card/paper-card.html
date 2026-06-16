@@ -11,6 +11,9 @@
     @if (paper().venue) {
       <p class="card-subtitle"><em>{{ paper().venue }}@if (paper().year) { ({{ paper().year }}) }</em></p>
     }
+    @if (paper().note) {
+      <p class="card-note" [innerHTML]="paper().note"></p>
+    }
   </div>
 
   @if (paper().links?.paper || paper().links?.supplementary || paper().links?.workingPaper || getDoi() || paper().bibtex) {

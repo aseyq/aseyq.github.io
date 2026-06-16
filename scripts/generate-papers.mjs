@@ -8,7 +8,7 @@ const papersDir = join(__dirname, '../src/data/papers');
 const outputFile = join(__dirname, '../src/app/data/papers.generated.ts');
 const outputDir = dirname(outputFile);
 
-const STATUS_ORDER = ['accepted', 'revise-and-resubmit', 'in-submission', 'draft', 'data-collection', 'design-stage', 'dormant'];
+const STATUS_ORDER = ['accepted', 'conditional-acceptance', 'revise-and-resubmit', 'in-submission', 'draft', 'data-collection', 'design-stage', 'dormant'];
 
 async function main() {
   const files = (await readdir(papersDir)).filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
