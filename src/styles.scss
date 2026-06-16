@@ -1,0 +1,182 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+// ---------------------------------------------------------------------------
+// Design tokens
+// ---------------------------------------------------------------------------
+:root {
+  // Brand palette
+  --color-ink-black:      #001514;
+  --color-white:          #fbfffe;
+  --color-dark-garnet:    #6b0504;
+  --color-sunflower-gold: #e6af2e;
+
+  // Semantic aliases — use these everywhere instead of raw palette / mat vars
+  --accent:        var(--color-dark-garnet);  // links, icons, accents
+  --accent-soft:   color-mix(in srgb, var(--accent) 12%, transparent);
+  --heading:       var(--color-dark-garnet);  // section h1
+
+  // Font (single sans-serif family throughout; headings differ by weight only)
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  // Spacing scale
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  // Radius scale
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  // Motion
+  --transition: 150ms ease;
+
+  // Elevation
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 22px rgba(0, 0, 0, 0.12);
+
+  // Layout
+  --content-max: 900px;
+}
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: (
+        brand-family: 'Inter, system-ui, sans-serif',
+        plain-family: 'Inter, system-ui, sans-serif',
+      ),
+      density: 0,
+    )
+  );
+
+  // Override Material CSS variables with our custom palette
+  --mat-sys-primary:              #6b0504;
+  --mat-sys-on-primary:           #fbfffe;
+  --mat-sys-primary-container:    #e6af2e;
+  --mat-sys-on-primary-container: #001514;
+  --mat-sys-surface:              #fbfffe;
+  --mat-sys-surface-variant:      #f2ebe8;
+  --mat-sys-on-surface-variant:   #4a3a35;
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--color-white);
+  color: var(--color-ink-black);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  padding-top: 64px; // offset for fixed navbar
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+
+a {
+  color: var(--accent);
+}
+
+// ---------------------------------------------------------------------------
+// Typography
+// ---------------------------------------------------------------------------
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+// ---------------------------------------------------------------------------
+// Shared section header (used by every page section)
+// ---------------------------------------------------------------------------
+.section-header {
+  margin-bottom: var(--space-4);
+
+  h1 {
+    color: var(--heading);
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin-top: var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+  }
+}
+
+// Sub-headings within a section (e.g. Publications / Work in Progress)
+.page-section h2 {
+  color: var(--accent);
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  line-height: 1.25;
+  margin: 0 0 var(--space-3);
+}
+
+// ---------------------------------------------------------------------------
+// Shared surface / card style (global utility classes — usable in any template)
+// ---------------------------------------------------------------------------
+.surface {
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--radius-md);
+  background: var(--mat-sys-surface);
+  transition:
+    border-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.surface-interactive {
+  @extend .surface;
+
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+// Allow tooltips to overflow from cards
+mat-card.paper-card,
+mat-card.paper-card .mat-mdc-card-actions,
+mat-card.paper-card [mat-card-actions] {
+  overflow: visible !important;
+}
+
+app-link-tooltip {
+  display: inline-block;
+}
+
+.bibtex-tooltip {
+  font-family: monospace;
+  font-size: 0.75rem;
+  white-space: pre;
+  max-width: 420px !important;
+}

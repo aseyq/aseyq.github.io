@@ -1,0 +1,56 @@
+:host {
+	display: block;
+}
+
+.page-section {
+	scroll-margin-top: 80px;
+	padding: var(--space-6) 0;
+}
+
+.page-section + .page-section {
+	border-top: 1px solid var(--mat-sys-outline-variant);
+}
+
+.maintenance {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: var(--space-4);
+	text-align: center;
+}
+
+.maintenance-card {
+	max-width: 480px;
+
+	h1 {
+		margin: 0 0 12px;
+		color: var(--heading);
+	}
+
+	p {
+		margin: 0;
+		color: var(--mat-sys-on-surface-variant);
+	}
+}
+
+.site-footer {
+	margin-top: var(--space-6);
+	padding: var(--space-5) var(--space-3);
+	text-align: center;
+	border-top: 1px solid var(--mat-sys-outline-variant);
+	background: var(--mat-sys-surface-variant);
+
+	.footer-name {
+		margin: 0 0 var(--space-1);
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: var(--heading);
+	}
+
+	.footer-meta {
+		margin: 0;
+		font-size: 0.82rem;
+		color: var(--mat-sys-on-surface-variant);
+	}
+}
