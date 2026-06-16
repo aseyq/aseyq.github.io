@@ -39,11 +39,13 @@
   }
 }
 
-.bio-highlight {
+// Bio paragraphs are rendered via [innerHTML] (translated strings), so these
+// inline styles must pierce view encapsulation to reach that injected markup.
+.bio ::ng-deep .bio-highlight {
   font-weight: 600;
 }
 
-.bio-see-also {
+.bio ::ng-deep .bio-see-also {
   font-size: 0.8rem;
   color: var(--mat-sys-on-surface-variant);
   opacity: 0.55;
