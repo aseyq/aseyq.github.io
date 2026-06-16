@@ -150,32 +150,40 @@
   }
 
   .circle-label {
-    font-size: 0.78rem;
+    font-size: 0.68rem;
   }
 
-
+  // On phones the circles are small, so the labels sit inside each
+  // circle's outer lobe instead of beyond its edge (which ran off-screen).
   .label-top {
     left: 170px;
-    top: 58px;
-    width: 170px;
+    top: 100px;
+    width: 104px;
     transform: translateX(-50%);
+    text-align: center;
   }
 
   .label-right {
-    left: 314px;
+    left: 248px;
     top: 210px;
-    width: 118px;
+    width: 92px;
+    transform: translate(-50%, -50%);
+    text-align: center;
   }
 
   .label-bottom {
-    left: 75px;
-    top: 360px;
-    width: 190px;
+    left: 170px;
+    top: 290px;
+    width: 104px;
+    transform: translateX(-50%);
+    text-align: center;
   }
 
   .label-left {
-    left: -56px;
+    left: 92px;
     top: 210px;
-    width: 100px;
+    width: 92px;
+    transform: translate(-50%, -50%);
+    text-align: center;
   }
 }
