@@ -1,0 +1,48 @@
+<section class="skills" aria-label="Software and tools I use">
+  <p class="skills-intro">Languages and software I work with across research and engineering. Expand a category to see the full list.</p>
+
+  <div class="skills-categories">
+    @for (cat of categories; track cat.title) {
+      <details class="skill-category">
+        <summary class="skill-summary">
+          <span class="skill-category-header">
+            <span class="skill-category-name">{{ cat.title }}</span>
+            @if (cat.more.length) {
+              <span class="skill-toggle">
+                <span class="toggle-more">+{{ cat.more.length }} more</span>
+                <span class="toggle-less">Show less</span>
+              </span>
+            }
+          </span>
+          <span class="skill-grid">
+            @for (skill of cat.preview; track skill.name) {
+              <span class="skill-item">
+                @if (skill.logo) {
+                  <img class="skill-logo" [src]="skill.logo" [alt]="skill.name" loading="lazy" />
+                } @else if (skill.icon) {
+                  <fa-icon [icon]="skill.icon"></fa-icon>
+                }
+                <span class="skill-name">{{ skill.name }}</span>
+              </span>
+            }
+          </span>
+        </summary>
+
+        @if (cat.more.length) {
+          <span class="skill-grid skill-grid--more">
+            @for (skill of cat.more; track skill.name) {
+              <span class="skill-item">
+                @if (skill.logo) {
+                  <img class="skill-logo" [src]="skill.logo" [alt]="skill.name" loading="lazy" />
+                } @else if (skill.icon) {
+                  <fa-icon [icon]="skill.icon"></fa-icon>
+                }
+                <span class="skill-name">{{ skill.name }}</span>
+              </span>
+            }
+          </span>
+        }
+      </details>
+    }
+  </div>
+</section>

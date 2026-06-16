@@ -1,0 +1,26 @@
+title: "Competition and moral behavior: A meta-analysis of forty-five crowd-sourced experimental designs"
+coauthors: "with C. Huber, A. Dreber, J. Huber, M. Johannesson, M. Kirchler, U. Weitzel, ..., F. Holzmeister"
+venue: "PNAS"
+year: 2023
+category: publication
+status: published
+tag: "Multi-lab collaboration"
+citation: "Proceedings of the National Academy of Sciences, 120(23), e2215572120 (2023)"
+shortRef: "Huber C, Dreber A, ..., Saral AS, ..., Holzmeister F (2023)"
+bibtex: |
+  @article{huber2023competition,
+    title     = {Competition and moral behavior: A meta-analysis of forty-five crowd-sourced experimental designs},
+    author    = {Huber, C. and Dreber, A. and Huber, J. and Johannesson, M. and Kirchler, M. and Weitzel, U. and Holzmeister, F. and Saral, Ali Seyhun and others},
+    journal   = {Proceedings of the National Academy of Sciences},
+    volume    = {120},
+    number    = {23},
+    pages     = {e2215572120},
+    year      = {2023},
+    publisher = {National Academy of Sciences},
+    doi       = {10.1073/pnas.2215572120}
+  }
+links:
+  paper:
+    url: "https://www.pnas.org/doi/10.1073/pnas.2215572120#sec-3"
+    doi: "10.1073/pnas.2215572120"
+    cover: "img/papers/2023-pnas-cover.jpeg"

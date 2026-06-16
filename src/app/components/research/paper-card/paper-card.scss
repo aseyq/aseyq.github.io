@@ -1,0 +1,93 @@
+.paper-card {
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+
+  &:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .card-header {
+    position: relative;
+    padding: 16px 130px 16px 16px;
+  }
+
+  .eyebrow {
+    margin: 0 0 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .card-title {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .card-subtitle {
+    margin: 2px 0 0;
+    font-size: 0.875rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .card-note {
+    margin: 8px 0 0;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--accent);
+
+    em {
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+
+  mat-card-actions {
+    padding: 8px 16px 12px;
+    gap: 6px;
+    display: flex;
+    flex-wrap: wrap;
+
+    [mat-stroked-button] {
+      height: 32px;
+      line-height: 32px;
+      font-size: 0.8rem;
+      padding: 0 12px;
+
+      mat-icon {
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+.status-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 3px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.status-published          { background: #c8e6c9; color: #1b5e20; }
+.status-accepted           { background: #b2dfdb; color: #004d40; }
+.status-conditional-acceptance { background: #b2ebf2; color: #00695c; }
+.status-revise-and-resubmit { background: #d7eaf5; color: #0d47a1; }
+.status-in-submission      { background: #dceefb; color: #1a567a; }
+.status-draft              { background: #e8eaf6; color: #283593; }
+.status-data-collection    { background: #e0f2f1; color: #004d40; }
+.status-design-stage       { background: #f3e5f5; color: #4a148c; }
+.status-dormant            { background: #eeeeee; color: #616161; }

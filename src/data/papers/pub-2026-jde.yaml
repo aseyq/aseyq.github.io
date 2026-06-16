@@ -1,0 +1,25 @@
+title: "From Open to Closed Societies: Inequality, Migration, and Women Rights"
+coauthors: "with Marco Casari and Maurizio Lisciandra"
+venue: "Journal of Development Economics"
+year: 2026
+month: 1
+category: publication
+status: published
+citation: "Journal of Development Economics, 178, 103607 (2026)"
+shortRef: "Casari M, Lisciandra M, Saral AS (2026)"
+bibtex: |
+  @article{casari2026open,
+    title     = {From Open to Closed Societies: Inequality, Migration, and Women Rights},
+    author    = {Casari, Marco and Lisciandra, Maurizio and Saral, Ali Seyhun},
+    journal   = {Journal of Development Economics},
+    volume    = {178},
+    pages     = {103607},
+    year      = {2026},
+    publisher = {Elsevier},
+    doi       = {10.1016/j.jdeveco.2025.103607}
+  }
+links:
+  paper:
+    url: "https://doi.org/10.1016/j.jdeveco.2025.103607"
+    doi: "10.1016/j.jdeveco.2025.103607"
+    cover: "img/papers/2026-jde-cover.gif"

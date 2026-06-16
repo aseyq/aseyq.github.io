@@ -1,0 +1,32 @@
+<mat-toolbar class="navbar-toolbar">
+  <a class="brand" href="#about">
+    <span class="brand-name">Ali Seyhun Saral</span>
+    <span class="brand-title">Behavioral Data Scientist</span>
+  </a>
+  <span class="spacer"></span>
+
+  <!-- Desktop links -->
+  <nav class="desktop-nav">
+    <a mat-button href="#about">About</a>
+    <a mat-button href="#research">Research</a>
+    <a mat-button href="#experience">Experience</a>
+    <!-- <a mat-button href="#projects">Projects</a> -->
+    <a mat-button href="#teaching">Teaching</a>
+    <a mat-button href="#skills">Skills</a>
+    <a mat-button href="#contact">Contact</a>
+  </nav>
+
+  <!-- Mobile menu -->
+  <button mat-icon-button class="mobile-menu-btn" [matMenuTriggerFor]="mobileMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mobileMenu="matMenu">
+    <a mat-menu-item href="#about">About</a>
+    <a mat-menu-item href="#research">Research</a>
+    <a mat-menu-item href="#experience">Experience</a>
+    <!-- <a mat-menu-item href="#projects">Projects</a> -->
+    <a mat-menu-item href="#teaching">Teaching</a>
+    <a mat-menu-item href="#skills">Skills</a>
+    <a mat-menu-item href="#contact">Contact</a>
+  </mat-menu>
+</mat-toolbar>

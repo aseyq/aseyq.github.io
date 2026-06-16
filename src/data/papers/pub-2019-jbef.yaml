@@ -1,0 +1,26 @@
+title: "zBrac—A multilanguage tool for z-Tree"
+coauthors: "with Anna Marie Schröter"
+venue: "Journal of Behavioral and Experimental Finance"
+year: 2019
+category: publication
+status: published
+tag: "Software paper"
+citation: "Journal of Behavioral and Experimental Finance, 23, 59-63 (2019)"
+shortRef: "Saral AS, Schröter AM (2019)"
+bibtex: |
+  @article{saral2019zbrac,
+    title     = {zBrac---A multilanguage tool for z-Tree},
+    author    = {Saral, Ali Seyhun and Schr{\"o}ter, Anna Marie},
+    journal   = {Journal of Behavioral and Experimental Finance},
+    volume    = {23},
+    pages     = {59--63},
+    year      = {2019},
+    publisher = {Elsevier},
+    doi       = {10.1016/j.jbef.2019.04.006}
+  }
+links:
+  paper:
+    url: "https://www.sciencedirect.com/science/article/abs/pii/S2214635018302661"
+    doi: "10.1016/j.jbef.2019.04.006"
+    cover: "img/papers/2019-jbef-cover.gif"
+  supplementary: "https://github.com/seyhunsaral/zbrac"
