@@ -17,82 +17,8 @@
   position: relative;
   height: 440px;
   max-width: 480px;
-  margin: 0 auto;
-}
-
-$tooltip-bg: rgba(28, 28, 32, 0.94);
-$arrow: 7px;
-
-.venn-tooltip {
-  position: absolute;
-  z-index: 10;
-  width: 200px;
-  padding: 11px 15px;
-  background: $tooltip-bg;
-  backdrop-filter: blur(6px);
-  border-radius: 10px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-  animation: tooltip-in 150ms ease both;
-
-  &::before {
-    content: '';
-    position: absolute;
-    border: $arrow solid transparent;
-  }
-}
-
-// top circle — label above → tooltip below, arrow up
-.tooltip-behavioralEconomics {
-  top: 273px;  // circle bottom (85+180) + 8px
-  left: 140px; // circle center x (150+90) − half width (100)
-  &::before {
-    top: -($arrow * 2);
-    left: 50%;
-    transform: translateX(-50%);
-    border-bottom-color: $tooltip-bg;
-  }
-}
-
-// right circle — label right → tooltip left of circle, arrow right
-.tooltip-softwareEngineering {
-  top: 205px;  // circle center y (155+90) − ~40
-  left: 12px;  // right edge (12+200=212) sits near circle left edge (220)
-  &::before {
-    top: 50%;
-    right: -($arrow * 2);
-    transform: translateY(-50%);
-    border-left-color: $tooltip-bg;
-  }
-}
-
-// bottom circle — label below → tooltip above, arrow down
-.tooltip-aiMlDataScience {
-  top: 138px;  // circle top (225) − tooltip height (~80) − gap (7)
-  left: 140px; // centered on circle x
-  &::before {
-    bottom: -($arrow * 2);
-    left: 50%;
-    transform: translateX(-50%);
-    border-top-color: $tooltip-bg;
-  }
-}
-
-// left circle — label left → tooltip right of circle, arrow left
-.tooltip-causalInference {
-  top: 205px;  // circle center y (155+90) − ~40
-  left: 268px; // circle right edge (80+180) + 8px
-  &::before {
-    top: 50%;
-    left: -($arrow * 2);
-    transform: translateY(-50%);
-    border-right-color: $tooltip-bg;
-  }
-}
-
-@keyframes tooltip-in {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
+  // pull up to absorb the empty space above the top label
+  margin: calc(var(--space-4) * -1) auto 0;
 }
 
 .venn-circle {
@@ -113,8 +39,6 @@ $arrow: 7px;
   backdrop-filter: blur(1px);
   mix-blend-mode: multiply;
   overflow: hidden;
-  transition: transform 160ms ease, box-shadow 160ms ease;
-  cursor: default;
 
   &::after {
     content: '';
@@ -125,17 +49,6 @@ $arrow: 7px;
     opacity: 0.12;
     mix-blend-mode: overlay;
     pointer-events: none;
-  }
-
-  &.is-active {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
-    z-index: 5;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--mat-sys-primary);
-    outline-offset: 2px;
   }
 }
 
@@ -205,14 +118,6 @@ $arrow: 7px;
   text-align: right;
 }
 
-.tooltip-text {
-  margin: 0;
-  line-height: 1.55;
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.92);
-  text-align: center;
-}
-
 @media (max-width: 600px) {
   .venn-wrap {
     height: 380px;
@@ -273,16 +178,4 @@ $arrow: 7px;
     top: 210px;
     width: 100px;
   }
-
-  .venn-tooltip { width: 150px; padding: 9px 12px; }
-
-  // mobile circle positions: size 140px
-  // top: left:100 top:80 → bottom 220, center-x 170
-  .tooltip-behavioralEconomics { top: 228px; left: 95px; }
-  // right: left:160 top:140 → center-y 210, left-x 160
-  .tooltip-softwareEngineering { top: 170px; left: 5px; }
-  // bottom: left:100 top:200 → top-y 200, center-x 170
-  .tooltip-aiMlDataScience     { top: 112px; left: 95px; }
-  // left: left:40 top:140 → right-x 180, center-y 210
-  .tooltip-causalInference     { top: 170px; left: 188px; }
 }

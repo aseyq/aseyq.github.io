@@ -6,7 +6,12 @@ import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })

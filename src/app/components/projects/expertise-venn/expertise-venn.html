@@ -1,69 +1,17 @@
 <section class="expertise-chart" aria-label="Research and engineering expertise overlap">
-  <h2>Expertise</h2>
+  
 
-  <p class="expertise-intro">
-    My work sits at the overlap of four complementary domains.
-    I combine behavioral insight, rigorous causal methods, data-driven modeling, and production-ready engineering.
-  </p>
-  <p class="expertise-intro">
-    Hover over each circle to see how each domain contributes to my approach.
-  </p>
-
-  <div class="venn-wrap" (mouseleave)="clearActiveDomain()">
-      <div
-        class="venn-circle circle-top"
-        [class.is-active]="activeDomain() === 'behavioralEconomics'"
-        (mouseenter)="setActiveDomain('behavioralEconomics')"
-        tabindex="0"
-        (focus)="setActiveDomain('behavioralEconomics')"
-        (blur)="clearActiveDomain()"
-        role="button"
-        aria-label="Behavioral Economics"
-      ></div>
+  <div class="venn-wrap">
+      <div class="venn-circle circle-top"></div>
       <p class="circle-label label-top">Behavioral Economics</p>
 
-      <div
-        class="venn-circle circle-right"
-        [class.is-active]="activeDomain() === 'softwareEngineering'"
-        (mouseenter)="setActiveDomain('softwareEngineering')"
-        tabindex="0"
-        (focus)="setActiveDomain('softwareEngineering')"
-        (blur)="clearActiveDomain()"
-        role="button"
-        aria-label="Software Engineering"
-      ></div>
-      <p class="circle-label label-right">Software<br />Engineering</p>
+      <div class="venn-circle circle-right"></div>
+      <p class="circle-label label-right">Software<br>Engineering</p>
 
-      <div
-        class="venn-circle circle-bottom"
-        [class.is-active]="activeDomain() === 'aiMlDataScience'"
-        (mouseenter)="setActiveDomain('aiMlDataScience')"
-        tabindex="0"
-        (focus)="setActiveDomain('aiMlDataScience')"
-        (blur)="clearActiveDomain()"
-        role="button"
-        aria-label="AI, ML, and Data Science"
-      ></div>
-      <p class="circle-label label-bottom">Data Science & AI </p>
+      <div class="venn-circle circle-bottom"></div>
+      <p class="circle-label label-bottom">Data Science &amp; AI</p>
 
-      <div
-        class="venn-circle circle-left"
-        [class.is-active]="activeDomain() === 'causalInference'"
-        (mouseenter)="setActiveDomain('causalInference')"
-        tabindex="0"
-        (focus)="setActiveDomain('causalInference')"
-        (blur)="clearActiveDomain()"
-        role="button"
-        aria-label="Experimentation & Causal Inference "
-      ></div>
-      <p class="circle-label label-left">Experimentation & <br />Causal Inference</p>
-
-      @for (d of [activeDomain()]; track d) {
-        @if (d !== 'default') {
-          <div class="venn-tooltip tooltip-{{ d }}">
-            <p class="tooltip-text">{{ domainDescriptions[d] }}</p>
-          </div>
-        }
-      }
+      <div class="venn-circle circle-left"></div>
+      <p class="circle-label label-left">Experimentation &amp;<br>Causal Inference</p>
   </div>
 </section>
