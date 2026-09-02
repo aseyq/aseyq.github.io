@@ -7,10 +7,10 @@ export const publications: Paper[] = [
     "title": "The emergence and cultural persistence of ineffective solutions",
     "coauthors": "with Manvir Singh, Antoine Jacquet, Haneul Jang, Maxime Derex",
     "category": "publication",
-    "status": "conditional-acceptance",
+    "status": "accepted",
     "year": 2026,
     "month": 12,
-    "note": "Conditionally accepted by <em>Nature Communications</em>"
+    "note": "Forthcoming at <em>Nature Communications</em>"
   },
   {
     "title": "The roles of cultural transmission and causal reasoning in the cultural evolution of technology",

@@ -79,7 +79,6 @@ export class Skills {
         { name: 'Hugging Face', logo: LOGO('huggingface') },
         { name: 'OpenAI / Anthropic API', logo: LOGO('anthropic') },
         { name: 'LangChain / LlamaIndex', logo: LOGO('langchain') },
-        { name: 'Ollama', logo: LOGO('ollama') },
         { name: 'llama.cpp', icon: faMicrochip },
       ],
     },
