@@ -94,6 +94,26 @@
     margin: 0 0 4px;
     font-size: 1.05rem;
     color: var(--heading);
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: inherit;
+      text-decoration: none;
+
+      .ext-icon {
+        font-size: 0.8rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        color: color-mix(in srgb, var(--mat-sys-on-surface-variant) 55%, transparent);
+        transition: color var(--transition);
+      }
+
+      &:hover .ext-icon {
+        color: var(--accent);
+      }
+    }
   }
 
   .role {

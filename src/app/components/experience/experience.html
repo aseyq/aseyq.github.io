@@ -9,7 +9,16 @@
           <img [src]="pos.logo" [alt]="pos.institution" class="inst-logo" />
         </div>
         <div class="info-col">
-          <h3>{{ pos.institution }}</h3>
+          <h3>
+            @if (pos.url) {
+              <a [href]="pos.url" target="_blank" rel="noopener">
+                {{ pos.institution }}
+                <mat-icon class="ext-icon">open_in_new</mat-icon>
+              </a>
+            } @else {
+              {{ pos.institution }}
+            }
+          </h3>
           <p class="role">{{ pos.role }}</p>
           <p class="period">{{ pos.period }}</p>
           <p class="location">
