@@ -37,16 +37,18 @@ const LOGO = (slug: string) => `img/skills/${slug}.svg`;
   styleUrl: './skills.scss',
 })
 export class Skills {
+  // Rule: `preview` holds exactly 4 skills — the folded card renders a uniform
+  // 2x2 pill grid (2 rows max). Everything else goes in `more`.
   categories: SkillCategory[] = [
     {
-      title: 'Languages',
+      title: 'Programming Languages',
       preview: [
         { name: 'R', logo: LOGO('r') },
         { name: 'Python', logo: LOGO('python') },
         { name: 'JavaScript / TypeScript', logo: LOGO('typescript') },
+        { name: 'Rust', logo: LOGO('rust') },
       ],
       more: [
-        { name: 'Rust', logo: LOGO('rust') },
         { name: 'PHP', logo: LOGO('php') },
       ],
     },
@@ -56,9 +58,9 @@ export class Skills {
         { name: 'tidyverse / ggplot2', logo: LOGO('tidyverse') },
         { name: 'pandas / NumPy', logo: LOGO('pandas') },
         { name: 'Stata', logo: LOGO('stata') },
+        { name: 'MATLAB', logo: LOGO('matlab') },
       ],
       more: [
-        { name: 'MATLAB', logo: LOGO('matlab') },
         { name: 'Mathematica', logo: LOGO('wolframmathematica') },
         { name: 'Stan / brms', icon: faDice },
         { name: 'Polars', logo: LOGO('polars') },
@@ -74,10 +76,10 @@ export class Skills {
       preview: [
         { name: 'PyTorch', logo: LOGO('pytorch') },
         { name: 'scikit-learn', logo: LOGO('scikitlearn') },
-      ],
-      more: [
         { name: 'Hugging Face', logo: LOGO('huggingface') },
         { name: 'OpenAI / Anthropic API', logo: LOGO('anthropic') },
+      ],
+      more: [
         { name: 'LangChain / LlamaIndex', logo: LOGO('langchain') },
         { name: 'llama.cpp', icon: faMicrochip },
       ],
@@ -87,10 +89,10 @@ export class Skills {
       preview: [
         { name: 'oTree', icon: faFlask },
         { name: 'Qualtrics', logo: LOGO('qualtrics') },
-      ],
-      more: [
         { name: 'z-Tree', icon: faVialCircleCheck },
         { name: 'Prolific', icon: faUsers },
+      ],
+      more: [
         { name: 'Amazon MTurk', icon: faUserGroup },
       ],
     },
@@ -99,10 +101,10 @@ export class Skills {
       preview: [
         { name: 'HTML & CSS', logo: LOGO('html5') },
         { name: 'FastAPI', logo: LOGO('fastapi') },
-      ],
-      more: [
         { name: 'SCSS', logo: LOGO('sass') },
         { name: 'Angular', logo: LOGO('angular') },
+      ],
+      more: [
         { name: 'Django', logo: LOGO('django') },
         { name: 'REST / HTTP APIs', icon: faPlug },
         { name: 'WebSockets', icon: faRightLeft },
@@ -113,10 +115,10 @@ export class Skills {
       preview: [
         { name: 'PostgreSQL', logo: LOGO('postgresql') },
         { name: 'DuckDB', logo: LOGO('duckdb') },
-      ],
-      more: [
         { name: 'MySQL', logo: LOGO('mysql') },
         { name: 'SQL Server', icon: faDatabase },
+      ],
+      more: [
         { name: 'SQLite', logo: LOGO('sqlite') },
       ],
     },
@@ -126,9 +128,9 @@ export class Skills {
         { name: 'AWS', icon: faAws },
         { name: 'Azure', icon: faMicrosoft },
         { name: 'HPC / SLURM', icon: faNetworkWired },
+        { name: 'Git / GitHub', logo: LOGO('github') },
       ],
       more: [
-        { name: 'Git / GitHub', logo: LOGO('github') },
         { name: 'GitHub Actions', logo: LOGO('githubactions') },
         { name: 'Docker', logo: LOGO('docker') },
         { name: 'Cloudflare', logo: LOGO('cloudflare') },

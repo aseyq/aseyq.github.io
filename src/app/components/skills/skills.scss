@@ -5,9 +5,14 @@
 }
 
 .skills-categories {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-2);
+  align-items: start;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .skill-category {
@@ -93,9 +98,11 @@
   display: inline;
 }
 
+// Both the folded preview and the expanded "more" list use a uniform
+// 2-column grid of full-width pills, so every folded card is exactly 2 rows.
 .skill-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin-top: 12px;
 }
@@ -109,12 +116,13 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 13px;
+  padding: 7px 10px;
   border: 1px solid var(--mat-sys-outline-variant);
   border-radius: var(--radius-pill);
   background: var(--mat-sys-surface);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1;
+  min-width: 0;
   transition:
     transform var(--transition),
     box-shadow var(--transition),
@@ -122,13 +130,13 @@
 
   fa-icon {
     color: var(--accent);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
   .skill-logo {
-    height: 1.05rem;
+    height: 0.95rem;
     width: auto;
-    max-width: 4.5rem;
+    max-width: 4rem;
     object-fit: contain;
     flex: 0 0 auto;
   }
@@ -141,5 +149,8 @@
 }
 
 .skill-name {
+  min-width: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
