@@ -176,7 +176,9 @@ app-link-tooltip {
 
 .bibtex-tooltip {
   font-family: monospace;
-  font-size: 0.75rem;
-  white-space: pre;
-  max-width: 420px !important;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 520px !important;
 }

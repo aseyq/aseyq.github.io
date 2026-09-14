@@ -68,7 +68,7 @@ export class PaperCard {
 
   bibtexPreview(): string {
     const b = this.paper().bibtex ?? '';
-    return b.length > 200 ? b.slice(0, 200) + '…' : b;
+    return b.length > 700 ? b.slice(0, 700) + '…' : b;
   }
 
   copyBibtex() {
