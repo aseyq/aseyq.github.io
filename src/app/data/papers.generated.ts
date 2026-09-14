@@ -4,13 +4,22 @@ import { Paper } from '../components/research/paper-card/paper-card';
 
 export const publications: Paper[] = [
   {
-    "title": "The emergence and cultural persistence of ineffective solutions",
+    "title": "Cognitive appeal promotes the persistence of inefficient solutions and hinders cumulative cultural evolution",
     "coauthors": "with Manvir Singh, Antoine Jacquet, Haneul Jang, Maxime Derex",
-    "category": "publication",
-    "status": "accepted",
+    "venue": "Nature Communications",
     "year": 2026,
-    "month": 12,
-    "note": "Forthcoming at <em>Nature Communications</em>"
+    "month": 9,
+    "category": "publication",
+    "status": "published",
+    "citation": "Nature Communications (2026)",
+    "shortRef": "Saral AS, Singh M, Jacquet A, Jang H, Derex M (2026)",
+    "bibtex": "@article{saral2026cognitive,\n  title     = {Cognitive appeal promotes the persistence of inefficient solutions and hinders cumulative cultural evolution},\n  author    = {Saral, Ali Seyhun and Singh, Manvir and Jacquet, Antoine and Jang, Haneul and Derex, Maxime},\n  journal   = {Nature Communications},\n  year      = {2026},\n  publisher = {Springer Nature},\n  doi       = {10.1038/s41467-026-77677-9}\n}\n",
+    "links": {
+      "paper": {
+        "url": "https://doi.org/10.1038/s41467-026-77677-9",
+        "doi": "10.1038/s41467-026-77677-9"
+      }
+    }
   },
   {
     "title": "The roles of cultural transmission and causal reasoning in the cultural evolution of technology",
