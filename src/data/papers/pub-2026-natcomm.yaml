@@ -4,7 +4,7 @@ venue: "Nature Communications"
 year: 2026
 month: 9
 category: publication
-status: published
+status: inpress
 citation: "Nature Communications (2026)"
 shortRef: "Saral AS, Singh M, Jacquet A, Jang H, Derex M (2026)"
 bibtex: |
@@ -18,5 +18,5 @@ bibtex: |
   }
 links:
   paper:
-    url: "https://doi.org/10.1038/s41467-026-77677-9"
+    url: "https://www.researchgate.net/publication/414249454_Cognitive_appeal_promotes_the_persistence_of_inefficient_solutions_and_hinders_cumulative_cultural_evolution"
     doi: "10.1038/s41467-026-77677-9"
